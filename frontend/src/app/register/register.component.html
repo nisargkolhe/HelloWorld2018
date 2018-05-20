@@ -1,0 +1,24 @@
+<div class="con">
+  <h1>Register</h1>
+
+  <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+    <input class="formInput topSpacing" placeholder="First Name" name="firstname" type="text" [(ngModel)]="model.firstname" #firstname="ngModel" required>
+    <div class="help-block" *ngIf="f.submitted && !firstname.valid">First Name is required</div>
+    <input class="formInput topSpacing" placeholder="Last Name" name="lastname" type="text" [(ngModel)]="model.lastname" #lastname="ngModel" required>
+    <div class="help-block" *ngIf="f.submitted && !lastname.valid">Last Name is required</div>
+    <input class="formInput topSpacing" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+    <div class="help-block" *ngIf="f.submitted && !email.valid">Purdue Email is required</div>
+    <input class="formInput topSpacing" placeholder="Password" name="password" type="password" [(ngModel)]="model.password" #password="ngModel" required>
+    <div class="help-block" *ngIf="f.submitted && !password.valid">Password is required</div>
+    <button class="ui-button topSpacing" [disabled]="loading" mdRippleColor="#F00">Register</button>
+    <button class="ui-button topSpacing" [routerLink]="['/login']">Login</button>
+    <div
+      *ngIf="loading"
+      color="primary"
+      mode="indeterminate"
+      class="spinner">
+      Loading...
+    </div>
+
+</form>
+</div>

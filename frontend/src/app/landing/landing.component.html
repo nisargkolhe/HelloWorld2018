@@ -1,0 +1,10 @@
+<div class="landing_button">
+  <ul>
+    <span *ngIf="isLoggedIn else elseBlock">
+      <li><button class="ui-button" [routerLink]="['/home']">My Account</button></li>
+    </span>
+    <ng-template #elseBlock>
+      <li><button class="ui-button" [routerLink]="['/register']">Sign Up</button></li>
+    </ng-template>
+  </ul>
+</div>

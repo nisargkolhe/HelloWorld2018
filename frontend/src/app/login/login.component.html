@@ -1,0 +1,26 @@
+<div class="con">
+  <h1>Login</h1>
+  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <!-- Email Input -->
+    <div class="topSpacing">
+      <input class="formInput" placeholder="Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required>
+    </div>
+    <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+
+    <!-- Password Input -->
+    <div>
+      <input class="formInput topSpacing" placeholder="Password" name="password" type="password" [(ngModel)]="model.password" #password="ngModel" required>
+    </div>
+    <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    <button class="ui-button topSpacing" [disabled]="loading">Login</button>
+    <button class="ui-button topSpacing" [routerLink]="['/register']">Register</button>
+    <a class="link topSpacing" [routerLink]="['/resetPassword']">Forgot Password?</a>
+    <div
+      *ngIf="loading"
+      color="primary"
+      mode="indeterminate"
+      class="spinner">
+      Loading...
+    </div>
+  </form>
+</div>

@@ -1,18 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
+import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
+import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
+import { UserService, AuthService, AlertService } from './services/index';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+  AppComponent,
+  LandingComponent,
+  LoginComponent,
+  RegisterComponent,
+  ResetPasswordComponent,
+  ConfirmPasswordComponent,
+  ConfirmEmailComponent,
+  HomeComponent
   ],
   imports: [
-    BrowserModule
+  BrowserModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpModule,
+  routing
   ],
-  providers: [],
+  providers: [
+  AuthService,
+  UserService,
+  AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
