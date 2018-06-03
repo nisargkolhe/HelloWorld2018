@@ -17,7 +17,7 @@ export class AuthService {
 		console.log("password", password);
     //let headers = new Headers({ 'Content-Type': 'application/json' });
     //let options = new RequestOptions({ headers: headers });
-    return this.http.post(environment.apiUrl+'/api/user/auth', {"email": email, "password": password })
+    return this.http.post(environment.apiUrl+'/user/auth', {"email": email, "password": password })
     .map((response: Response) => {
       // login successful if there's a jwt token in the response
       console.log("RESPONSE",response);
@@ -37,21 +37,21 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-  	return this.http.post(environment.apiUrl+'/api/user/requestPasswordReset', {"email": email})
+  	return this.http.post(environment.apiUrl+'/user/requestPasswordReset', {"email": email})
   	.map((response: Response) => response.json());
   }
 
   confirmPassword(password: string, token: string) {
-  	return this.http.post(environment.apiUrl+'/api/user/confirmPasswordReset', {"password": password, "token": token})
+  	return this.http.post(environment.apiUrl+'/user/confirmPasswordReset', {"password": password, "token": token})
   	.map((response: Response) => response.json());
   }
 
   resendVerificationEmail() {
-  	return this.http.post(environment.apiUrl+'/api/user/resendVerificationEmail', {}, this.jwt()).map((response: Response) => response.json());
+  	return this.http.post(environment.apiUrl+'/user/resendVerificationEmail', {}, this.jwt()).map((response: Response) => response.json());
   }
 
   confirmEmail(token: string) {
-  	return this.http.post(environment.apiUrl+'/api/user/confirmEmail', {"token": token})
+  	return this.http.post(environment.apiUrl+'/user/confirmEmail', {"token": token})
   	.map((response: Response) => response.json());
   }
 

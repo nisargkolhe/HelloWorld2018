@@ -1,4 +1,4 @@
-<md-card class="con">
+<div class="con">
   <div>
   <h1>Hi {{currentUser.firstname}}!</h1>
     <div *ngIf="currentUser.roles.indexOf('admin') !== -1 else elseBlock">
@@ -51,14 +51,14 @@
           <button class="ui-button" (click)="resendVerificationEmail()">Resend Verification Email </button>
           <button class="ui-button negative" [routerLink]="['/login']">Logout</button>
         </div>
-        <md-progress-spinner
+        <div
           *ngIf="loading"
           color="primary"
           mode="indeterminate"
-          value="indeterminate"
           class="spinner">
-        </md-progress-spinner>
+          Loading...
+        </div>
       </ng-template>
     </ng-template>
   </div>
-</md-card>
+</div>

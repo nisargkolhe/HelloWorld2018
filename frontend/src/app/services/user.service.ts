@@ -10,23 +10,23 @@ export class UserService {
 	constructor(private http: Http) { }
 
 	create(user: User) {
-		return this.http.post(environment.apiUrl+'/api/user/register', user).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/register', user).map((response: Response) => response.json());
 	}
 
 	apply(application: Application) {
-		return this.http.post(environment.apiUrl+'/api/user/apply', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/apply', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
 	}
 
 	updateApplication(application: Application) {
-		return this.http.post(environment.apiUrl+'/api/user/updateApplication', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/updateApplication', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
 	}
 
 	getApplication() {
-		return this.http.get(environment.apiUrl+'/api/user/application', this.jwt()).map((response: Response) => response.json());
+		return this.http.get(environment.apiUrl+'/user/application', this.jwt()).map((response: Response) => response.json());
 	}
 
 	userSearch(searchKey: string) {
-		return this.http.post(environment.apiUrl+'/api/user/search', {"searchvalue": searchKey}, this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/search', {"searchvalue": searchKey}, this.jwt()).map((response: Response) => response.json());
 	}
 
 	loadFromLocalStorage() {
