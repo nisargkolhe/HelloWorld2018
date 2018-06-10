@@ -128,9 +128,49 @@ function getUser(user_id, callback) {
   }
 }
 
+function verifyUser(verification_token, callback) {
+  Token.findOne({ token: verification_token }, function (err, token) {
+    if (!token) { 
+      callback("We were unable to find a valid token. Your token my have expired.", null); 
+    } else {
+      // If we found a token, find a matching user
+       MongoClient.connect(mongodbUrl, function (err, db) {
+        if (err) {
+          callback("We are currently facing some technically difficulties, please try again later!", null);
+        } else {
+          var dbo = db.db(config.mongoDBDatabase);
+          dbo.collection("Users").findOne({'_id' : token._userId}, function(err, user) {
+            if(err) {
+              callback(err.message, null); 
+            } else if (!user) { 
+              console.log('user', user);
+              callback("We were unable to find a user for this token.", null); 
+            } else if (user.verified) {
+              callback("This email is already verified.", null); 
+            } else {
+              // Verify and save the user
+              user.verified = true;
+
+              dbo.collection("Users").update({'_id': token._userId}, {$set: {'verified': true}}, function(err, res){
+                if (err) { 
+                  callback(err.message, null); 
+                } else {
+                  //Success
+                  callback(null, res);
+                }
+              });
+            }
+          });
+        } 
+      });
+    }
+  });
+}
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
   addUser : addUser,
-  getUser: getUser
+  getUser: getUser,
+  verifyUser: verifyUser
 }

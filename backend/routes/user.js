@@ -30,8 +30,8 @@ router.post("/login", function(req, res) {
 });
 
 router.post("/register", function(req, res) {
-  if(!req.body.email || !req.body.password){
-    res.status(401).json({message: "Email or password was not provided."});
+  if(!req.body || !req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname){
+    res.status(401).json({message: "Incomplete data."});
   }
 
   if(!req.body.email.includes("@purdue.edu")){
@@ -39,8 +39,11 @@ router.post("/register", function(req, res) {
   }
 
   let user = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10)
+    password: bcrypt.hashSync(req.body.password, 10),
+    verified: false
   }
 
   mongo.addUser(user, function(error, result) {
@@ -55,21 +58,22 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/verify", function(req,res){
-  if(!req.body.url){
-    res.status(401).json({message: "Invalid URL."});
+  if(!req.body.token){
+    res.status(401).json({message: "Invalid token."});
   }
 
-  var url = req.body.url;
+  var token = req.body.token;
 
-  nev.confirmTempUser(url, function(err, user) {
-      if (err)
-        res.status(401).json({message: "Invalid URL."});
-
-      // user was found!
-      if (user) {
-        res.json({message: "Email verified successful! You'll be redirected to login shortly..."});
+  mongo.verifyUser(token, function(err, user) {
+      if (err){
+        res.status(401).json({message: err});
       } else {
-        res.json({message: "This URL is expired."});
+        // user was found!
+        if (user) {
+          res.json({message: "Email verified successful! You'll be redirected to login shortly..."});
+        } else {
+          res.json({message: "This URL is expired."});
+        }
       }
   });
 });
