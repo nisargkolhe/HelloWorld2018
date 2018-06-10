@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService, AuthService } from '../services/index';
 
 @Component({
   selector: 'app-confirm-email',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmEmailComponent implements OnInit {
 
-  constructor() { }
+  model: any = {};
+  loading = false;
+  error = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
+    let token = this.route.snapshot.queryParams["token"];
+    console.log('confirmEmailToken', token);
+    if(token){
+        this.model.token = token;
+        this.confirmEmail();
+    } else {
+        this.router.navigate(['/login']);
+    }
   }
 
+  confirmEmail(){
+    this.loading = true;
+    this.authService.confirmEmail(this.model.token)
+      .subscribe(
+        data => {
+          this.alertService.success('Email Verification Successful', true);
+          this.router.navigate(['/login']);
+        },
+        error => {
+            error = error.json();
+            console.log(error);
+            this.alertService.error(error.error);
+            this.loading = false;
+      });
+  }
 }

@@ -87,7 +87,7 @@ function addUser(user, callback) {
                     if (err) { 
                       callback(err.message, null); 
                     } else {
-                      console.log("TOKEN: "+token.token);
+                      console.log("TOKEN URL: /confirmEmail?token="+token.token);
                       // TODO: Send the email
 
                       callback(null, user);
@@ -169,10 +169,48 @@ function verifyUser(verification_token, callback) {
   });
 }
 
+function resetPassword(email, callback) {
+   MongoClient.connect(mongodbUrl, function (err, db) {
+    if (err) {
+      callback("We are currently facing some technically difficulties, please try again later!", null);
+    } else {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Users").findOne({'email' : user.email}, function(err, result) {
+        if (err) {
+          callback("Error finding the user! " + err.message, null);
+        } else {
+          if (!result) {
+            callback("The email provided is not registered.", null);
+          } else  {
+            // Create a reset password token for this user
+            var token = new Token({ _userId: res.insertedId, token: crypto.randomBytes(16).toString('hex') });
+     
+            // Save the verification token
+            token.save(function (err) {
+              if (err) { 
+                callback(err.message, null); 
+              } else {
+                console.log("TOKEN URL: /resetPassword?token="+token.token);
+                // TODO: Send the email
+
+                callback(null, user);
+              }
+            });
+          }
+
+          db.close();
+          }
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
   addUser : addUser,
   getUser: getUser,
-  verifyUser: verifyUser
+  verifyUser: verifyUser,
+  resetPassword: resetPassword
 }

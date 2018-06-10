@@ -79,4 +79,18 @@ router.post("/verify", cors(), function(req,res){
   });
 });
 
+router.post("/resetPassword", cors(), function(req,res){
+  if(!req.body.email){
+    res.status(401).json({message: "No email provided."});
+  }
+
+  mongo.resetPassword(req.body.email, function(err, user) {
+    if (err){
+      res.status(401).json({message: err});
+    } else {
+      res.json({message: "Reset password link successfully sent."});
+    }
+  });
+});
+
 module.exports = router;

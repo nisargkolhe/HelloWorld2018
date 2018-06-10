@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     this.userService.create(this.model)
     .subscribe(
       data => {
-        this.alertService.success('Registration successful', true);
+        this.alertService.success('Registration successful.', true);
         this.router.navigate(['/login']);
       },
       error => {
@@ -34,13 +34,13 @@ export class RegisterComponent implements OnInit {
 
         let errorMsg = "";
         for(var attr in error.errors){
-        //errorMsg += attr + ":\n"
-        error.errors[attr].forEach(error => errorMsg += error + "\n");
-      }
-      console.log('errorMsg', errorMsg);
+          //errorMsg += attr + ":\n"
+          error.errors[attr].forEach(error => errorMsg += error + "\n");
+        }
+        console.log('errorMsg', error);
 
-      this.alertService.error(errorMsg);
-      this.loading = false;
+        this.alertService.error(errorMsg);
+        this.loading = false;
     });
   }
 

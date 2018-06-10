@@ -17,7 +17,7 @@ export class AuthService {
 		console.log("password", password);
     //let headers = new Headers({ 'Content-Type': 'application/json' });
     //let options = new RequestOptions({ headers: headers });
-    return this.http.post(environment.apiUrl+'/user/auth', {"email": email, "password": password })
+    return this.http.post(environment.apiUrl+'/user/login', {"email": email, "password": password })
     .map((response: Response) => {
       // login successful if there's a jwt token in the response
       console.log("RESPONSE",response);
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   confirmEmail(token: string) {
-  	return this.http.post(environment.apiUrl+'/user/confirmEmail', {"token": token})
+  	return this.http.post(environment.apiUrl+'/user/verify', {"token": token})
   	.map((response: Response) => response.json());
   }
 

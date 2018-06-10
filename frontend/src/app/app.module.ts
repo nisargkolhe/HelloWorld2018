@@ -5,6 +5,9 @@ import { HttpModule } from '@angular/http';
 
 import { routing } from './app.routing';
 
+import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin.guard';
+
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
@@ -35,6 +38,7 @@ import { HomeComponent } from './home/home.component';
   routing
   ],
   providers: [
+  AuthGuard,
   AuthService,
   UserService,
   AlertService
