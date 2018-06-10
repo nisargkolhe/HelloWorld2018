@@ -76,22 +76,24 @@ function addUser(user, callback) {
               dbo.collection("Users").insertOne(user, function(err, res) {
                 if (err) {
                   console.log("Error inserting the user : " + user);
-                }
-                console.log('res', res);
-                // Create a verification token for this user
-                var token = new Token({ _userId: res.insertedId, token: crypto.randomBytes(16).toString('hex') });
-         
-                // Save the verification token
-                token.save(function (err) {
-                  if (err) { 
-                    callback(err.message, null); 
-                  } else {
-                    console.log("TOKEN: "+token.token);
-                    // TODO: Send the email
+                  callback("Error inserting the user : " + user.email, null);
+                } else {
+                  console.log('res', res);
+                  // Create a verification token for this user
+                  var token = new Token({ _userId: res.insertedId, token: crypto.randomBytes(16).toString('hex') });
+           
+                  // Save the verification token
+                  token.save(function (err) {
+                    if (err) { 
+                      callback(err.message, null); 
+                    } else {
+                      console.log("TOKEN: "+token.token);
+                      // TODO: Send the email
 
-                    callback(null, user);
-                  }
-                });
+                      callback(null, user);
+                    }
+                  });
+                }
 
                 db.close();
               });

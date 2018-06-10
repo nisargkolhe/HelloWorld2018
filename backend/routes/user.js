@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var mongo = require('../utils/mongoDBCalls');
 var config = require('../config/config');
 var token = require('../utils/token');
+var cors = require('cors');
 require('../config/passport');
 var User = require('../models/user')
 var router = express.Router();
@@ -12,7 +13,7 @@ const bcrypt = require('bcrypt');
 
 mongoose.connect(config.mongoDBHost);
 
-router.post("/login", function(req, res) {
+router.post("/login", cors(), function(req, res) {
   if(req.body.email && req.body.password){
     var email = req.body.email;
     var password = req.body.password;
@@ -29,7 +30,7 @@ router.post("/login", function(req, res) {
   });
 });
 
-router.post("/register", function(req, res) {
+router.post("/register", cors(), function(req, res) {
   if(!req.body || !req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname){
     res.status(401).json({message: "Incomplete data."});
   }
@@ -48,7 +49,7 @@ router.post("/register", function(req, res) {
 
   mongo.addUser(user, function(error, result) {
     if(error) {
-      res.status(401).json({message:error});
+      res.status(401).json({message:"Error: " + error});
     } else {
       var payload = {email: req.body.email};
       var jwtToken = token.generateAccessToken(payload);
@@ -57,7 +58,7 @@ router.post("/register", function(req, res) {
   });
 });
 
-router.post("/verify", function(req,res){
+router.post("/verify", cors(), function(req,res){
   if(!req.body.token){
     res.status(401).json({message: "Invalid token."});
   }
