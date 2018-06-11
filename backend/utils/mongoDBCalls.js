@@ -49,8 +49,6 @@ function checkUserExists(jwt_payload, callback) {
               callback("Incorrect Password or the user doesn’t exists.", false);
             }
           }
-
-          db.close();
         });
       }
     });
@@ -133,7 +131,7 @@ function getUser(user_id, callback) {
 function verifyUser(verification_token, callback) {
   Token.findOne({ token: verification_token }, function (err, token) {
     if (!token) { 
-      callback("We were unable to find a valid token. Your token my have expired.", null); 
+      callback("We were unable to find a valid token. Your token may have expired.", null); 
     } else {
       // If we found a token, find a matching user
        MongoClient.connect(mongodbUrl, function (err, db) {
@@ -151,8 +149,6 @@ function verifyUser(verification_token, callback) {
               callback("This email is already verified.", null); 
             } else {
               // Verify and save the user
-              user.verified = true;
-
               dbo.collection("Users").update({'_id': token._userId}, {$set: {'verified': true}}, function(err, res){
                 if (err) { 
                   callback(err.message, null); 
@@ -175,15 +171,15 @@ function resetPassword(email, callback) {
       callback("We are currently facing some technically difficulties, please try again later!", null);
     } else {
       var dbo = db.db(config.mongoDBDatabase);
-      dbo.collection("Users").findOne({'email' : user.email}, function(err, result) {
+      dbo.collection("Users").findOne({'email' : email}, function(err, user) {
         if (err) {
           callback("Error finding the user! " + err.message, null);
         } else {
-          if (!result) {
+          if (!user) {
             callback("The email provided is not registered.", null);
           } else  {
             // Create a reset password token for this user
-            var token = new Token({ _userId: res.insertedId, token: crypto.randomBytes(16).toString('hex') });
+            var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
      
             // Save the verification token
             token.save(function (err) {
@@ -199,8 +195,42 @@ function resetPassword(email, callback) {
           }
 
           db.close();
-          }
         }
+      });
+    }
+  });
+}
+
+function confirmPassword(password_token, password, callback) {
+  Token.findOne({ token: password_token }, function (err, token) {
+    if (!token) { 
+      callback("We were unable to find a valid token. Your token may have expired.", null); 
+    } else {
+      // If we found a token, find a matching user
+       MongoClient.connect(mongodbUrl, function (err, db) {
+        if (err) {
+          callback("We are currently facing some technically difficulties, please try again later!", null);
+        } else {
+          var dbo = db.db(config.mongoDBDatabase);
+          dbo.collection("Users").findOne({'_id' : token._userId}, function(err, user) {
+            if(err) {
+              callback(err.message, null); 
+            } else if (!user) { 
+              console.log('user', user);
+              callback("We were unable to find a user for this token.", null); 
+            } else {
+              // Update user password
+              dbo.collection("Users").update({'_id': token._userId}, {$set: {'password': password}}, function(err, res){
+                if (err) { 
+                  callback(err.message, null); 
+                } else {
+                  //Success
+                  callback(null, res);
+                }
+              });
+            }
+          });
+        } 
       });
     }
   });
@@ -212,5 +242,6 @@ module.exports = {
   addUser : addUser,
   getUser: getUser,
   verifyUser: verifyUser,
-  resetPassword: resetPassword
+  resetPassword: resetPassword,
+  confirmPassword: confirmPassword
 }

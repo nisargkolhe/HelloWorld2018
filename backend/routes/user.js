@@ -93,4 +93,24 @@ router.post("/resetPassword", cors(), function(req,res){
   });
 });
 
+router.post("/confirmPassword", cors(), function(req,res){
+  if(!req.body.password){
+    res.status(401).json({message: "No password provided."});
+  }
+
+  if(!req.body.token){
+    res.status(401).json({message: "No reset token provided."});
+  }
+
+  let password = bcrypt.hashSync(req.body.password, 10);
+
+  mongo.confirmPassword(req.body.token, password, function(err, user) {
+    if (err){
+      res.status(401).json({message: err});
+    } else {
+      res.json({message: "Password successfully updated. You'll be redirected to login shortly..."});
+    }
+  });
+});
+
 module.exports = router;
