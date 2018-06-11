@@ -31,6 +31,7 @@ export class AlertService {
   }
 
   error(message: string, keepAfterNavigationChange = false) {
+    console.log("Error Message:" + message);
     this.keepAfterNavigationChange = keepAfterNavigationChange;
 
     let msg = message;

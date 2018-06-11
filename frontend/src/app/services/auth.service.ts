@@ -37,12 +37,12 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-  	return this.http.post(environment.apiUrl+'/user/requestPasswordReset', {"email": email})
+  	return this.http.post(environment.apiUrl+'/user/resetPassword', {"email": email})
   	.map((response: Response) => response.json());
   }
 
   confirmPassword(password: string, token: string) {
-  	return this.http.post(environment.apiUrl+'/user/confirmPasswordReset', {"password": password, "token": token})
+  	return this.http.post(environment.apiUrl+'/user/confirmPassword', {"password": password, "token": token})
   	.map((response: Response) => response.json());
   }
 
