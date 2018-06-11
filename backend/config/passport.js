@@ -26,7 +26,7 @@ jwtOptions.issuer = config.JWT_ISSUER;
 jwtOptions.audience = config.JWT_AUDIENCE;
 
 var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  mongo.checkUserExists(jwt_payload, function(error, result) {
+  mongo.checkUserExists(jwt_payload, false, function(error, result) {
     next(error, result);
   });
 });

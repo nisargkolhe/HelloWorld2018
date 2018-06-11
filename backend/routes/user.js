@@ -19,7 +19,7 @@ router.post("/login", cors(), function(req, res) {
     var password = req.body.password;
   }
 
-  mongo.checkUserExists(req.body, function(error, result) {
+  mongo.checkUserExists(req.body, true, function(error, result) {
     if(error) {
       res.status(401).json({message:error});
     } else {
@@ -109,6 +109,19 @@ router.post("/confirmPassword", cors(), function(req,res){
       res.status(401).json({message: err});
     } else {
       res.json({message: "Password successfully updated. You'll be redirected to login shortly..."});
+    }
+  });
+});
+
+router.get('/', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
+  mongo.getUser(req.user._id, (err, response) => {
+    if(err) {
+      res.send({error: err})
+    }
+    else if(response) {
+      res.send(JSON.parse(JSON.stringify(response)));
+    } else {
+      res.send("Error!");
     }
   });
 });

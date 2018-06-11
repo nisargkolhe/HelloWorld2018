@@ -25,7 +25,7 @@ function connectToMongo(callback) {
   });
 }
 
-function checkUserExists(jwt_payload, callback) {
+function checkUserExists(jwt_payload, logging_in, callback) {
   if (!jwt_payload || !jwt_payload.email) {
     callback("No user found!", null);
   } else {
@@ -38,15 +38,19 @@ function checkUserExists(jwt_payload, callback) {
           if (err) {
             callback("Incorrect Password or the user doesn’t exists.", null);
           } else {
-            if(bcrypt.compareSync(jwt_payload.password, result.password)) {
-              if(!result.verified){
-                callback("Your account has not been verified.", null);
-              }
+            if(logging_in) {
+              if(bcrypt.compareSync(jwt_payload.password, result.password)) {
+                if(!result.verified){
+                  callback("Your account has not been verified.", null);
+                }
 
-              //Login successful
-              callback(null, result);
+                //Login successful
+                callback(null, result);
+              } else {
+                callback("Incorrect Password or the user doesn’t exists.", false);
+              }
             } else {
-              callback("Incorrect Password or the user doesn’t exists.", false);
+              callback(null, result);
             }
           }
         });
@@ -117,6 +121,7 @@ function getUser(user_id, callback) {
             callback("Error finding the user!", null);
           } else {
             if (result) {
+              result.password = undefined;
               callback(null, result);
             } else  {
               callback("User does not exist!", null);
