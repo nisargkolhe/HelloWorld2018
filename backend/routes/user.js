@@ -44,7 +44,8 @@ router.post("/register", cors(), function(req, res) {
     lastname: req.body.lastname,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 10),
-    verified: false
+    verified: false,
+    checkedin: false
   }
 
   mongo.addUser(user, function(error, result) {

@@ -241,6 +241,49 @@ function confirmPassword(password_token, password, callback) {
   });
 }
 
+function checkCheckInStatus(user_email, callback) {
+  //Email not provided
+  if (!user_email) {
+    callback("Error getting the user!", null);
+  } else {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      //Connection error
+      if (err) {
+        callback("We are currently facing some technically difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Users").findOne({email : user_email}, function(err, result) {
+          //User not found
+          if (err) {
+            callback("Error finding the user!", null);
+          } else {
+            if (result) {
+              //User already checked in
+              if (result.checkedin == true){
+                callback("User already checked in!", null);
+              }
+              //User not checked in
+              else {
+                //Update "check in" status
+                dbo.collection("Users").update(
+                  {email: user_email},
+                  {
+                    $set:
+                    {checkedin: true}
+                  }
+                );
+                callback("User successfully checked in!", null);
+              }
+            } else  {
+              callback("User does not exist!", null);
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -248,5 +291,6 @@ module.exports = {
   getUser: getUser,
   verifyUser: verifyUser,
   resetPassword: resetPassword,
-  confirmPassword: confirmPassword
+  confirmPassword: confirmPassword,
+  checkCheckInStatus : checkCheckInStatus
 }
