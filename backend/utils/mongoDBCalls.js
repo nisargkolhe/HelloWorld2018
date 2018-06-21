@@ -259,8 +259,11 @@ function checkCheckInStatus(user_email, callback) {
           } else {
             if (result) {
               //User already checked in
-              if (result.checkedin == true){
+              if (result.checkedin) {
                 callback("User already checked in!", null);
+              }
+              else if (!result.verified) {
+                callback("User not verified!", null);
               }
               //User not checked in
               else {
@@ -284,6 +287,24 @@ function checkCheckInStatus(user_email, callback) {
   }
 }
 
+function getCheckedInUsers(callback) {
+  MongoClient.connect(mongodbUrl, function (err, db) {
+    //Connection error
+    if (err) {
+      callback("We are currently facing some technically difficulties, please try again later!", null);
+    } else {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Users").find({'checkedin': true}).toArray(function(err, results) {
+        if (err){
+          callback("Error finding users!", null);
+        } else {
+          callback(null, results);
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -292,5 +313,6 @@ module.exports = {
   verifyUser: verifyUser,
   resetPassword: resetPassword,
   confirmPassword: confirmPassword,
-  checkCheckInStatus : checkCheckInStatus
+  checkCheckInStatus: checkCheckInStatus,
+  getCheckedInUsers: getCheckedInUsers
 }

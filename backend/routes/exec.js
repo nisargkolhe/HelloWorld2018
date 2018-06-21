@@ -30,16 +30,23 @@ nev.configure({
 
 router.post('/checkin', function(req, res, next) {
 	mongo.checkCheckInStatus(req.body.email, function(error, result) {
-	    if(error) {
-	      //res.status(401).json({message:error});
-        res.status(401).json({message:error});
-
-	    } else {
-	      var payload = {email: req.body.email};
-	      var jwtToken = token.generateAccessToken(payload);
-	      res.json({message: "Check In Successful", token: jwtToken});
-	    }
-  	});
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      res.json({message: "Check In Successful"});
+    }
+	});
 });
+
+router.get('/checkin', function(req, res, next) {
+  mongo.getCheckedInUsers(function(error, result) {
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 
 module.exports = router;
