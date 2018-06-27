@@ -31,11 +31,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.options('*', cors());
 
-app.use('/', routes);
+//app.use('/', routes);
 app.use('/user', user);
 app.use('/exec', exec);
 

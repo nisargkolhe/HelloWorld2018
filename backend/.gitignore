@@ -32,4 +32,8 @@ npm-debug.log
 #config
 config/config.js
 
+# System Files
+.DS_Store
+Thumbs.db
+
 
