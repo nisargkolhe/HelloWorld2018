@@ -1,1 +1,315 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
+
+/* Colors
+teal: ##55C296
+navy: #101B24
+light teal: #C1FFF2
+light blue: #7489A7
+*/
+body {
+  font-family: 'Varela Round', sans-serif !important;
+  background-color: #101B24;
+  margin: 0;
+  color: white;
+  background-image: url('assets/images/stars.svg');
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  text-align: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.topSpacing {
+  margin-top: 20px;
+}
+
+.box {
+  box-sizing: border-box;
+  display: block;
+  width: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border: 1px solid #C1FFF2;
+  color: #C1FFF2;
+  border-radius: 5px;
+  background: rgba(16, 27, 36, 0.9);
+  vertical-align: middle;
+  padding: 1em;
+  text-align: left;
+}
+
+h1, h2, h3, mat-option {
+  font-family: 'Varela Round', sans-serif;
+}
+
+h2, h3 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 18px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+nav a {
+  padding: 20px 10px;
+  color: #C1FFF2;
+  align-self: center;
+  font-size: 20px;
+}
+nav a span:hover {
+  padding-bottom: 12px;
+  border-bottom: 3px solid #C1FFF2;
+}
+
+footer {
+  padding: 20px;
+}
+a:focus, button:focus {
+  outline: none;
+}
+
+li {
+  margin: 3px;
+  list-style-type: none;
+  font-family: 'Varela Round', sans-serif;
+  color: #4AC29A;
+}
+
+.register {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 20px 80px;
+  background-color: #ac7b77;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-top: -20px;
+}
+.register:hover {
+  border-radius: 5px;
+  background-color: #f6d9d6;
+  color: #101B24;
+}
+.sign_in {
+  color: white;
+  text-decoration: underline;
+  padding-left: 5px;
+}
+.mentor {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 254.98px;
+  padding: 20px;
+  background-color: #4ac29a;
+  color: white;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.mentor:hover {
+  border-radius: 5px;
+  background-color: #bdfce7;
+  color: #101B24;
+}
+button {
+  margin: 5px;
+}
+.ui-button {
+  border: none;
+  font-family: 'Varela Round', sans-serif;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer !important;
+  padding: 1em 2em;
+  display: inline-block;
+  margin-right: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  background: #55C296;
+  color: #fff;
+  border-radius: 10px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.ui-button:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.ui-button:hover {
+  background: #C1FFF2;
+  color: #101B24;
+}
+
+.ui-button:active {
+  background: #C1FFF2;
+  top: 2px;
+}
+
+.upload-btn {
+  padding: 1em 2em;
+  background-color: transparent;
+  border: 1px solid #C1FFF2;
+  border-radius: 4px;
+  margin: 0;
+  cursor: pointer !important;
+}
+
+.upload-btn input[type=file] {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+/*.ui-button {
+  padding: 12px 20px;
+  width: auto;
+  color: black;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 18px;
+  background-color: #55C296;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.ui-button:hover {
+  background-color: #C1FFF2;
+  color: #101B24;
+}*/
+
+/*THEME ALERT SNACKBAR HERE */
+.ui-alert {
+  border-radius: 5px !important;
+}
+.ui-alert.success{
+  background-color: #4CAF50;
+}
+.ui-alert.danger{
+  background-color: #ac7b77;
+}
+
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.padded-divs div {
+  padding: 20px;
+}
+.faq {
+  color: #C1FFF2;
+  font-size: 13px;
+  vertical-align: middle;
+  display: inline;
+  text-align: left;
+  border-radius: 5px;
+  border: 1px solid #C1FFF2;
+  padding: 20px 15px 15px 15px;
+}
+.faq p {
+  display: inline;
+}
+.faq .icon {
+  margin-top: -5px;
+  display: inline;
+  max-width: 20px;
+  padding: 5px;
+}
+.faq i {
+  color: #C1FFF2;
+  padding: 5px;
+}
+
+.formInput {
+  /*position: absolute;*/
+  padding: 12px 20px;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #C1FFF2;
+  border-radius: 4px;
+  background: rgba(16, 27, 36, 0.9);
+  font-family: 'Varela Round', sans-serif;
+  color: #4AC29A;
+  text-align: left;
+  transition: border-color ease 0.5s;
+}
+
+.formInput:focus:required:invalid {
+  outline: none;
+  border-color: red;
+}
+
+.formInput:required:valid {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.invalidInput {
+  outline: none !important;
+  border-color: red !important;
+}
+
+.help-block {
+  color: red;
+  margin-top: 10px;
+  font-family: 'Varela Round', sans-serif;
+
+}
+
+/*THEME MD-CARD HERE*/
+.mat-card{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+
+.negative {
+  width: auto;
+  background-color: #ac7b77 !important;
+  color: white;
+}
+
+.negative:hover {
+  background-color: #f6d9d6 !important;
+  color: #101B24;
+}
+
+.con h1 {
+  margin-bottom: 0px;
+}
+
+.link {
+  color: #ac7b77;
+  font-size: 14px;
+  font-family: 'Varela Round', sans-serif;
+  display: block;
+}

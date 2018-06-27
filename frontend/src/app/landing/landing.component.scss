@@ -1,0 +1,211 @@
+/* Colors
+teal: ##55C296
+navy: #101B24
+light teal: #C1FFF2
+light blue: #7489A7
+*/
+
+section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.box {
+  box-sizing: border-box;
+  display: block;
+  width: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border: 1px solid #C1FFF2;
+  color: #C1FFF2;
+  border-radius: 5px;
+  background: rgba(16, 27, 36, 0.9);
+  vertical-align: middle;
+  padding: 1em;
+  text-align: left;
+}
+h1 {
+  font-family: 'Short Stack', sans-serif;
+}
+
+a {
+  /*border-bottom: .08em solid #55C296;*/
+  /*padding-bottom: .08em;*/
+  /*text-decoration: none;*/
+  /*vertical-align: baseline;*/
+  margin: 0;
+  background: 0 0;
+  font-weight: 300;
+  /*-webkit-transition: all .25s;*/
+  /*transition: all .25s;*/
+  color: inherit;
+}
+a:hover {
+  /*padding-bottom: .08em;*/
+    /*text-decoration: none;*/
+    /*border-bottom: .08em solid #C1FFF2;*/
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px;
+}
+a:focus, button:focus {
+  outline: none;
+}
+
+.faq .q {
+  text-align: left;
+  font-weight: 400;
+  color: white;
+}
+.faq .a {
+  text-align: left;
+  font-weight: 200;
+}
+h2 {
+  padding: 0px;
+}
+
+li {
+  margin: 3px;
+  list-style-type: none;
+  font-family: 'Varela Round', sans-serif;
+  color: #4AC29A;
+}
+
+.landing_button {
+  margin-top: -20px;
+}
+
+.landing_button ul {
+  padding: 0;
+}
+
+input[type=text], select {
+  width: auto;
+  padding: 12px 20px;
+  font-size: 18px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #C1FFF2;
+  border-radius: 4px;
+  background: rgba(16, 27, 36, 0.9);
+}
+.updates {
+  width: auto;
+  min-width: 249px;
+  font-family: 'Short Stack', sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #ac7b77;
+  color: white;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.updates:hover {
+  background-color: #f6d9d6;
+  color: #101B24;
+}
+.sign_in {
+  text-decoration: underline;
+  padding-left: 5px;
+}
+.mentor {
+  font-family: 'Short Stack', sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #4ac29a;
+  color: white;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.mentor:hover {
+  background-color: #bdfce7;
+  color: #101B24;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #55C296;
+  color: white;
+  font-weight: 200;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #C1FFF2;
+  color: #101B24;
+}
+
+.faq {
+  color: #C1FFF2;
+  font-size: 13px;
+  vertical-align: middle;
+  display: inline;
+  text-align: left;
+  border-radius: 5px;
+  border: 1px solid #C1FFF2;
+  padding: 20px 15px 15px 15px;
+}
+.faq p {
+  display: inline;
+}
+.faq .icon {
+  margin-top: -5px;
+  display: inline;
+  max-width: 20px;
+  padding: 5px;
+}
+.faq i {
+  color: #C1FFF2;
+  padding: 5px;
+}
+
+.logo img {
+  max-width: 300px;
+}
+summary {
+  outline:none;
+}
+
+details {
+  font-size: 22px;
+  margin: 1em;
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.company-logo {
+  max-width: 300px;
+  margin: 20px;
+}
+
+.container {
+  padding: 20px;
+}
+.main-card {
+  max-width: 600px;
+  margin: 1em auto;
+}
+.con {
+  padding: 20px;
+  max-width: 530px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 2em auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+  margin:auto;
+  /*border: 1px solid #C1FFF2;*/
+  color: #C1FFF2;
+  border-radius: 5px;
+  background: rgba(16, 27, 36, 0.9);
+  vertical-align: middle;
+  text-align: left;
+}
