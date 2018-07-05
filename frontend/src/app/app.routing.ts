@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { CheckinComponent } from './checkin/checkin.component';
 import { AuthGuard } from './auth.guard';
 import { AdminGuard } from './admin.guard';
 
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
 { path: 'resetPassword', component: ResetPasswordComponent },
 { path: 'confirmPassword', component: ConfirmPasswordComponent },
 { path: 'confirmEmail', component: ConfirmEmailComponent },
+{ path: 'checkin', component: CheckinComponent },
 { path: '**', redirectTo: '' }
 ];
 

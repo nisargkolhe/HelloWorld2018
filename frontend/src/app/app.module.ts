@@ -18,6 +18,7 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 import { UserService, AuthService, AlertService } from './services/index';
 import { HomeComponent } from './home/home.component';
+import { CheckinComponent } from './checkin/checkin.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './home/home.component';
   ResetPasswordComponent,
   ConfirmPasswordComponent,
   ConfirmEmailComponent,
-  HomeComponent
+  HomeComponent,
+  CheckinComponent
   ],
   imports: [
   BrowserModule,

@@ -1,0 +1,10 @@
+<div class="con">
+  	<h1>Check In</h1>
+  	<!--input email-->
+  	<div class="topSpacing">
+      	<input class="formInput" placeholder="Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required>
+  	</div>
+    <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+    <!--check in button-->
+    <button class="ui-button topSpacing" [disabled]="loading">Check In</button>
+</div>
