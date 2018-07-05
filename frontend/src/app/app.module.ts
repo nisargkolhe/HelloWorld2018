@@ -29,8 +29,8 @@ import { CheckinComponent } from './checkin/checkin.component';
   ResetPasswordComponent,
   ConfirmPasswordComponent,
   ConfirmEmailComponent,
-  HomeComponent,
-  CheckinComponent
+  CheckinComponent,
+  HomeComponent
   ],
   imports: [
   BrowserModule,

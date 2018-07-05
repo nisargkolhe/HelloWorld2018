@@ -6,4 +6,5 @@ export class User {
 	lastname: string;
 	roles:string[];
 	verified: boolean;
+	checkedin: boolean;
 }

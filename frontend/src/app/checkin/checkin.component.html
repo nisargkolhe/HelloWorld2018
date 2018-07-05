@@ -1,10 +1,16 @@
 <div class="con">
   	<h1>Check In</h1>
-  	<!--input email-->
-  	<div class="topSpacing">
-      	<input class="formInput" placeholder="Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required>
-  	</div>
-    <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
-    <!--check in button-->
-    <button class="ui-button topSpacing" [disabled]="loading">Check In</button>
+  	<form name="form" (ngSubmit)="f.form.valid && checkin()" #f="ngForm" novalidate>
+	  	<!--input email-->
+	    <input class="formInput topSpacing" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+	    <div class="help-block" *ngIf="f.submitted && !email.valid">Purdue Email is required</div>
+	    <button class="ui-button topSpacing" [disabled]="loading" mdRippleColor="#F00">Check In</button>
+	    <div
+	      *ngIf="loading"
+	      color="primary"
+	      mode="indeterminate"
+	      class="spinner">
+	      Loading...
+	    </div>
+	</form>
 </div>
