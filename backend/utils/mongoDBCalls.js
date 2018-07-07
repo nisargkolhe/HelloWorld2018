@@ -305,6 +305,44 @@ function getCheckedInUsers(callback) {
   });
 }
 
+function createOrUpdateApplication(user_id, applicationData, callback){
+  if (!user_id){
+    callback("Invalid user!", null);
+  } else{
+  MongoClient.connect(mongodbUrl, function(err, db){
+    if (err){
+      callback("Error connecting", null);
+    }
+    else
+    {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").findOne({uid: user_id}, function(err, application){
+        console.log('ERROR', err, 'THE RESPONSE', application)
+        if (err){
+          console.log('an error ocurred while looking up application', err);
+          callback(err);
+        } else if (application) {
+          dbo.collection('Applications').updateOne({'_id.$oid': application._id.$oid}, applicationData, (err, result) => {
+            callback(null, {update: true, result});
+          })
+        } else {
+          dbo.collection('Applications').insertOne(applicationData, (err, result) => {
+            callback(null, {insert: true, result})
+          })
+        }
+    
+      });
+
+
+    }
+  });
+
+  
+
+  }
+
+}
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -313,6 +351,7 @@ module.exports = {
   verifyUser: verifyUser,
   resetPassword: resetPassword,
   confirmPassword: confirmPassword,
+  createOrUpdateApplication: createOrUpdateApplication,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers
 }

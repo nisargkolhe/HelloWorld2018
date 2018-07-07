@@ -127,4 +127,28 @@ router.get('/', passport.authenticate(['jwt'], { session: false }), function(req
   });
 });
 
+router.post("/apply", cors(), function(req, res){
+  console.log('-------This is the token---------', req.headers)
+  const decodedToken = token.decodeAccessToken(req.headers.authorization)
+  
+  const applicationData = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    address: req.body.address,
+    email: req.body.email
+  }
+
+  mongo.createOrUpdateApplication(req.body.userId, applicationData, (err, response) => {
+    if (err) {
+      res.send({error: 'An error occured', error: err});
+    } else if (response.update) {
+      res.send({message: 'Application successfully updated', response: response.result});
+    } else if (response.insert) {
+      res.send({message: 'Application successfully inserted', response: response.result});
+    } else {
+      res.send('An unknown error occured');
+    }
+  });
+});
+
 module.exports = router;
