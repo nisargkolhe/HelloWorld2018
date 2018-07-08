@@ -305,8 +305,9 @@ function getCheckedInUsers(callback) {
   });
 }
 
-function createOrUpdateApplication(user_id, applicationData, callback){
-  if (!user_id){
+function createOrUpdateApplication(user_email, applicationData, callback){
+  console.log("Email of user: " + user_email)
+  if (!user_email){
     callback("Invalid user!", null);
   } else{
   MongoClient.connect(mongodbUrl, function(err, db){
@@ -316,10 +317,10 @@ function createOrUpdateApplication(user_id, applicationData, callback){
     else
     {
       var dbo = db.db(config.mongoDBDatabase);
-      dbo.collection("Applications").findOne({uid: user_id}, function(err, application){
+      dbo.collection("Applications").findOne({'email': user_email}, function(err, application){
         console.log('ERROR', err, 'THE RESPONSE', application)
         if (err){
-          console.log('an error ocurred while looking up application', err);
+          console.log('an error occurred while looking up application', err);
           callback(err);
         } else if (application) {
           dbo.collection('Applications').updateOne({'_id.$oid': application._id.$oid}, applicationData, (err, result) => {
@@ -330,18 +331,38 @@ function createOrUpdateApplication(user_id, applicationData, callback){
             callback(null, {insert: true, result})
           })
         }
-    
       });
-
-
     }
   });
-
-  
-
   }
-
 }
+
+function retrieveUserApplication(user_email, callback){
+  if (!user_email){
+    callback("Invalid user!", null);
+  }
+  else{
+    MongoClient.connect(mongodbUrl, function(err, db){
+      if (err){
+        callback("Error connecting to MongoDB", null)
+      }
+      else
+      {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
+          if (err){
+            console.log('An error occurred while finding application', err);
+            callback(err);
+          }
+          else if (application){
+            callback(null, application);
+          }
+        });
+      }
+    });
+  }
+}
+
 
 module.exports = {
   connectToMongo : connectToMongo,
@@ -352,6 +373,7 @@ module.exports = {
   resetPassword: resetPassword,
   confirmPassword: confirmPassword,
   createOrUpdateApplication: createOrUpdateApplication,
+  retrieveUserApplication : retrieveUserApplication,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers
 }

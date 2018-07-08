@@ -127,26 +127,42 @@ router.get('/', passport.authenticate(['jwt'], { session: false }), function(req
   });
 });
 
-router.post("/apply", cors(), function(req, res){
-  console.log('-------This is the token---------', req.headers)
-  const decodedToken = token.decodeAccessToken(req.headers.authorization)
-  
+router.get('/application', passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
+  if (!req.user.email){
+    res.status(401).json({message: "Need to pass a user id"});
+  }
+  mongo.retrieveUserApplication(req.user.email,(err, response) => {
+      if (err){
+        res.send({Error: err})
+      }
+      else if (response){
+        res.send(JSON.parse(JSON.stringify(response)));
+      }
+      else{
+        res.send("An error has occurred");
+      }
+  });
+});
+
+
+router.post("/apply", passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
+  console.log('-----------This is the token---------', req.headers)
+
   const applicationData = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     address: req.body.address,
-    email: req.body.email
+    email: req.user.email
   }
-
-  mongo.createOrUpdateApplication(req.body.userId, applicationData, (err, response) => {
+  mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
-      res.send({error: 'An error occured', error: err});
+      res.send({error: 'An error occurred', error: err});
     } else if (response.update) {
       res.send({message: 'Application successfully updated', response: response.result});
     } else if (response.insert) {
       res.send({message: 'Application successfully inserted', response: response.result});
     } else {
-      res.send('An unknown error occured');
+      res.send('An unknown error occurred');
     }
   });
 });
