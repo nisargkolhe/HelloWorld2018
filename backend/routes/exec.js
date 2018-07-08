@@ -48,5 +48,35 @@ router.get('/checkin', function(req, res, next) {
   });
 });
 
+router.get('/applications', passport.authenticate(['jwt'], { session: false }), function(req, res){
+  console.log(typeof(req.user.roles))
+
+  var isAdmin = false;
+
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "admin")
+    {
+      isAdmin = true;
+    }
+  }
+
+  if (isAdmin == false){
+    res.status(401).json({message: "Only admins access all applications"});
+
+  }
+
+  mongo.retrieveAllApplications((err, response) => {
+    if (err){
+      res.send({Error: err})
+    }
+    else if (response){
+      res.send(response);
+    }
+    else{
+      res.send("An error has occurred");
+    }
+});
+});
+
 
 module.exports = router;

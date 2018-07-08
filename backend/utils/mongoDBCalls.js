@@ -363,6 +363,28 @@ function retrieveUserApplication(user_email, callback){
   }
 }
 
+function retrieveAllApplications(callback){
+  MongoClient.connect(mongodbUrl, function(err,db){
+    if (err){
+      callback("Error connecting to MongoDB", null)
+    }
+    else{
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").find().toArray(function(err, applications){
+        if (err)
+        {
+          console.log('An error occurred getting the applications', err);
+          callback(err);
+        }
+        else if (applications)
+        {
+          console.log(applications)
+          callback(null, applications);
+        }
+      });      
+    }
+  });
+}
 
 module.exports = {
   connectToMongo : connectToMongo,
@@ -374,6 +396,7 @@ module.exports = {
   confirmPassword: confirmPassword,
   createOrUpdateApplication: createOrUpdateApplication,
   retrieveUserApplication : retrieveUserApplication,
+  retrieveAllApplications: retrieveAllApplications,
   checkCheckInStatus: checkCheckInStatus,
-  getCheckedInUsers: getCheckedInUsers
+  getCheckedInUsers: getCheckedInUsers,
 }
