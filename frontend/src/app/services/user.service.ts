@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UtilService } from './util.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { environment } from '../../environments';
 
@@ -7,26 +8,28 @@ import { Application } from '../application';
 
 @Injectable()
 export class UserService {
-	constructor(private http: Http) { }
+	constructor(
+		private http: Http,
+		private utilService: UtilService) { }
 
 	create(user: User) {
 		return this.http.post(environment.apiUrl+'/user/register', user).map((response: Response) => response.json());
 	}
 
 	apply(application: Application) {
-		return this.http.post(environment.apiUrl+'/user/apply', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/apply', this.convertJsonToFormData(application), this.utilService.jwt()).map((response: Response) => response.json());
 	}
 
 	updateApplication(application: Application) {
-		return this.http.post(environment.apiUrl+'/user/updateApplication', this.convertJsonToFormData(application), this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/updateApplication', this.convertJsonToFormData(application), this.utilService.jwt()).map((response: Response) => response.json());
 	}
 
 	getApplication() {
-		return this.http.get(environment.apiUrl+'/user/application', this.jwt()).map((response: Response) => response.json());
+		return this.http.get(environment.apiUrl+'/user/application', this.utilService.jwt()).map((response: Response) => response.json());
 	}
 
 	userSearch(searchKey: string) {
-		return this.http.post(environment.apiUrl+'/user/search', {"searchvalue": searchKey}, this.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/search', {"searchvalue": searchKey}, this.utilService.jwt()).map((response: Response) => response.json());
 	}
 
 	loadFromLocalStorage() {
@@ -53,14 +56,4 @@ export class UserService {
 
 		return formData;
 	}
-
-	private jwt() {
-    // create authorization header with jwt token
-    //let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let token = localStorage.getItem('token');
-    if (token) {
-    	let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    	return new RequestOptions({ headers: headers });
-    }
-  }
 }
