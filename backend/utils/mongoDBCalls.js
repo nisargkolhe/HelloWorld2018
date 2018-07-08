@@ -440,6 +440,35 @@ MongoClient.connect(mongodbUrl, function(err, db){
 });
 }
 
+function setApplicationStatus(user_email, status, callback){
+  MongoClient.connect(mongodbUrl, function(err, db){
+    if (err)
+    {
+      callback("Error connecting to MongoDB", null)
+    }
+    else{
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
+        if (err)
+        {
+          console.log('An error occurred while finding application', err);
+          callback(err)
+        }
+        else if (application)
+        {
+          dbo.collection("Applications").update({"email": user_email}, {$set: {"status": status}}, function(err, res){
+            if (err) { 
+              callback(err.message, null); 
+            } else {
+              callback(null, res);
+            }
+          });
+        }
+      }); 
+    }
+  });
+  }
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
