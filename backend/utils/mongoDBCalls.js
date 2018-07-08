@@ -1,7 +1,7 @@
 
 var MongoClient = require('mongodb').MongoClient
 , assert = require('assert')
-, ObjectId = require('mongodb').ObjectID
+, ObjectID = require('mongodb').ObjectID
 , token = require('./token')
 , crypto = require('crypto');
 
@@ -124,6 +124,33 @@ function getUser(user_id, callback) {
               result.password = undefined;
               callback(null, result);
             } else  {
+              callback("User does not exist!", null);
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
+function getUserByOID(user_id, callback) {
+  if (!user_id) {
+    callback("ID is needed to find user", null);
+  } else {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      if (err) {
+        callback("We are currently facing some technical difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Users").findOne({ _id : ObjectID(user_id)}, function(err, result) {
+          if (err) {
+            callback("Error finding the user!", null);
+          } else {
+            if (result) {
+              result.password = undefined;
+              callback(null, result);
+            } else  {
+              console.log(result);
               callback("User does not exist!", null);
             }
           }
@@ -411,13 +438,41 @@ MongoClient.connect(mongodbUrl, function(err, db){
 });
 }
 
-
+function setApplicationStatus(user_email, status, callback){
+MongoClient.connect(mongodbUrl, function(err, db){
+  if (err)
+  {
+    callback("Error connecting to MongoDB", null)
+  }
+  else{
+    var dbo = db.db(config.mongoDBDatabase);
+    dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
+      if (err)
+      {
+        console.log('An error occurred while finding application', err);
+        callback(err)
+      }
+      else if (application)
+      {
+        dbo.collection("Applications").updateOne({"email": user_email}, {$set: {"status": status}}, function(err, res){
+          if (err) { 
+            callback(err.message, null); 
+          } else {
+            callback(null, res);
+          }
+        });
+      }
+    }); 
+  }
+});
+}
 
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
   addUser : addUser,
   getUser: getUser,
+  getUserByOID: getUserByOID,
   verifyUser: verifyUser,
   resetPassword: resetPassword,
   confirmPassword: confirmPassword,
@@ -425,6 +480,7 @@ module.exports = {
   retrieveUserApplication : retrieveUserApplication,
   retrieveAllApplications: retrieveAllApplications,
   retrieveOpenApplications: retrieveOpenApplications,
+  setApplicationStatus: setApplicationStatus,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers,
 }
