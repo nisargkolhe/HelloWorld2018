@@ -386,6 +386,33 @@ function retrieveAllApplications(callback){
   });
 }
 
+function retrieveOpenApplications(callback){
+MongoClient.connect(mongodbUrl, function(err, db){
+  if (err)
+  {
+    callback("Error connecting to MongoDB", null)
+  }
+  else
+  {
+    var dbo = db.db(config.mongoDBDatabase);
+    dbo.collection("Applications").find({"status" : "open"}).toArray(function(err,applications){
+      if (err)
+      {
+        console.log('An error occurred getting the applications', err);
+        callback(err);
+      }
+      else if (applications)
+      {
+          console.log(applications)
+          callback(null, applications);
+      }
+    });
+  }
+});
+}
+
+
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -397,6 +424,7 @@ module.exports = {
   createOrUpdateApplication: createOrUpdateApplication,
   retrieveUserApplication : retrieveUserApplication,
   retrieveAllApplications: retrieveAllApplications,
+  retrieveOpenApplications: retrieveOpenApplications,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers,
 }
