@@ -334,6 +334,7 @@ function getCheckedInUsers(callback) {
 
 function createOrUpdateApplication(user_email, applicationData, callback){
   console.log("Email of user: " + user_email)
+  console.log(applicationData)
   if (!user_email){
     callback("Invalid user!", null);
   } else{
@@ -350,7 +351,8 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           console.log('an error occurred while looking up application', err);
           callback(err);
         } else if (application) {
-          dbo.collection('Applications').updateOne({'_id.$oid': application._id.$oid}, applicationData, (err, result) => {
+          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address}}, (err, result) => {
+            
             callback(null, {update: true, result});
           })
         } else {
@@ -434,35 +436,6 @@ MongoClient.connect(mongodbUrl, function(err, db){
           callback(null, applications);
       }
     });
-  }
-});
-}
-
-function setApplicationStatus(user_email, status, callback){
-MongoClient.connect(mongodbUrl, function(err, db){
-  if (err)
-  {
-    callback("Error connecting to MongoDB", null)
-  }
-  else{
-    var dbo = db.db(config.mongoDBDatabase);
-    dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
-      if (err)
-      {
-        console.log('An error occurred while finding application', err);
-        callback(err)
-      }
-      else if (application)
-      {
-        dbo.collection("Applications").updateOne({"email": user_email}, {$set: {"status": status}}, function(err, res){
-          if (err) { 
-            callback(err.message, null); 
-          } else {
-            callback(null, res);
-          }
-        });
-      }
-    }); 
   }
 });
 }

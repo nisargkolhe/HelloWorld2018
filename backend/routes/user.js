@@ -146,13 +146,15 @@ router.get('/application', passport.authenticate(['jwt'], { session: false }), c
 
 
 router.post("/apply", passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
-  console.log('-----------This is the token---------', req.headers)
+console.log(req.body.firstName)
+console.log("xd")
 
   const applicationData = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     address: req.body.address,
-    email: req.user.email
+    email: req.user.email,
+    status: "open"
   }
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
