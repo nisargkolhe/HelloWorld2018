@@ -21,5 +21,11 @@ module.exports = {
     });
 
     return token;
-  }
+  },
+  decodeAccessToken: function(token) {
+    console.log('-----------NEWTOKEN--------', token)
+    const decodedToken = jwt.verify(token, config.JWT_SECRET)
+    console.log('DECODED INFO', decodedToken);
+    return decodedToken
+  },
 };

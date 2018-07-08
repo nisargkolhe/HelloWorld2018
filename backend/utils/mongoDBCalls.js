@@ -1,7 +1,7 @@
 
 var MongoClient = require('mongodb').MongoClient
 , assert = require('assert')
-, ObjectId = require('mongodb').ObjectID
+, ObjectID = require('mongodb').ObjectID
 , token = require('./token')
 , crypto = require('crypto');
 
@@ -124,6 +124,33 @@ function getUser(user_id, callback) {
               result.password = undefined;
               callback(null, result);
             } else  {
+              callback("User does not exist!", null);
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
+function getUserByOID(user_id, callback) {
+  if (!user_id) {
+    callback("ID is needed to find user", null);
+  } else {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      if (err) {
+        callback("We are currently facing some technical difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Users").findOne({ _id : ObjectID(user_id)}, function(err, result) {
+          if (err) {
+            callback("Error finding the user!", null);
+          } else {
+            if (result) {
+              result.password = undefined;
+              callback(null, result);
+            } else  {
+              console.log(result);
               callback("User does not exist!", null);
             }
           }
@@ -305,14 +332,157 @@ function getCheckedInUsers(callback) {
   });
 }
 
+function createOrUpdateApplication(user_email, applicationData, callback){
+  console.log("Email of user: " + user_email)
+  console.log(applicationData)
+  if (!user_email){
+    callback("Invalid user!", null);
+  } else{
+  MongoClient.connect(mongodbUrl, function(err, db){
+    if (err){
+      callback("Error connecting", null);
+    }
+    else
+    {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").findOne({'email': user_email}, function(err, application){
+        console.log('ERROR', err, 'THE RESPONSE', application)
+        if (err){
+          console.log('an error occurred while looking up application', err);
+          callback(err);
+        } else if (application) {
+          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address}}, (err, result) => {
+            
+            callback(null, {update: true, result});
+          })
+        } else {
+          dbo.collection('Applications').insertOne(applicationData, (err, result) => {
+            callback(null, {insert: true, result})
+          })
+        }
+      });
+    }
+  });
+  }
+}
+
+function retrieveUserApplication(user_email, callback){
+  if (!user_email){
+    callback("Invalid user!", null);
+  }
+  else{
+    MongoClient.connect(mongodbUrl, function(err, db){
+      if (err){
+        callback("Error connecting to MongoDB", null)
+      }
+      else
+      {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
+          if (err){
+            console.log('An error occurred while finding application', err);
+            callback(err);
+          }
+          else if (application){
+            callback(null, application);
+          }
+        });
+      }
+    });
+  }
+}
+
+function retrieveAllApplications(callback){
+  MongoClient.connect(mongodbUrl, function(err,db){
+    if (err){
+      callback("Error connecting to MongoDB", null)
+    }
+    else{
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").find().toArray(function(err, applications){
+        if (err)
+        {
+          console.log('An error occurred getting the applications', err);
+          callback(err);
+        }
+        else if (applications)
+        {
+          console.log(applications)
+          callback(null, applications);
+        }
+      });      
+    }
+  });
+}
+
+function retrieveOpenApplications(callback){
+MongoClient.connect(mongodbUrl, function(err, db){
+  if (err)
+  {
+    callback("Error connecting to MongoDB", null)
+  }
+  else
+  {
+    var dbo = db.db(config.mongoDBDatabase);
+    dbo.collection("Applications").find({"status" : "open"}).toArray(function(err,applications){
+      if (err)
+      {
+        console.log('An error occurred getting the applications', err);
+        callback(err);
+      }
+      else if (applications)
+      {
+          console.log(applications)
+          callback(null, applications);
+      }
+    });
+  }
+});
+}
+
+function setApplicationStatus(user_email, status, callback){
+  MongoClient.connect(mongodbUrl, function(err, db){
+    if (err)
+    {
+      callback("Error connecting to MongoDB", null)
+    }
+    else{
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").findOne({"email": user_email}, function(err, application){
+        if (err)
+        {
+          console.log('An error occurred while finding application', err);
+          callback(err)
+        }
+        else if (application)
+        {
+          dbo.collection("Applications").update({"email": user_email}, {$set: {"status": status}}, function(err, res){
+            if (err) { 
+              callback(err.message, null); 
+            } else {
+              callback(null, res);
+            }
+          });
+        }
+      }); 
+    }
+  });
+  }
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
   addUser : addUser,
   getUser: getUser,
+  getUserByOID: getUserByOID,
   verifyUser: verifyUser,
   resetPassword: resetPassword,
   confirmPassword: confirmPassword,
+  createOrUpdateApplication: createOrUpdateApplication,
+  retrieveUserApplication : retrieveUserApplication,
+  retrieveAllApplications: retrieveAllApplications,
+  retrieveOpenApplications: retrieveOpenApplications,
+  setApplicationStatus: setApplicationStatus,
   checkCheckInStatus: checkCheckInStatus,
-  getCheckedInUsers: getCheckedInUsers
+  getCheckedInUsers: getCheckedInUsers,
 }
