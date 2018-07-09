@@ -177,7 +177,7 @@ p {
   color: #ffffff;
 }
 
-.ui-button {
+.uk-button {
   border: none;
 	cursor: pointer !important;
 	padding: 1em 2em;
@@ -198,7 +198,7 @@ p {
   color: white;
 }
 
-.ui-button:after {
+.uk-button:after {
 	content: '';
 	position: absolute;
 	z-index: -1;
@@ -207,21 +207,21 @@ p {
 	transition: all 0.3s;
 }
 
-.ui-button:hover {
+.uk-button:hover {
   background-color: #7233ad;
   border: solid 1px #7233ad;
 }
 
-.ui-button:active {
+.uk-button:active {
   background-color: #7233ad;
   border: solid 1px #7233ad;
 }
 
-.ui-button:disabled {
+.uk-button:disabled {
   background-color: rgba(139, 149, 166, 0.5);
 }
 
-.ui-button-secondary{
+.uk-button-secondary{
   box-shadow: 0 4px 4px 0 rgba(139, 149, 166, 0.25);
   background-color: #ffffff;
   border: solid 2px #1d1f7a;
@@ -229,12 +229,12 @@ p {
   color: var(--dark-blue);
 }
 
-.ui-button-secondary:hover {
+.uk-button-secondary:hover {
   background-color: #ffffff;
   border: solid 2px #7233ad;
 }
 
-.ui-button-secondary:active {
+.uk-button-secondary:active {
   background-color: #ffffff;
   border: solid 2px #7233ad;
 }
@@ -294,4 +294,13 @@ p {
 .leftBox {
   height: 50%;
   width: 100%;
+}
+
+.uk-logo {
+  width: 4em;
+  height: 4em;
+}
+
+.no-margin {
+  margin: 0 !important;
 }

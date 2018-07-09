@@ -43,8 +43,8 @@
             <div *ngIf="f.submitted && !cpassword.valid" class="uk-text-danger">Password Confirmation is required</div>
         </div>
         <div class="uk-align-right">
-          <button class="ui-button ui-button-secondary p-large-light uk-margin-right" [routerLink]="['/login']">Login</button>
-          <button class="ui-button p-large-dark" [disabled]="loading" [routerLink]="['/register']">Register</button>
+          <button class="uk-button uk-button-secondary p-large-light uk-margin-right" [routerLink]="['/login']">Login</button>
+          <button class="uk-button p-large-dark" [disabled]="loading" [routerLink]="['/register']">Register</button>
         </div>
         <div
           *ngIf="loading"

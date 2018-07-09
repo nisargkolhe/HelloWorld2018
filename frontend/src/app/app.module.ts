@@ -20,6 +20,7 @@ import { UserService, ExecService, AuthService, AlertService, ApplicationService
 import { HomeComponent } from './home/home.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { ApplicationComponent } from './application/application.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ApplicationComponent } from './application/application.component';
   ConfirmEmailComponent,
   CheckinComponent,
   HomeComponent,
-  ApplicationComponent
+  ApplicationComponent,
+  NavbarComponent
   ],
   imports: [
   BrowserModule,
