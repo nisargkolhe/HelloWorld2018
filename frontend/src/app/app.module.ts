@@ -16,7 +16,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
-import { UserService, AuthService, AlertService, ApplicationService, UtilService} from './services/index';
+import { UserService, ExecService, AuthService, AlertService, ApplicationService, UtilService} from './services/index';
 import { HomeComponent } from './home/home.component';
 import { CheckinComponent } from './checkin/checkin.component';
 
@@ -43,6 +43,7 @@ import { CheckinComponent } from './checkin/checkin.component';
   AuthGuard,
   AuthService,
   UserService,
+  ExecService,
   AlertService,
   ApplicationService,
   UtilService
