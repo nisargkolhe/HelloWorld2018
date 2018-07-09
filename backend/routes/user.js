@@ -144,13 +144,13 @@ router.get('/application', passport.authenticate(['jwt'], { session: false }), c
   }
   mongo.retrieveUserApplication(req.user.email,(err, response) => {
       if (err){
-        res.send({Error: err})
+        res.status(401).json({message: err})
       }
       else if (response){
         res.send(JSON.parse(JSON.stringify(response)));
       }
       else{
-        res.send("An error has occurred");
+        res.status(401).json({message: "An error has occurred"});
       }
   });
 });
@@ -169,13 +169,13 @@ console.log("xd")
   }
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
-      res.send({error: 'An error occurred', error: err});
+      res.status(401).json({message: 'An error occurred', error: err});
     } else if (response.update) {
       res.send({message: 'Application successfully updated', response: response.result});
     } else if (response.insert) {
       res.send({message: 'Application successfully inserted', response: response.result});
     } else {
-      res.send('An unknown error occurred');
+      res.status(401).json({message: 'An unknown error occurred'});
     }
   });
 });
