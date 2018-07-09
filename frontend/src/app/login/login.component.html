@@ -5,7 +5,7 @@
 		</div>
 	</div>
 	<div class="uk-flex uk-flex-middle">
-		<div class="uk-container uk-container-supersmall flexbox-center">
+		<div class="fullwidth uk-container uk-container-supersmall flexbox-center">
       <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
@@ -21,9 +21,11 @@
             </div>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
-        <button class="ui-button topSpacing p-large-light" [disabled]="loading">Login</button>
-        <button class="ui-button ui-button-secondary topSpacing p-large-dark" [routerLink]="['/register']">Register</button>
-        <a class="link topSpacing" [routerLink]="['/resetPassword']">Forgot Password?</a>
+        <div class="uk-align-right">
+          <a class="link uk-margin-right" [routerLink]="['/resetPassword']">Forgot Password?</a>
+          <button class="ui-button ui-button-secondary p-large-dark uk-margin-right" [routerLink]="['/register']">Register</button>
+          <button class="ui-button p-large-light" [disabled]="loading">Login</button>
+        </div>
         <div
           *ngIf="loading"
           color="primary"

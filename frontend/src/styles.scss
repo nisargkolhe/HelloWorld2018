@@ -182,7 +182,6 @@ p {
 	cursor: pointer !important;
 	padding: 1em 2em;
 	display: inline-block;
-	margin-right: 20px;
 	text-transform: uppercase;
   text-decoration: none;
 	outline: none;
@@ -274,6 +273,10 @@ p {
 	height: 100%;
 	width: 100%;
 	// position: absolute;
+}
+
+.fullwidth {
+  width: 100%;
 }
 
 .body-container {
