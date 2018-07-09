@@ -23,6 +23,8 @@
     "@angular/router": "^5.2.11",
     "angular2-jwt": "^0.2.3",
     "core-js": "^2.4.1",
+    "ng2-validation": "^4.2.0",
+    "node-sass": "^4.9.2",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

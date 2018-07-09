@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
+import { ApplicationComponent } from './application/application.component';
 import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +15,7 @@ import { AdminGuard } from './admin.guard';
 const appRoutes: Routes = [
 { path: '', component: LandingComponent },
 { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+{ path: 'apply', component: ApplicationComponent, canActivate: [AuthGuard] },
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
 { path: 'resetPassword', component: ResetPasswordComponent },

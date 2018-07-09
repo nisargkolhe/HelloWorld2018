@@ -1,0 +1,93 @@
+<div class="con app">
+    <h1>Application</h1>
+    <form name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" novalidate>
+        <label for="class_year">Class Year*</label>
+        <select class="formInput" [ngClass]="{'invalidInput':(f.submitted && !model.class_year)}" [(ngModel)]="model.class_year" #class_year="ngModel" name="class_year"  required>
+          <option *ngFor="let year of class_years" [value]="year.value">
+            {{year.viewValue}}
+          </option>
+        </select>
+        <label for="grad_year">Graduation Year*</label>
+        <select class="formInput" [ngClass]="{'invalidInput':(f.submitted && !model.grad_year)}" [(ngModel)]="model.grad_year" name="grad_year" required>
+          <option *ngFor="let year of grad_years" [value]="year">
+            {{year}}
+          </option>
+        </select>
+        <!-- <div *ngIf="f.submitted && !grad_year.valid" class="help-block">Graduation Year is required</div> -->
+        <!-- <md-input-container class="full-width" [ngClass]="{ 'ng-invalid': f.submitted && !model.major }">
+          <input mdInput placeholder="Major" name="major" type="text" [(ngModel)]="model.major" #major="ngModel" required>
+        </md-input-container> -->
+        <label for="major">Major*</label>
+          <input class="formInput" placeholder="Major" [ngClass]="{'invalidInput':(f.submitted && !model.major)}" [(ngModel)]="model.major" [formControl]="majorCtrl" required>
+        <!-- <mat-autocomplete #auto="mdAutocomplete">
+          <mat-option *ngFor="let major of filteredMajors | async" [value]="major" >
+            {{ major }}
+          </mat-option>
+        </mat-autocomplete> -->
+        <!-- <div *ngIf="f.submitted && !major" class="help-block">Password is required</div> -->
+        <label for="referral">How did you hear about us?*</label>
+        <select class="formInput" [ngClass]="{'invalidInput':(f.submitted && !model.referral)}" [(ngModel)]="model.referral" name="referral" required>
+          <option *ngFor="let referral of referrals" [value]="referral.value">
+            {{referral.viewValue}}
+          </option>
+        </select>
+        <!-- <div *ngIf="f.submitted && !referral" class="help-block">Referral is required</div> -->
+
+      <label for="hackathon_count">Past Number of Hackathons*</label>
+        <input class="formInput" placeholder="Hackathon Count" name="hackathon_count" type="number" [ngClass]="{'invalidInput':(f.submitted && (!model.hackathon_count || model.hackathon_count < 0))}" [(ngModel)]="model.hackathon_count" #hackathon_count="ngModel" [min]="0" min="0" required>
+        <!-- <div *ngIf="f.submitted && !hackathon_count.valid" class="app-error-block">Hackathon count is required</div> -->
+
+      <label for="dietary_restrictions">Dietary Restrictions</label>
+        <input class="formInput" placeholder="Dietary Restrictions" name="dietary_restrictions" type="text" [(ngModel)]="model.dietary_restrictions" #dietary_restrictions="ngModel">
+
+        <label for="class_year">T-Shirt Size*</label>
+        <select class="formInput" [ngClass]="{'invalidInput':(f.submitted && !model.shirt_size)}" [(ngModel)]="model.shirt_size" name="shirt_size" required>
+          <option *ngFor="let size of shirt_sizes" [value]="size.value">
+            {{size.viewValue}}
+          </option>
+        </select>
+
+      <label for="hackathon_count">Personal Website or Github</label>
+        <input class="formInput" placeholder="Website" name="website" type="text" [(ngModel)]="model.website" #website="ngModel" pattern="(https?:\/\/)([\w\d]+\.)?[\w\d]+\.\w+\/?.+">
+        <div *ngIf="f.submitted && !website.valid" class="app-error-block">Website must be a valid url</div>
+
+      <label for="longanswer_1">Why do you want to attend Hello World?*</label>
+        <textarea class="formInput" placeholder="Why do you want to attend Hello World?" name="longanswer_1" type="text" [ngClass]="{'invalidInput':(f.submitted && !model.longanswer_1)}" [(ngModel)]="model.longanswer_1" #longanswer_1="ngModel" required></textarea>
+        <!-- <div *ngIf="f.submitted && !longanswer_1.valid" class="app-error-block">Answer is required</div> -->
+
+      <label for="longanswer_2">What do you hope to learn from your experience at Hello World?*</label>
+        <textarea class="formInput" placeholder="What do you hope to learn from your experience at Hello World?" name="longanswer_2" type="text" [ngClass]="{'invalidInput':(f.submitted && !model.longanswer_2)}" [(ngModel)]="model.longanswer_2" #longanswer_2="ngModel" required></textarea>
+        <!-- <div *ngIf="f.submitted && !longanswer_2.valid" class="app-error-block">Answer is required</div> -->
+        <!-- <p *ngIf="model.resume.uuid">Selected: {{model.resume}}</p> -->
+        <label for="resume">
+          Upload Your Resume (Optional but highly recommended)
+        </label>
+        <div class="formWrapper">
+          <a class="ui-button upload-btn">
+            <div *ngIf='filename; else elseBlock'>
+              {{filename}}
+            </div>
+            <ng-template #elseBlock><i class="fa fa-upload" aria-hidden="true"></i> {{(model.resume && model.resume.filename_original) ? model.resume.filename_original : "Upload"}} </ng-template>
+            <input id="resume" type="file" name="resume" (change)="setFile($event)" accept=".pdf"/>
+          </a>
+        </div>
+
+    <div class="buttons">
+      <button class="ui-button" [disabled]="loading" mdRippleColor="#F00" type="submit">
+        <div *ngIf='appSubmitted'>
+          Update Application
+        </div>
+        <div *ngIf='!appSubmitted'>Submit</div>
+      </button>
+    </div>
+    <div *ngIf="f.submitted && f.form.invalid" class="help-block">Some fields are missing and/or invalid.</div>
+    <div
+      *ngIf="loading"
+      color="primary"
+      mode="indeterminate"
+      class="spinner">
+      Loading...
+    </div>
+
+    </form>
+</div>

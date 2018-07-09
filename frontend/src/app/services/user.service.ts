@@ -21,11 +21,7 @@ export class UserService {
 	}
 
 	apply(application: Application) {
-		return this.http.post(environment.apiUrl+'/user/apply', this.convertJsonToFormData(application), this.utilService.jwt()).map((response: Response) => response.json());
-	}
-
-	updateApplication(application: Application) {
-		return this.http.post(environment.apiUrl+'/user/updateApplication', this.convertJsonToFormData(application), this.utilService.jwt()).map((response: Response) => response.json());
+		return this.http.post(environment.apiUrl+'/user/apply', application, this.utilService.jwt()).map((response: Response) => response.json());
 	}
 
 	getApplication() {

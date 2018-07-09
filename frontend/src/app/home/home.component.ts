@@ -55,9 +55,8 @@ export class HomeComponent implements OnInit {
         .subscribe(
           result => {
             this.application = result.application;
-            if(result.message === "success")
-              this.appSubmitted = true;
-              this.appLoaded = true;
+            this.appSubmitted = true;
+            this.appLoaded = true;
             console.log(result);
             this.loading = false;
           }, error => {
