@@ -55,11 +55,6 @@ export class AuthService {
   	.map((response: Response) => response.json());
   }
 
-  checkin(email: string) {
-    return this.http.post(environment.apiUrl+'/exec/checkin', {"email": email})
-    .map((response: Response) => response.json());
-  }
-
   jwt() {
     // create authorization header with jwt token
     //let currentUser = JSON.parse(localStorage.getItem('currentUser'));

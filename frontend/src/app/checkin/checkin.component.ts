@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, AuthService } from '../services/index';
+import { AlertService, ExecService } from '../services/index';
 
 @Component({
   selector: 'app-checkin',
@@ -17,19 +17,15 @@ export class CheckinComponent implements OnInit {
   	constructor(
     	private route: ActivatedRoute,
     	private router: Router,
-    	private authService: AuthService,
+    	private execService: ExecService,
     	private alertService: AlertService) { }
 
   	ngOnInit() {
-    	// reset login status
-    	this.authService.logout();
-    	// get return url from route parameters or default to '/'
-    	this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   	}
 
     checkin() {
     	this.loading = true;
-    	this.authService.checkin(this.model.email).subscribe(
+    	this.execService.checkin(this.model.email).subscribe(
       		data => {
         	this.router.navigate([this.returnUrl]);
       	},
