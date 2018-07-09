@@ -28,7 +28,18 @@ nev.configure({
     console.log(error);
 });
 
-router.post('/checkin', function(req, res, next) {
+router.post('/checkin', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
+  var isExec = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "exec")
+    {
+      isExec = true;
+    }
+  }
+  if (isExec == false){
+    res.status(401).json({message: "Only execs can access this page"});
+  }
+
 	mongo.checkCheckInStatus(req.body.email, function(error, result) {
     if(error) {
       res.status(401).json({message:error});
@@ -38,7 +49,18 @@ router.post('/checkin', function(req, res, next) {
 	});
 });
 
-router.get('/checkin', function(req, res, next) {
+router.get('/checkin', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
+  var isExec = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "exec")
+    {
+      isExec = true;
+    }
+  }
+  if (isExec == false){
+    res.status(401).json({message: "Only execs can access this information"});
+  }
+
   mongo.getCheckedInUsers(function(error, result) {
     if(error) {
       res.status(401).json({message:error});
