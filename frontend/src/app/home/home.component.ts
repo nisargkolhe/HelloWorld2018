@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from "../user";
 import { Application } from '../application';
 import { UserService } from "../services/index";
-import { AuthService, AlertService } from "../services/index";
+import { AuthService, AlertService, ApplicationService } from "../services/index";
 
 @Component({
   selector: 'app-home',
@@ -24,12 +24,54 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private alertService: AlertService,
+    private appService: ApplicationService,
     private route: ActivatedRoute,
     private router: Router) {
     this.currentUser = userService.loadFromLocalStorage();
   }
 
   ngOnInit() {
+    if(this.currentUser.roles && this.currentUser.roles.indexOf('admin') !== -1){
+      this.appService.getAllApplications()
+        .subscribe(
+          result => {
+            this.applications = result;
+            console.log(result);
+          }, error => {
+            console.log(error);
+          }
+      );
+    } else {
+      this.loadApplication();
+    }
+  }
+
+  onSelect(app: Application) {
+    this.router.navigate(['/applications', app.id]);
+  }
+
+  private loadApplication() {
+      this.userService.getApplication()
+        .subscribe(
+          result => {
+            this.application = result.application;
+            if(result.message === "success")
+              this.appSubmitted = true;
+              this.appLoaded = true;
+            console.log(result);
+            this.loading = false;
+          }, error => {
+            if(error.status == 404) {
+              //User has not submitted their application yet
+              this.appSubmitted = false;
+              this.appLoaded = true;
+            } else {
+              //Something else bad happened
+              console.log(error);
+              this.loading = false;
+            }
+          }
+      );
   }
 
   private resendVerificationEmail() {

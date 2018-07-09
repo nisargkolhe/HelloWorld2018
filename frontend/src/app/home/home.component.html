@@ -1,7 +1,7 @@
 <div class="con">
   <div>
   <h1>Hi {{currentUser.firstname}}!</h1>
-    <div *ngIf="currentUser.roles.indexOf('admin') !== -1 else elseBlock">
+    <div *ngIf="currentUser.roles && currentUser.roles.indexOf('admin') !== -1 else elseBlock">
       <h3>Admin Actions:</h3>
       <li class="admin">
         <ul>

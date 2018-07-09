@@ -12,6 +12,10 @@ export class UserService {
 		private http: Http,
 		private utilService: UtilService) { }
 
+	getUser() {
+		return this.http.get(environment.apiUrl+'/user/', this.utilService.jwt()).map((response: Response) => response.json());
+ 	}
+
 	create(user: User) {
 		return this.http.post(environment.apiUrl+'/user/register', user).map((response: Response) => response.json());
 	}
