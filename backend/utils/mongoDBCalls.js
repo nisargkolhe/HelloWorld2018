@@ -107,16 +107,44 @@ function addUser(user, callback) {
   }
 }
 
-function getUser(user_id, callback) {
+function resendVerificationEmail(user_id, callback) {
   if (!user_id) {
-    callback("Error adding the user!", null);
+    callback("No user id provided!", null);
   } else {
     MongoClient.connect(mongodbUrl, function (err, db) {
       if (err) {
         callback("We are currently facing some technically difficulties, please try again later!", null);
       } else {
         var dbo = db.db(config.mongoDBDatabase);
-        dbo.collection("Users").findOne({'_id' : user_id}, function(err, result) {
+        dbo.collection("tokens").findOne({'_userId' : user_id}, function(err, result) {
+          if (err) {
+            callback("Error finding the user!", null);
+          } else {
+            if (result) {
+              console.log("TOKEN URL: /confirmEmail?token="+result.token);
+              // TODO: Send the email
+
+              callback(null, result);
+            } else  {
+              callback("User does not exist!", null);
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
+function getUser(user_id, callback) {
+  if (!user_id) {
+    callback("ID is needed to find user", null);
+  } else {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      if (err) {
+        callback("We are currently facing some technical difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Users").findOne({ _id : user_id}, function(err, result) {
           if (err) {
             callback("Error finding the user!", null);
           } else {
@@ -124,6 +152,7 @@ function getUser(user_id, callback) {
               result.password = undefined;
               callback(null, result);
             } else  {
+              console.log(result);
               callback("User does not exist!", null);
             }
           }
@@ -487,4 +516,5 @@ module.exports = {
   setApplicationStatus: setApplicationStatus,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers,
+  resendVerificationEmail: resendVerificationEmail
 }

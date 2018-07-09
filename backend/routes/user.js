@@ -59,6 +59,17 @@ router.post("/register", cors(), function(req, res) {
   });
 });
 
+router.post("/resendVerificationEmail", passport.authenticate(['jwt'], { session: false }), cors(), function(req,res){
+  mongo.resendVerificationEmail(req.user._id, function(error, result){
+    if(error) {
+      res.status(401).json({message:"Error: " + error});
+    } else {
+      res.json({message: "Verification email resent successfully."});
+    }
+  });
+
+});
+
 router.post("/verify", cors(), function(req,res){
   if(!req.body.token){
     res.status(401).json({message: "Invalid token."});
