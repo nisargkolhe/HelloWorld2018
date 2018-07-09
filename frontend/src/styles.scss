@@ -2,250 +2,242 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 
-/* Colors
-teal: ##55C296
-navy: #101B24
-light teal: #C1FFF2
-light blue: #7489A7
-*/
+/* Color palette */
+:root {
+  --dark-blue: #1d1f7a;
+  --purple: #7233ad;
+}
+
 body {
-  font-family: 'Varela Round', sans-serif !important;
-  background-color: #101B24;
+  font-family: 'Lato', sans-serif !important;
   margin: 0;
   color: white;
-  background-image: url('assets/images/stars.svg');
   background-size: 100% auto;
   background-repeat: repeat-y;
-  text-align: center;
 }
 
-.float-right {
-  float: right;
+h1{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
 }
-
-.float-left {
-  float: left;
+.h1-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #ffffff;
 }
-
-.topSpacing {
-  margin-top: 20px;
+.h2-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
 }
-
-.box {
-  box-sizing: border-box;
-  display: block;
-  width: auto;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  border: 1px solid #C1FFF2;
-  color: #C1FFF2;
-  border-radius: 5px;
-  background: rgba(16, 27, 36, 0.9);
-  vertical-align: middle;
-  padding: 1em;
-  text-align: left;
+h2{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
 }
-
-h1, h2, h3, mat-option {
-  font-family: 'Varela Round', sans-serif;
+.h3-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
 }
-
-h2, h3 {
+h3{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.p-lead{
+  font-family: 'Lato', sans-serif !important;
   font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
 }
-
-p {
+.p-lead-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+h4{
+  font-family: 'Lato', sans-serif !important;
   font-size: 18px;
-  font-family: 'Varela Round', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.h4-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+p {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
 }
 
-nav {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-nav a {
-  padding: 20px 10px;
-  color: #C1FFF2;
-  align-self: center;
-  font-size: 20px;
-}
-nav a span:hover {
-  padding-bottom: 12px;
-  border-bottom: 3px solid #C1FFF2;
+.p-large-dark {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
 }
 
-footer {
-  padding: 20px;
+.p-large-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #ffffff;
 }
-a:focus, button:focus {
-  outline: none;
+.p-small{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.p-small-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #ffffff;
 }
 
-li {
-  margin: 3px;
-  list-style-type: none;
-  font-family: 'Varela Round', sans-serif;
-  color: #4AC29A;
-}
-
-.register {
-  font-family: 'Varela Round', sans-serif;
-  font-size: 20px;
-  border-radius: 5px;
-  padding: 20px 80px;
-  background-color: #ac7b77;
-  color: white;
-  font-weight: 500;
-  margin-bottom: 10px;
-  margin-top: -20px;
-}
-.register:hover {
-  border-radius: 5px;
-  background-color: #f6d9d6;
-  color: #101B24;
-}
-.sign_in {
-  color: white;
-  text-decoration: underline;
-  padding-left: 5px;
-}
-.mentor {
-  font-family: 'Varela Round', sans-serif;
-  font-size: 20px;
-  border-radius: 5px;
-  width: 254.98px;
-  padding: 20px;
-  background-color: #4ac29a;
-  color: white;
-  font-weight: 500;
-  margin-top: 20px;
-}
-.mentor:hover {
-  border-radius: 5px;
-  background-color: #bdfce7;
-  color: #101B24;
-}
-button {
-  margin: 5px;
-}
 .ui-button {
   border: none;
-  font-family: 'Varela Round', sans-serif;
-  font-size: inherit;
-  color: inherit;
-  cursor: pointer !important;
-  padding: 1em 2em;
-  display: inline-block;
-  margin-right: 20px;
-  text-transform: uppercase;
+	cursor: pointer !important;
+	padding: 1em 2em;
+	display: inline-block;
+	margin-right: 20px;
+	text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: 1px;
-  font-weight: 700;
-  outline: none;
-  position: relative;
-  background: #55C296;
-  color: #fff;
-  border-radius: 10px;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+	outline: none;
+	position: relative;
+  border-radius: 2px;
+  box-shadow: 0 4px 4px 0 rgba(139, 149, 166, 0.5);
+  background-color: #1d1f7a;
+  background-color: var(--dark-blue);
+  border: solid 1px #1d1f7a;
+  border: solid 1px var(--dark-blue);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  color: white;
 }
 
 .ui-button:after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
 }
 
 .ui-button:hover {
-  background: #C1FFF2;
-  color: #101B24;
+  background-color: #7233ad;
+  border: solid 1px #7233ad;
 }
 
 .ui-button:active {
-  background: #C1FFF2;
-  top: 2px;
+  background-color: #7233ad;
+  border: solid 1px #7233ad;
 }
 
-.upload-btn {
-  padding: 1em 2em;
-  background-color: transparent;
-  border: 1px solid #C1FFF2;
-  border-radius: 4px;
-  margin: 0;
-  cursor: pointer !important;
+.ui-button:disabled {
+  background-color: rgba(139, 149, 166, 0.5);
 }
 
-.upload-btn input[type=file] {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
+.ui-button-secondary{
+  box-shadow: 0 4px 4px 0 rgba(139, 149, 166, 0.25);
+  background-color: #ffffff;
+  border: solid 2px #1d1f7a;
+  border: solid 2px var(--dark-blue);
+  color: var(--dark-blue);
 }
 
-/*.ui-button {
-  padding: 12px 20px;
-  width: auto;
-  color: black;
-  font-family: 'Varela Round', sans-serif;
-  font-size: 18px;
-  background-color: #55C296;
-  border: none;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-.ui-button:hover {
-  background-color: #C1FFF2;
-  color: #101B24;
-}*/
-
-/*THEME ALERT SNACKBAR HERE */
-.ui-alert {
-  border-radius: 5px !important;
-}
-.ui-alert.success{
-  background-color: #4CAF50;
-}
-.ui-alert.danger{
-  background-color: #ac7b77;
+.ui-button-secondary:hover {
+  background-color: #ffffff;
+  border: solid 2px #7233ad;
 }
 
-
-.center {
-  text-align: center;
-  margin: 0 auto;
-}
-
-.padded-divs div {
-  padding: 20px;
-}
-.faq {
-  color: #C1FFF2;
-  font-size: 13px;
-  vertical-align: middle;
-  display: inline;
-  text-align: left;
-  border-radius: 5px;
-  border: 1px solid #C1FFF2;
-  padding: 20px 15px 15px 15px;
-}
-.faq p {
-  display: inline;
-}
-.faq .icon {
-  margin-top: -5px;
-  display: inline;
-  max-width: 20px;
-  padding: 5px;
-}
-.faq i {
-  color: #C1FFF2;
-  padding: 5px;
+.ui-button-secondary:active {
+  background-color: #ffffff;
+  border: solid 2px #7233ad;
 }
 
 .formInput {
@@ -255,11 +247,10 @@ button {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #C1FFF2;
-  border-radius: 4px;
-  background: rgba(16, 27, 36, 0.9);
-  font-family: 'Varela Round', sans-serif;
-  color: #4AC29A;
+  border-radius: 2px;
+  border: solid 2px #7233ad;
+  background-color: white;
+  color: var(--purple);
   text-align: left;
   transition: border-color ease 0.5s;
 }
@@ -279,37 +270,25 @@ button {
   border-color: red !important;
 }
 
-.help-block {
-  color: red;
-  margin-top: 10px;
-  font-family: 'Varela Round', sans-serif;
-
+.fullscreen {
+	height: 100%;
+	width: 100%;
+	// position: absolute;
 }
 
-/*THEME MD-CARD HERE*/
-.mat-card{
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+.body-container {
+  height: 100vh;
 }
 
-
-.negative {
-  width: auto;
-  background-color: #ac7b77 !important;
-  color: white;
+.section-primary {
+  background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
 }
 
-.negative:hover {
-  background-color: #f6d9d6 !important;
-  color: #101B24;
+.uk-container-supersmall {
+  max-width: 70%;
 }
 
-.con h1 {
-  margin-bottom: 0px;
-}
-
-.link {
-  color: #ac7b77;
-  font-size: 14px;
-  font-family: 'Varela Round', sans-serif;
-  display: block;
+.leftBox {
+  height: 50%;
+  width: 100%;
 }

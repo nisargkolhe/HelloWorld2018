@@ -1,26 +1,37 @@
-<div class="con">
-  <h1>Login</h1>
-  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-    <!-- Email Input -->
-    <div class="topSpacing">
-      <input class="formInput" placeholder="Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required>
-    </div>
-    <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
-
-    <!-- Password Input -->
-    <div>
-      <input class="formInput topSpacing" placeholder="Password" name="password" type="password" [(ngModel)]="model.password" #password="ngModel" required>
-    </div>
-    <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-    <button class="ui-button topSpacing" [disabled]="loading">Login</button>
-    <button class="ui-button topSpacing" [routerLink]="['/register']">Register</button>
-    <a class="link topSpacing" [routerLink]="['/resetPassword']">Forgot Password?</a>
-    <div
-      *ngIf="loading"
-      color="primary"
-      mode="indeterminate"
-      class="spinner">
-      Loading...
-    </div>
-  </form>
+<div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
+	<div class="section-primary uk-flex uk-flex-middle">
+		<div class="uk-container uk-container-supersmall leftBox">
+				<h1 class="h1-light">Login</h1>
+		</div>
+	</div>
+	<div class="uk-flex uk-flex-middle">
+		<div class="uk-container uk-container-supersmall flexbox-center">
+      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="email" type="email"  [(ngModel)]="model.email" #email="ngModel" required>
+            </div>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">PASSWORD</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="password" type="password" [(ngModel)]="model.password" #password="ngModel" required>
+            </div>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+        <button class="ui-button topSpacing p-large-light" [disabled]="loading">Login</button>
+        <button class="ui-button ui-button-secondary topSpacing p-large-dark" [routerLink]="['/register']">Register</button>
+        <a class="link topSpacing" [routerLink]="['/resetPassword']">Forgot Password?</a>
+        <div
+          *ngIf="loading"
+          color="primary"
+          mode="indeterminate"
+          class="spinner">
+          Loading...
+        </div>
+      </form>
+		</div>
+	</div>
 </div>
