@@ -40,9 +40,9 @@ function checkUserExists(jwt_payload, logging_in, callback) {
           } else {
             if(logging_in) {
               if(bcrypt.compareSync(jwt_payload.password, result.password)) {
-                if(!result.verified){
-                  callback("Your account has not been verified.", null);
-                }
+                // if(!result.verified){
+                //   callback("Your account has not been verified.", result);
+                // }
 
                 //Login successful
                 callback(null, result);
