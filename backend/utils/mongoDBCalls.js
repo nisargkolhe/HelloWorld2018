@@ -83,11 +83,11 @@ function addUser(user, callback) {
                   console.log('res', res);
                   // Create a verification token for this user
                   var token = new Token({ _userId: res.insertedId, token: crypto.randomBytes(16).toString('hex') });
-           
+
                   // Save the verification token
                   token.save(function (err) {
-                    if (err) { 
-                      callback(err.message, null); 
+                    if (err) {
+                      callback(err.message, null);
                     } else {
                       console.log("TOKEN URL: /confirmEmail?token="+token.token);
                       // TODO: Send the email
@@ -162,8 +162,8 @@ function getUserByOID(user_id, callback) {
 
 function verifyUser(verification_token, callback) {
   Token.findOne({ token: verification_token }, function (err, token) {
-    if (!token) { 
-      callback("We were unable to find a valid token. Your token may have expired.", null); 
+    if (!token) {
+      callback("We were unable to find a valid token. Your token may have expired.", null);
     } else {
       // If we found a token, find a matching user
        MongoClient.connect(mongodbUrl, function (err, db) {
@@ -173,17 +173,17 @@ function verifyUser(verification_token, callback) {
           var dbo = db.db(config.mongoDBDatabase);
           dbo.collection("Users").findOne({'_id' : token._userId}, function(err, user) {
             if(err) {
-              callback(err.message, null); 
-            } else if (!user) { 
+              callback(err.message, null);
+            } else if (!user) {
               console.log('user', user);
-              callback("We were unable to find a user for this token.", null); 
+              callback("We were unable to find a user for this token.", null);
             } else if (user.verified) {
-              callback("This email is already verified.", null); 
+              callback("This email is already verified.", null);
             } else {
               // Verify and save the user
               dbo.collection("Users").update({'_id': token._userId}, {$set: {'verified': true}}, function(err, res){
-                if (err) { 
-                  callback(err.message, null); 
+                if (err) {
+                  callback(err.message, null);
                 } else {
                   //Success
                   callback(null, res);
@@ -191,7 +191,7 @@ function verifyUser(verification_token, callback) {
               });
             }
           });
-        } 
+        }
       });
     }
   });
@@ -212,11 +212,11 @@ function resetPassword(email, callback) {
           } else  {
             // Create a reset password token for this user
             var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
-     
+
             // Save the verification token
             token.save(function (err) {
-              if (err) { 
-                callback(err.message, null); 
+              if (err) {
+                callback(err.message, null);
               } else {
                 console.log("TOKEN URL: /resetPassword?token="+token.token);
                 // TODO: Send the email
@@ -235,8 +235,8 @@ function resetPassword(email, callback) {
 
 function confirmPassword(password_token, password, callback) {
   Token.findOne({ token: password_token }, function (err, token) {
-    if (!token) { 
-      callback("We were unable to find a valid token. Your token may have expired.", null); 
+    if (!token) {
+      callback("We were unable to find a valid token. Your token may have expired.", null);
     } else {
       // If we found a token, find a matching user
        MongoClient.connect(mongodbUrl, function (err, db) {
@@ -246,15 +246,15 @@ function confirmPassword(password_token, password, callback) {
           var dbo = db.db(config.mongoDBDatabase);
           dbo.collection("Users").findOne({'_id' : token._userId}, function(err, user) {
             if(err) {
-              callback(err.message, null); 
-            } else if (!user) { 
+              callback(err.message, null);
+            } else if (!user) {
               console.log('user', user);
-              callback("We were unable to find a user for this token.", null); 
+              callback("We were unable to find a user for this token.", null);
             } else {
               // Update user password
               dbo.collection("Users").update({'_id': token._userId}, {$set: {'password': password}}, function(err, res){
-                if (err) { 
-                  callback(err.message, null); 
+                if (err) {
+                  callback(err.message, null);
                 } else {
                   //Success
                   callback(null, res);
@@ -262,7 +262,7 @@ function confirmPassword(password_token, password, callback) {
               });
             }
           });
-        } 
+        }
       });
     }
   });
@@ -352,7 +352,7 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           callback(err);
         } else if (application) {
           dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address}}, (err, result) => {
-            
+
             callback(null, {update: true, result});
           })
         } else {
@@ -385,6 +385,8 @@ function retrieveUserApplication(user_email, callback){
           }
           else if (application){
             callback(null, application);
+          } else {
+            callback("No application submitted yet.", null)
           }
         });
       }
@@ -410,7 +412,7 @@ function retrieveAllApplications(callback){
           console.log(applications)
           callback(null, applications);
         }
-      });      
+      });
     }
   });
 }
@@ -457,14 +459,14 @@ function setApplicationStatus(user_email, status, callback){
         else if (application)
         {
           dbo.collection("Applications").update({"email": user_email}, {$set: {"status": status}}, function(err, res){
-            if (err) { 
-              callback(err.message, null); 
+            if (err) {
+              callback(err.message, null);
             } else {
               callback(null, res);
             }
           });
         }
-      }); 
+      });
     }
   });
   }
