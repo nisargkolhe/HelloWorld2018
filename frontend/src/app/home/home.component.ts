@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
               //Something else bad happened
               console.log(error);
               error = error.json()
-              this.alertService.error(error.message);
+              //this.alertService.error(error.message);
               this.loading = false;
             }
           }
