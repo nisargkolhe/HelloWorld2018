@@ -31,15 +31,7 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         error = error.json();
-
-        let errorMsg = "";
-        for(var attr in error.errors){
-          //errorMsg += attr + ":\n"
-          error.errors[attr].forEach(error => errorMsg += error + "\n");
-        }
-        console.log('errorMsg', error);
-
-        this.alertService.error(errorMsg);
+        this.alertService.error(error.message);
         this.loading = false;
     });
   }

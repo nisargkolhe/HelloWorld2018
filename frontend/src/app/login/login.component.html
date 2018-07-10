@@ -24,8 +24,8 @@
         </div>
         <div class="uk-align-right">
           <a class="link uk-margin-right" [routerLink]="['/resetPassword']">Forgot Password?</a>
-          <button class="uk-button uk-button-secondary p-large-dark uk-margin-right" [routerLink]="['/register']">Register</button>
-          <button class="uk-button p-large-light" [disabled]="loading">Login</button>
+          <button class="uk-button uk-button-secondary p-large-dark uk-margin-right" [routerLink]="['/register']" type="button">Register</button>
+          <button class="uk-button p-large-light" [disabled]="loading" type="submit">Login</button>
         </div>
         <div
           *ngIf="loading"

@@ -3,6 +3,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
+declare var UIkit: any;
 
 @Injectable()
 export class AlertService {
@@ -27,24 +28,22 @@ export class AlertService {
 
   success(message: string, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'success', text: message });
+    UIkit.notification({
+          message: message,
+          status: 'success',
+          pos: 'bottom-center',
+      });
   }
 
   error(message: string, keepAfterNavigationChange = false) {
     console.log("Error Message:" + message);
     this.keepAfterNavigationChange = keepAfterNavigationChange;
 
-    let msg = message;
-
-    if(message === "invalid_credentials"){
-      msg = "Invalid Credentials";
-    } else if(message === "unverified_email") {
-      msg = "Please verify your email before submitting the application";
-    } else if(message == "token_not_provided"){
-      msg = "Invalid Token";
-    }
-
-    this.subject.next({ type: 'error', text: msg });
+    UIkit.notification({
+          message: message,
+          status: 'danger',
+          pos: 'bottom-center',
+      });
   }
 
   getMessage(): Observable<any> {

@@ -42,11 +42,11 @@
                 <input class="uk-input" name="cpassword" type="password" [(ngModel)]="model.cpassword" #cpassword="ngModel" required>
             </div>
             <div *ngIf="f.submitted && !cpassword.valid" class="uk-text-danger">Password confirmation is required.</div>
-            <div *ngIf="f.submitted && cpassword != password" class="uk-text-danger">Password confirmation do not match.</div>
+            <div *ngIf="f.submitted && model.cpassword != model.password" class="uk-text-danger">Password confirmation do not match.</div>
         </div>
         <div class="uk-align-right">
-          <button class="uk-button uk-button-secondary p-large-light uk-margin-right" [routerLink]="['/login']">Login</button>
-          <button class="uk-button p-large-dark" [disabled]="loading" [routerLink]="['/register']">Register</button>
+          <button class="uk-button uk-button-secondary p-large-light uk-margin-right" [routerLink]="['/login']" type="button">Login</button>
+          <button class="uk-button p-large-dark" [disabled]="loading" [routerLink]="['/register']" type="submit">Register</button>
         </div>
         <div
           *ngIf="loading"
