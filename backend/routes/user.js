@@ -52,7 +52,7 @@ router.post("/register", cors(), function(req, res) {
 
   mongo.addUser(user, function(error, result) {
     if(error) {
-      res.status(401).json({message:"Error: " + error});
+      res.status(401).json({message: error});
     } else {
       var payload = {email: req.body.email};
       var jwtToken = token.generateAccessToken(payload);
@@ -64,7 +64,7 @@ router.post("/register", cors(), function(req, res) {
 router.post("/resendVerificationEmail", passport.authenticate(['jwt'], { session: false }), cors(), function(req,res){
   mongo.resendVerificationEmail(req.user._id, function(error, result){
     if(error) {
-      res.status(401).json({message:"Error: " + error});
+      res.status(401).json({message: error});
     } else {
       res.json({message: "Verification email resent successfully."});
     }
