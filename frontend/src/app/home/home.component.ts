@@ -38,6 +38,8 @@ export class HomeComponent implements OnInit {
             this.applications = result;
             console.log(result);
           }, error => {
+            error = error.json()
+            this.alertService.error(error.message);
             console.log(error);
           }
       );
@@ -67,6 +69,8 @@ export class HomeComponent implements OnInit {
             } else {
               //Something else bad happened
               console.log(error);
+              error = error.json()
+              this.alertService.error(error.message);
               this.loading = false;
             }
           }

@@ -41,7 +41,7 @@ export class ConfirmEmailComponent implements OnInit {
         error => {
             error = error.json();
             console.log(error);
-            this.alertService.error(error.error);
+            this.alertService.error(error.message);
             this.loading = false;
       });
   }
