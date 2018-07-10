@@ -33,10 +33,12 @@ router.post("/login", cors(), function(req, res) {
 router.post("/register", cors(), function(req, res) {
   if(!req.body || !req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname){
     res.status(401).json({message: "Incomplete data."});
+    return;
   }
 
   if(!req.body.email.includes("@purdue.edu")){
     res.status(401).json({message: "Registration email has to be @purdue.edu"});
+    return;
   }
 
   let user = {
