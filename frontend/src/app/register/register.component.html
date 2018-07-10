@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
 	<div class="section-primary uk-flex uk-flex-middle">
 		<div class="uk-container uk-container-supersmall leftBox">
@@ -6,7 +7,7 @@
 	</div>
 	<div class="uk-flex uk-flex-middle">
 		<div class="fullwidth uk-container uk-container-supersmall">
-      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && model.password == model.cpassword && register()" #f="ngForm" novalidate>
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">FIRST NAME</label>
             <div class="uk-form-controls">
@@ -40,7 +41,8 @@
             <div class="uk-form-controls">
                 <input class="uk-input" name="cpassword" type="password" [(ngModel)]="model.cpassword" #cpassword="ngModel" required>
             </div>
-            <div *ngIf="f.submitted && !cpassword.valid" class="uk-text-danger">Password Confirmation is required</div>
+            <div *ngIf="f.submitted && !cpassword.valid" class="uk-text-danger">Password confirmation is required.</div>
+            <div *ngIf="f.submitted && cpassword != password" class="uk-text-danger">Password confirmation do not match.</div>
         </div>
         <div class="uk-align-right">
           <button class="uk-button uk-button-secondary p-large-light uk-margin-right" [routerLink]="['/login']">Login</button>
