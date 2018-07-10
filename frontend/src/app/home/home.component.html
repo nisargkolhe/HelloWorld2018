@@ -3,10 +3,10 @@
 	<div class="section-primary uk-flex uk-flex-middle uk-width-1-3@m">
 		<div class="uk-container uk-container-supersmall leftBox uk-flex uk-flex-column ">
 				<div><h1 class="h1-light">Hi {{currentUser.firstname}}!</h1></div>
-        <div><button class="uk-button negative" [routerLink]="['/login']">Logout</button></div>
+        <div><button class="uk-button negative  p-large-dark" [routerLink]="['/login']">Logout</button></div>
 		</div>
 	</div>
-	<div class="uk-flex uk-flex-middle uk-width-2-3@m">
+	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer">
 		<div class="fullwidth uk-container uk-container-supersmall floating-box">
       <div *ngIf="currentUser.roles && currentUser.roles.indexOf('admin') !== -1 else elseBlock">
         <h3>Admin Actions:</h3>
@@ -48,14 +48,14 @@
             </ng-template>
           </div>
           <div class="buttons topSpacing">
-            <button class="uk-button" [routerLink]="['/apply']">Application</button>
+            <button class="uk-button  p-large-dark" [routerLink]="['/apply']">Application</button>
           </div>
         </div>
         <ng-template #elseBlock>
           <div class="buttons">
             <p>Please verify your email to access the application.</p>
-            <button class="uk-button" (click)="resendVerificationEmail()">Resend Verification Email </button>
-            <button class="uk-button negative" [routerLink]="['/login']">Logout</button>
+            <button class="uk-button  p-large-dark" (click)="resendVerificationEmail()">Resend Verification Email </button>
+            <button class="uk-button negative p-large-dark" [routerLink]="['/login']">Logout</button>
           </div>
           <div
             *ngIf="loading"

@@ -240,29 +240,52 @@ p {
   color: var(--purple);
 }
 
-.formInput {
+.uk-input {
   /*position: absolute;*/
-  padding: 12px 20px;
   font-size: 18px;
   display: block;
   width: 100%;
   box-sizing: border-box;
   border-radius: 2px;
-  border: solid 2px #7233ad;
+  border: solid 2px var(--dark-blue);
   background-color: white;
-  color: var(--purple);
+  color: var(--dark-blue);
   text-align: left;
   transition: border-color ease 0.5s;
 }
 
-.formInput:focus:required:invalid {
+.uk-textarea:focus:required:invalid {
   outline: none;
   border-color: red;
 }
 
-.formInput:required:valid {
+.uk-textarea:required:valid {
   outline: none;
-  border-color: #4CAF50;
+  border-color: var(--purple);
+}
+
+.uk-textarea {
+  /*position: absolute;*/
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: solid 2px var(--dark-blue);
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: left;
+  transition: border-color ease 0.5s;
+}
+
+.uk-input:focus:required:invalid {
+  outline: none;
+  border-color: red;
+}
+
+.uk-input:required:valid {
+  outline: none;
+  border-color: var(--purple);
 }
 
 .invalidInput {
@@ -297,8 +320,14 @@ p {
   width: 100%;
 }
 
+.rightContainer {
+  overflow: scroll;
+  padding-top: 4em;
+}
+
 .floating-box {
   min-height: 50%;
+  max-height: 100%;
 }
 
 .uk-logo {
