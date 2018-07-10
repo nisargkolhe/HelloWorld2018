@@ -23,8 +23,8 @@ router.post("/login", cors(), function(req, res) {
     if(error) {
       res.status(401).json({message:error});
     } else {
-      var payload = {email: result.email, verified: result.verified};
-      var jwtToken = token.generateAccessToken(payload);
+      result.password = undefined;
+      var jwtToken = token.generateAccessToken(result);
       res.json({message: "Login Successful", token: jwtToken});
     }
   });
