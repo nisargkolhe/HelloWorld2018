@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
               localStorage.removeItem('currentUser');
               localStorage.removeItem('token');
               // things went wrong so redirect to login page with the return url
-              this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
+              this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
               console.log(error);
               return false;
             }
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
       localStorage.removeItem('token');
 
     	// not logged in so redirect to login page with the return url
-    	this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
+    	this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
     	return false;
     }
   }

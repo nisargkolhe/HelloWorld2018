@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/index';
 
 @Component({
@@ -9,7 +10,10 @@ import { UserService } from '../services/index';
 export class LandingComponent implements OnInit {
   public isLoggedIn: boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
     if(this.userService.loadFromLocalStorage()){

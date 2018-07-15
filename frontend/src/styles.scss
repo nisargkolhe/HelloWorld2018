@@ -6,6 +6,7 @@
 :root {
   --dark-blue: #1d1f7a;
   --purple: #7233ad;
+  --bluey-purple-50: rgba(114, 51, 173, 0.5);
 }
 
 body {
@@ -303,16 +304,36 @@ p {
   width: 100%;
 }
 
+.fullheight {
+  height: 100%;
+}
+
 .body-container {
   height: 100vh;
+}
+
+.uk-section {
+
 }
 
 .section-primary {
   background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
 }
 
+.uk-section-primary {
+  background-color: var(--dark-blue);
+}
+
+.uk-section-secondary {
+  background-color: var(--bluey-purple-50);
+}
+
 .uk-container-supersmall {
   max-width: 70%;
+}
+
+.uk-card-default h3 {
+  color: var(--dark-blue) !important;
 }
 
 .leftBox {
@@ -337,4 +358,27 @@ p {
 
 .no-margin {
   margin: 0 !important;
+}
+
+.action-btn {
+  padding: 0;
+  height: 2em;
+  width: 2em;
+  z-index: 1;
+}
+
+.fade-bg-left {
+  width: 120px;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  z-index: 0;
+  transform: translateX(60px) translateY(-50%);
+}
+
+.fade-bg-right {
+  width: 120px;
+  height: 100%;
+  background-image: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  z-index: 0;
+  transform: translateX(-60px) translateY(-50%);
 }
