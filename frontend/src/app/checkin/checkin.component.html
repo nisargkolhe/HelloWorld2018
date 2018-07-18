@@ -11,7 +11,8 @@
         <div class="uk-margin">
           <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
           <div class="uk-form-controls">
-            <input class="uk-input" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+            <input class="uk-input" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" list="dataList" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+            <datalist name="dataList" id="dataList"></datalist>
           </div>
           <div *ngIf="f.submitted && !email.valid" class="help-block">Purdue Email is required</div>
         </div>
