@@ -1,16 +1,27 @@
-<div class="con">
-  	<h1>Check In</h1>
-  	<form name="form" (ngSubmit)="f.form.valid && checkin()" #f="ngForm" novalidate>
-	  	<!--input email-->
-	    <input class="formInput topSpacing" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
-	    <div class="help-block" *ngIf="f.submitted && !email.valid">Purdue Email is required</div>
-	    <button class="ui-button topSpacing" [disabled]="loading" mdRippleColor="#F00">Check In</button>
-	    <div
-	      *ngIf="loading"
-	      color="primary"
-	      mode="indeterminate"
-	      class="spinner">
-	      Loading...
-	    </div>
-	</form>
+<app-navbar></app-navbar>
+<div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
+	<div class="section-primary uk-flex uk-flex-middle">
+		<div class="uk-container uk-container-supersmall leftBox">
+			<h1 class="h1-light">Check In</h1>
+		</div>
+	</div>
+	<div class="uk-flex uk-flex-middle">
+		<div class="fullwidth uk-container uk-container-supersmall flexbox-center">
+
+    <form class="uk-form-stacked" (ngSubmit)="f.form.valid && checkin()" #f="ngForm" autocomplete="off" novalidate>
+      <div class="uk-margin">
+        <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+        </div>
+        <div *ngIf="f.submitted && !email.valid" class="help-block">Purdue Email is required</div>
+      </div>
+       <button class="uk-button p-large-light" [disabled]="loading" type="submit">Check In</button>
+      <div *ngIf="loading" color="primary" mode="indeterminate" class="spinner"> Loading...</div>
+    </form>
+
+		</div>
+	</div>
 </div>
+
+

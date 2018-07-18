@@ -27,12 +27,14 @@ export class CheckinComponent implements OnInit {
     	this.loading = true;
     	this.execService.checkin(this.model.email).subscribe(
       		data => {
-        	this.router.navigate([this.returnUrl]);
+          this.loading = false;
+          window.location.reload();
       	},
       	error => {
         	error = error.json()
         	this.alertService.error(error.message);
         	this.loading = false;
     	});
+      window.location.reload();
   	}
 }
