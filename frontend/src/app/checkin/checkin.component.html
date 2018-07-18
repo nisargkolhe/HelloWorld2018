@@ -7,19 +7,17 @@
 	</div>
 	<div class="uk-flex uk-flex-middle">
 		<div class="fullwidth uk-container uk-container-supersmall flexbox-center">
-
-    <form class="uk-form-stacked" (ngSubmit)="f.form.valid && checkin()" #f="ngForm" autocomplete="off" novalidate>
-      <div class="uk-margin">
-        <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
-        <div class="uk-form-controls">
-          <input class="uk-input" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+      <form class="uk-form-stacked" (ngSubmit)="f.form.valid && checkin()" #f="ngForm" autocomplete="off" novalidate>
+        <div class="uk-margin">
+          <label class="uk-form-label p-small" for="form-stacked-text">EMAIL</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" placeholder="Purdue Email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" pattern="^[A-Za-z0-9._%+-]+@purdue.edu$" required>
+          </div>
+          <div *ngIf="f.submitted && !email.valid" class="help-block">Purdue Email is required</div>
         </div>
-        <div *ngIf="f.submitted && !email.valid" class="help-block">Purdue Email is required</div>
-      </div>
-       <button class="uk-button p-large-light" [disabled]="loading" type="submit">Check In</button>
-      <div *ngIf="loading" color="primary" mode="indeterminate" class="spinner"> Loading...</div>
-    </form>
-
+        <button class="uk-button p-large-light" [disabled]="loading" type="submit">Check In</button>
+        <div *ngIf="loading" color="primary" mode="indeterminate" class="spinner"> Loading...</div>
+      </form>
 		</div>
 	</div>
 </div>

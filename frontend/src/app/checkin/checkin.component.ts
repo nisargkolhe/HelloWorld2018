@@ -28,7 +28,6 @@ export class CheckinComponent implements OnInit {
     	this.execService.checkin(this.model.email).subscribe(
       		data => {
           this.loading = false;
-          window.location.reload();
       	},
       	error => {
         	error = error.json()
