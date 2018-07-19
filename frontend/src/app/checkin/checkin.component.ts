@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, ExecService } from '../services/index';
+import { AlertService, ExecService, UserService } from '../services/index';
+import { User } from "../user";
 
 @Component({
   selector: 'app-checkin',
@@ -10,6 +11,7 @@ import { AlertService, ExecService } from '../services/index';
 
 export class CheckinComponent implements OnInit {
 
+  currentUser: User;
 	model: any = {};
 	loading = false;
 	returnUrl: string;
@@ -19,23 +21,45 @@ export class CheckinComponent implements OnInit {
   	private route: ActivatedRoute,
   	private router: Router,
   	private execService: ExecService,
-  	private alertService: AlertService) { }
+  	private alertService: AlertService,
+    private userService: UserService,
+  ){
+    this.currentUser = userService.loadFromLocalStorage();
+  }
 
 	ngOnInit() {
-    this.loadCheckIns();
+    console.log(this.currentUser);
+    if (this.currentUser){
+      if(this.currentUser.roles){
+        if (this.currentUser.roles.indexOf('exec') !== -1 || this.currentUser.roles.indexOf('admin') !== -1){
+          this.loadCheckIns();
+        }
+        else {
+          this.router.navigate(["/home"]);
+        }
+      }
+      else {
+        this.router.navigate(["/home"]);
+      }
+    }
+    else {
+      this.router.navigate(["/home"]);
+    }
 	}
 
   checkin() {
   	this.loading = true;
   	this.execService.checkin(this.model.email).subscribe(
-    	data => {
+      data => {
+        this.alertService.success(data.message);
+        this.loadCheckIns();
         this.loading = false;
-    	},
-    	error => {
-      	error = error.json()
-      	this.alertService.error(error.message);
-      	this.loading = false;
-  	});
+      },
+      error => {
+        this.alertService.error(error);
+        console.log(error);
+        this.loading = false;
+      });
     window.location.reload();
 	}
 

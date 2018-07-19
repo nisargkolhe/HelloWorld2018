@@ -29,15 +29,15 @@ nev.configure({
 });
 
 router.post('/checkin', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
-  var isExec = false;
+  var isExecOrAdmin = false;
   for (i in req.user.roles) {
-    if (req.user.roles[i] == "exec")
+    if (req.user.roles[i] == "exec" || req.user.roles[i] == "admin")
     {
-      isExec = true;
+      isExecOrAdmin = true;
     }
   }
-  if (isExec == false){
-    res.status(401).json({message: "Only execs can access this page"});
+  if (isExecOrAdmin == false){
+    res.status(401).json({message: "Only execs and admins can access this page"});
   }
 
 	mongo.checkCheckInStatus(req.body.email, function(error, result) {
@@ -50,15 +50,15 @@ router.post('/checkin', passport.authenticate(['jwt'], { session: false }), func
 });
 
 router.get('/checkin', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
-  var isExec = false;
+  var isExecOrAdmin = false;
   for (i in req.user.roles) {
-    if (req.user.roles[i] == "exec")
+    if (req.user.roles[i] == "exec" || req.user.roles[i] == "admin")
     {
-      isExec = true;
+      isExecOrAdmin = true;
     }
   }
-  if (isExec == false){
-    res.status(401).json({message: "Only execs can access this information"});
+  if (isExecOrAdmin == false){
+    res.status(401).json({message: "Only execs and admins can access this information"});
   }
 
   mongo.getCheckedInUsers(function(error, result) {
@@ -71,17 +71,17 @@ router.get('/checkin', passport.authenticate(['jwt'], { session: false }), funct
 });
 
 router.get('/applications', passport.authenticate(['jwt'], { session: false }), function(req, res){
-  var isAdmin = false;
+  var isExecOrAdmin = false;
   for (i in req.user.roles) {
-    if (req.user.roles[i] == "admin")
+    if (req.user.roles[i] == "exec" || req.user.roles[i] == "admin")
     {
-      isAdmin = true;
+      isExecOrAdmin = true;
     }
   }
-  if (isAdmin == false){
-    res.status(401).json({message: "Only admins access all applications"});
-
+  if (isExecOrAdmin == false){
+    res.status(401).json({message: "Only execs and admins can access this information"});
   }
+  
   mongo.retrieveAllApplications((err, response) => {
     if (err){
       res.send({Error: err})
