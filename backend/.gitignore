@@ -35,5 +35,4 @@ config/config.js
 # System Files
 .DS_Store
 Thumbs.db
-
-
+package-lock.json
