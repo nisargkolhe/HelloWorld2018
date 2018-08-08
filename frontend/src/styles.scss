@@ -1,1 +1,393 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
+
+/* Color palette */
+:root {
+  --dark-blue: #1d1f7a;
+  --purple: #7233ad;
+  --bluey-purple-50: rgba(114, 51, 173, 0.5);
+}
+
+body {
+  font-family: 'Lato', sans-serif !important;
+  margin: 0;
+  color: white;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+}
+
+h1{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.h1-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.h2-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+h2{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.h3-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+h3{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.p-lead{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.p-lead-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+h4{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.h4-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+p {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+
+.p-large-dark {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+
+.p-large-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.p-small{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #1d1f7a;
+  color: var(--dark-blue);
+}
+.p-small-light {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.uk-button {
+  border: none;
+	cursor: pointer !important;
+	padding: 1em 2em;
+	display: inline-block;
+	text-transform: uppercase;
+  text-decoration: none;
+	outline: none;
+	position: relative;
+  border-radius: 2px;
+  box-shadow: 0 4px 4px 0 rgba(139, 149, 166, 0.5);
+  background-color: var(--dark-blue);
+  border: solid 1px var(--dark-blue);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  color: white;
+}
+
+.uk-button:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.uk-button:hover {
+  background-color: #7233ad;
+  border: solid 1px #7233ad;
+}
+
+.uk-button:active {
+  background-color: #7233ad;
+  border: solid 1px #7233ad;
+}
+
+.uk-button:disabled {
+  background-color: rgba(139, 149, 166, 0.5);
+  border: none;
+}
+
+.uk-button-secondary{
+  box-shadow: 0 4px 4px 0 rgba(139, 149, 166, 0.25);
+  background-color: #ffffff;
+  border: solid 2px #1d1f7a;
+  border: solid 2px var(--dark-blue);
+  color: var(--dark-blue);
+}
+
+.uk-button-secondary:hover {
+  background-color: #ffffff;
+  border: solid 2px #7233ad;
+  color: var(--purple);
+}
+
+.uk-button-secondary:active {
+  background-color: #ffffff;
+  border: solid 2px #7233ad;
+  color: var(--purple);
+}
+
+.uk-input {
+  /*position: absolute;*/
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: solid 2px var(--dark-blue);
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: left;
+  transition: border-color ease 0.5s;
+}
+
+.uk-textarea:focus:required:invalid {
+  outline: none;
+  border-color: red;
+}
+
+.uk-textarea:required:valid {
+  outline: none;
+  border-color: var(--purple);
+}
+
+.uk-textarea {
+  /*position: absolute;*/
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: solid 2px var(--dark-blue);
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: left;
+  transition: border-color ease 0.5s;
+}
+
+.uk-input:focus:required:invalid {
+  outline: none;
+  border-color: red;
+}
+
+.uk-input:required:valid {
+  outline: none;
+  border-color: var(--purple);
+}
+
+.invalidInput {
+  outline: none !important;
+  border-color: red !important;
+}
+
+.fullscreen {
+	height: 100%;
+	width: 100%;
+	// position: absolute;
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.fullheight {
+  height: 100%;
+}
+
+.body-container {
+  height: 100vh;
+}
+
+.uk-section {
+
+}
+
+.section-primary {
+  background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
+}
+
+.uk-section-primary {
+  background-color: var(--dark-blue);
+}
+
+.uk-section-secondary {
+  background-color: var(--bluey-purple-50);
+}
+
+.uk-container-supersmall {
+  max-width: 70%;
+}
+
+.uk-card-default h3 {
+  color: var(--dark-blue) !important;
+}
+
+.leftBox {
+  height: 50%;
+  width: 100%;
+}
+
+.rightContainer {
+  overflow: scroll;
+  padding-top: 4em;
+}
+
+.floating-box {
+  min-height: 50%;
+  max-height: 100%;
+}
+
+.uk-logo {
+  width: 4em;
+  height: 4em;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.action-btn {
+  padding: 0;
+  height: 2em;
+  width: 2em;
+  z-index: 1;
+}
+
+.fade-bg-left {
+  width: 120px;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  z-index: 0;
+  transform: translateX(60px) translateY(-50%);
+}
+
+.fade-bg-right {
+  width: 120px;
+  height: 100%;
+  background-image: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  z-index: 0;
+  transform: translateX(-60px) translateY(-50%);
+}
+
+.spinner {
+  color: #1d1f7a;
+  background: none;
+}
+
+.help-block {
+  color: #ff0000;
+}

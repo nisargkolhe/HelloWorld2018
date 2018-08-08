@@ -4,11 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
+var exec = require('./routes/exec');
 
-var app = express();
+const config = require('./config/config');
+const passport = require('passport');
+const passportJwt = require('passport-jwt');
+const token = require('./utils/token');
+
+require('./config/passport');
+
+var app = express(cors());
+
+app.use(passport.initialize());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +33,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.options('*', cors());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+//app.use('/', routes);
+app.use('/user', user);
+app.use('/exec', exec);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

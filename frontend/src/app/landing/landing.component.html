@@ -1,0 +1,365 @@
+<app-navbar showButton="true"></app-navbar>
+<div class="uk-section section-primary uk-section-default uk-flex ">
+  <div class="uk-container uk-container-small fullwidth uk-margin-large-top">
+    <div class="">
+      <h1 class="h1-light">Purdue's<br>freshman-only<br>hackathon.</h1>
+      <button class="uk-button p-large-light uk-margin-top" [routerLink]="['/apply']">Apply</button>
+    </div>
+  </div>
+</div>
+<div class="uk-section uk-section-default uk-flex uk-flex-center">
+  <div class="uk-container-small fullwidth">
+    <h2>About</h2>
+    <div uk-grid>
+      <div class="uk-width-2-3@m">
+        <p>
+          Hello World is Purdue’s freshman-only hackathon. Lorem ipsum dolor sit amet consectetur.
+        </p>
+        <p>
+          Create projects with classmates. Get acquainted with Purdue CS. Win big. Lorem ipsum dolor sit amet consectetur.
+        </p>
+        <p>
+          Applications open 00/00/00.
+          Applications close 00/00/00.
+        </p>
+      </div>
+      <div class="uk-width-1-3@m">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-section uk-section-primary uk-flex uk-flex-center">
+  <div class="uk-container-small fullwidth">
+    <h2 class="h2-light">Schedule</h2>
+    <div uk-grid>
+      <div class="uk-width-2-3@m">
+        <iframe width="100%" height="300px" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJfw3Ca7LiEogRxUHhdrGHkJo&key=AIzaSyBBVmjYgH5d7sxq0FD3mPvNBdIUxqWURO0" allowfullscreen>
+        </iframe>
+      </div>
+      <div class="uk-width-1-3@m">
+        <p class="p-large-light">
+          <b>Date</b>
+        </p>
+        <p class="p-large-light">
+          September 12 - 13
+        </p>
+        <p class="p-large-light">
+          <b>Location</b>
+        </p>
+        <p class="p-large-light">
+          Purdue University
+        </p>
+      </div>
+    </div>
+    <div >
+      <table class="uk-table uk-table-small uk-table-justify uk-margin-large-top">
+          <thead>
+              <tr>
+                  <th class="uk-table-shrink"><h3 class="h3-light">Day 1</h3></th>
+                  <th class="uk-table-expand"></th>
+                  <th class="uk-table-shrink"><h3 class="h3-light">Day 2</h3></th>
+                  <th class="uk-table-expand"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td>6:00&nbsp;PM&nbsp;</td>
+                <td>Lift-Off</td>
+                <td>6:00&nbsp;PM&nbsp;</td>
+                <td>Lift-Off</td>
+              </tr>
+              <tr>
+                <td>6:00&nbsp;PM&nbsp;</td>
+                <td>Check-in</td>
+                <td>6:00&nbsp;PM&nbsp;</td>
+                <td>Check-in</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="uk-section uk-section-secondary uk-flex uk-flex-around uk-flex-wrap">
+  <div class="uk-container-small fullwidth">
+    <h2 class="h2-light">FAQ</h2>
+  </div>
+  <div class="uk-container fullwidth uk-flex uk-flex-between uk-flex-wrap">
+    <div class="uk-padding-small uk-width-1-3@m">
+      <div class="uk-card uk-card-default uk-card-body fullheight">
+        <h3>What is Hello World?</h3>
+        <p>Hello World is hackathon for Purdue freshman. It’s an opportunity to build a cool project and develop your skills in a fun and collaborative space. You’ll be surrounded by your peers and will have access to all of the help and resources you need.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>What is a Hackathon?</h3>
+        <p>A hackathon is not a place where people get together and try to break into websites. To us, hacking is when people come together to create awesome technical projects. People from all over the world will come together for Hackathons every few weeks, working together to make something amazing. Along the way there’s usually fun, food, and prizes.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>Do I need to be good at programming?</h3>
+        <p>Nope! We’re going to have lots of volunteers and mentors who can help you throughout the weekend. On top of that, we’ve put together some awesome resources to help you get started with any language of platform you want.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>How do I apply?</h3>
+        <p>Just sign up <a href="/#/register" [routerLink]="['/register']">here!</a> with your Purdue email and fill out the application form. We’ll let you know in the next few weeks if you’ve been accepted.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>Do I need to pay?</h3>
+        <p>Nope! Hello World is completely free. Just show up with your laptop and charger, and we’ll provide the food, friends, prizes, and mentors.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>Are teams allowed?</h3>
+        <p>Yes! You can have teams of up to 4 people.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>What are the rules?</h3>
+        <p>The project you make for Hello World has to be brand new-- you can’t use code that you’ve written before the event. And of course, be respectful of others. Harassment and abuse are never tolerated.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>When is Hello World?</h3>
+        <p>Hello World will take place on September 16th and 17th. We’ll have mentors and volunteers in the building for all 24 hours, so you can code through the night if you want! We’ll have a more detailed schedule coming soon.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body fullheight">
+          <h3>I have more questions!</h3>
+        <p>No problem! You can email us at helloworld@purduehackers.com</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-section uk-flex uk-flex-around uk-flex-wrap">
+  <div class="uk-container-small fullwidth">
+    <h2>Sponsors</h2>
+  </div>
+  <div class="uk-container fullwidth" uk-slider>
+    <div class="uk-position-relative uk-visible-toggle uk-light">
+      <ul class="uk-slider-items uk-child-width-1-2@s uk-grid uk-padding">
+          <li>
+              <div class="uk-card uk-card-default">
+                  <div class="uk-card-media-top">
+                      <img src="../docs/images/photo.jpg" alt="">
+                  </div>
+                  <div class="uk-card-body">
+                      <h3 class="uk-card-title">Headline</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <div class="uk-card uk-card-default">
+                  <div class="uk-card-media-top">
+                      <img src="../docs/images/dark.jpg" alt="">
+                  </div>
+                  <div class="uk-card-body">
+                      <h3 class="uk-card-title">Headline</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <div class="uk-card uk-card-default">
+                  <div class="uk-card-media-top">
+                      <img src="../docs/images/light.jpg" alt="">
+                  </div>
+                  <div class="uk-card-body">
+                      <h3 class="uk-card-title">Headline</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                  </div>
+              </div>
+          </li>
+        </ul>
+        <div class="uk-position-center-left-out fade-bg-left"></div>
+
+        <a class="uk-position-center-left-out uk-button action-btn" href="#" uk-slider-item="previous"><i class="material-icons">
+keyboard_arrow_left
+</i></a>
+        <a class="uk-position-center-right-out uk-button action-btn" href="#" uk-slider-item="next"><i class="material-icons">
+keyboard_arrow_right
+</i></a>
+        <div class="uk-position-center-right-out fade-bg-right"></div>
+
+      </div>
+  </div>
+</div>
+<div class="uk-section uk-section-secondary uk-flex uk-flex-around uk-flex-wrap">
+  <div class="uk-container-small fullwidth">
+    <h2 class="h2-light">Reach new heights.</h2>
+    <button class="uk-button p-large-light uk-margin-top">Apply</button>
+  </div>
+</div>
+<div class="uk-section uk-flex uk-flex-around uk-flex-wrap">
+  <div class="uk-container-small fullwidth">
+    <h2 class="h2">Questions?</h2>
+    <div class="uk-flex uk-flex-middle">
+        <a class="uk-button action-btn" href="#"><i class="material-icons">
+    keyboard_arrow_right
+    </i></a><a href="" class="p-large-dark uk-margin-left">Facebook</a>
+        <a class="uk-button action-btn uk-margin-large-left" href="#"><i class="material-icons">
+        keyboard_arrow_right
+      </i></a><a href="" class="p-large-dark uk-margin-left">Email</a>
+    </div>
+  </div>
+</div>
+<!-- <nav class="desktop-nav nav">
+  <a href="#main">Home</a>
+  <a href="#about">About</a>
+  <a href="#mentors">Mentors</a>
+  <a href="#sponsors">Sponsors</a>
+  <a href="#faq">FAQ</a>
+</nav>
+<nav class="mobile-nav">
+  <div class="nav-con">
+    <a class="logo" href="#main">Hello World</a>
+    <i (click)="show = !show" class="fa fa-bars" aria-hidden="true"></i>
+  </div>
+  <div *ngIf="show || f" class="mobile-nav-content">
+    <a href="#main">Home</a>
+    <a href="#about">About</a>
+    <a href="#mentors">Mentors</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav> -->
+<!-- <div class="padded-divs">
+  <main id="main">
+    <div class="logo">
+      <img src="assets/images/logo.svg" alt="logo">
+      <h1>Hello World</h1>
+      <h3>Coming Fall 2018.</h3>
+    </div>
+    <div class="landing_button" *ngIf="false">
+      <ul>
+        <span *ngIf="isLoggedIn else elseBlock">
+      <li><button class="ui-button" [routerLink]="['/home']">My Account</button></li>
+    </span>
+        <ng-template #elseBlock>
+          <li>
+            <button class="ui-button" [routerLink]="['/register']">Sign Up</button>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </main>
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="box">
+      <p>
+        Join us for 24 hours of making, learning, exploring, and collaborating. 24 hours of what we call hacking.
+      </p>
+      <p>
+        Hello World will bring together the freshman class like never before. If you’ve never programmed before then this event is for you. If you’re well versed in the art of code then this event is for you. We want you to work together to make something awesome in 24 hours.
+      </p>
+      <p>
+        Hello World is an introductory hackathon that introduces you to the format of a hackathon as well as provides a helpful atmosphere and resources for you to create a real life application of your choice!
+      </p>
+    </div>
+  </section>
+
+<div *ngIf="false">
+  <section id="mentors">
+    <h2>Mentors</h2>
+    <div class="box">
+      <p>
+        Hello World is the weekend of September 16th and we're looking for mentors to help freshman students through their first hackathon projects! As a mentor you can make Hello World awesome by:
+      </p>
+      <ul>
+        <li> • Answering questions about technologies the students are using </li>
+        <li> • Setting up and breaking down the event </li>
+        <li> • Helping out during the event like serving food or setting up tech talks </li>
+      </ul>
+      <p>
+        If this sounds interesting to you, please sign up using the form below. We'll be in touch as the event gets closer!
+      </p>
+    </div>
+    <div>
+      <button class="ui-button" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdcnkqkgwqUBqu1QZKAKzH-fISteTxMMeNBlfN86nEuYOLnPg/viewform');">Be a mentor</button>
+    </div>
+  </section>
+  <section id="sponsors">
+    <h2>Sponsors</h2>
+    <div class="box">
+      <p>Hello World wouldn't be possible without the help of our awesome sponsors! Make sure to stop by their tables and say hello!</p>
+      <div class="logo-container">
+        <img class="company-logo" src="assets/images/logo_microsoft.svg" />
+      </div>
+    </div>
+  </section>
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="box">
+    <div class="uk-padding-small uk-width-1-3@m">
+      <div class="uk-card uk-card-default uk-card-body">
+        <h3>What is Hello World?</h3>
+        <p>Hello World is hackathon for Purdue freshman. It’s an opportunity to build a cool project and develop your skills in a fun and collaborative space. You’ll be surrounded by your peers and will have access to all of the help and resources you need.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>What is a Hackathon?</h3>
+        <p>A hackathon is not a place where people get together and try to break into websites. To us, hacking is when people come together to create awesome technical projects. People from all over the world will come together for Hackathons every few weeks, working together to make something amazing. Along the way there’s usually fun, food, and prizes.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>Do I need to be good at programming?</h3>
+        <p>Nope! We’re going to have lots of volunteers and mentors who can help you throughout the weekend. On top of that, we’ve put together some awesome resources to help you get started with any language of platform you want.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>How do I apply?</h3>
+        <p>Just sign up <a href="/#/register" [routerLink]="['/register']">here!</a> with your Purdue email and fill out the application form. We’ll let you know in the next few weeks if you’ve been accepted.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>Do I need to pay?</h3>
+        <p>Nope! Hello World is completely free. Just show up with your laptop and charger, and we’ll provide the food, friends, prizes, and mentors.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>Are teams allowed?</h3>
+        <p>Yes! You can have teams of up to 4 people.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>What are the rules?</h3>
+        <p>The project you make for Hello World has to be brand new-- you can’t use code that you’ve written before the event. And of course, be respectful of others. Harassment and abuse are never tolerated.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>When is Hello World?</h3>
+        <p>Hello World will take place on September 16th and 17th. We’ll have mentors and volunteers in the building for all 24 hours, so you can code through the night if you want! We’ll have a more detailed schedule coming soon.</p>
+      </div>
+    </div>
+      <div class="uk-padding-small uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>I have more questions!</summary>
+        <p>No problem! You can email us at helloworld@purduehackers.com</p>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+  <footer>
+    Made with <i class="fa fa-heart" aria-hidden="true"></i> by Hello World
+  </footer>
+</div>
+<script src="js/jquery-3.2.1.slim.min.js"></script> -->
