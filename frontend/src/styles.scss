@@ -9,6 +9,10 @@
   --bluey-purple-50: rgba(114, 51, 173, 0.5);
 }
 
+html {
+  width: 100%;
+}
+
 body {
   font-family: 'Lato', sans-serif !important;
   margin: 0;
@@ -316,6 +320,10 @@ p {
 
 }
 
+.uk-container-small {
+  padding: 1em;
+}
+
 .section-primary {
   background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
 }
@@ -367,7 +375,7 @@ p {
 }
 
 .fade-bg-left {
-  width: 120px;
+  width: 180px;
   height: 100%;
   background-image: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
   z-index: 0;
@@ -375,7 +383,7 @@ p {
 }
 
 .fade-bg-right {
-  width: 120px;
+  width: 180px;
   height: 100%;
   background-image: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
   z-index: 0;
@@ -389,6 +397,14 @@ p {
 
 .help-block {
   color: #ff0000;
+}
+
+.uk-position-center-right-out {
+  left: calc(100% - 2em);
+}
+
+.uk-position-center-left-out {
+  right: calc(100% - 2em);
 }
 
 .ng-autocomplete-dropdown .ng-autocomplete-inputs {
