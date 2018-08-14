@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer">
-		<div class="fullwidth uk-container uk-container-supersmall floating-box">
+		<div class="fullwidth uk-container uk-container-supersmall floating-box" style="padding-top: -4em;">
       <div *ngIf="currentUser.roles && (currentUser.roles.indexOf('admin') !== -1 || currentUser.roles.indexOf('exec') !== -1)else elseBlock">
         <h3>Admin Actions:</h3>
         <li class="admin">
@@ -34,7 +34,7 @@
             <!-- Show once the app has loaded-->
             <div *ngIf="!loading else elseBlock">
               <div *ngIf="appSubmitted else elseBlock">
-                <h2>{{getStatusString().title | uppercase}}</h2>
+                <h1>{{getStatusString().title | uppercase}}</h1>
                 <p>{{getStatusString().description}}</p>
               </div>
               <ng-template #elseBlock>
@@ -53,9 +53,9 @@
         </div>
         <ng-template #elseBlock>
           <div class="buttons">
+						<h1>UNVERIFIED</h1>
             <p>Please verify your email to access the application.</p>
             <button class="uk-button  p-large-dark" (click)="resendVerificationEmail()">Resend Verification Email </button>
-            <button class="uk-button negative p-large-dark" [routerLink]="['/login']">Logout</button>
           </div>
           <div
             *ngIf="loading"
