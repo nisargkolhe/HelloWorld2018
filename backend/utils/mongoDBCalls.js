@@ -500,6 +500,52 @@ function setApplicationStatus(user_email, status, callback){
   });
   }
 
+
+  function addAnnouncement(announcement, callback) {
+    if (!announcement || !announcement.ancm) {
+      callback("Error adding the announcement!", null);
+    } else {
+      MongoClient.connect(mongodbUrl, function (err, db) {
+        if (err) {
+          callback("We are currently facing some technically difficulties, please try again later!", null);
+        } else {
+          var dbo = db.db(config.mongoDBDatabase);
+          if (err) {
+            callback("Error adding the announcement! " + err.message, null);
+          } else {
+              dbo.collection("Announcements").insertOne(announcement, function(err, res) {
+                if (err) {
+                  console.log("Error inserting the announcement: " + announcement);
+                  callback("Error inserting the announcement", null);
+                } else {
+                  callback("Announcement added!", null);                  
+                }
+                db.close();
+              });
+          }
+        }
+      });
+    }
+  }
+
+  function getAnnouncements(callback) {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      //Connection error
+      if (err) {
+        callback("We are currently facing some technically difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        dbo.collection("Announcements").find().toArray(function(err, results) {
+          if (err){
+            callback("Error finding announcements!", null);
+          } else {
+            callback(null, results);
+          }
+        });
+      }
+    });
+  }
+
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -516,5 +562,7 @@ module.exports = {
   setApplicationStatus: setApplicationStatus,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers,
-  resendVerificationEmail: resendVerificationEmail
+  resendVerificationEmail: resendVerificationEmail,
+  addAnnouncement: addAnnouncement,
+  getAnnouncements: getAnnouncements
 }

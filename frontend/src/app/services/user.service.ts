@@ -5,12 +5,14 @@ import { environment } from '../../environments';
 
 import { User } from '../user';
 import { Application } from '../application';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
 	constructor(
 		private http: Http,
-		private utilService: UtilService) { }
+		private utilService: UtilService,
+		private authService: AuthService) { }
 
 	getUser() {
 		return this.http.get(environment.apiUrl+'/user/', this.utilService.jwt()).map((response: Response) => response.json());
@@ -55,5 +57,9 @@ export class UserService {
 		}
 
 		return formData;
+	}
+
+	getAnnouncements() {
+		return this.http.get(environment.apiUrl+'/user/announcements', this.authService.jwt()).map((response: Response) => response.json());
 	}
 }

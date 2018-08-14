@@ -182,4 +182,14 @@ console.log("xd")
   });
 });
 
+router.get('/announcements', function(req, res, next) {
+  mongo.getAnnouncements(function(error, result) {
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 module.exports = router;

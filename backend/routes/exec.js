@@ -150,5 +150,41 @@ router.get('/applications/:id', passport.authenticate(['jwt'], { session: false 
   });
 });
 
+router.post('/announcement', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
+  var isExecOrAdmin = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "exec" || req.user.roles[i] == "admin")
+    {
+      isExecOrAdmin = true;
+    }
+  }
+  if (isExecOrAdmin == false){
+    res.status(401).json({message: "Only execs and admins can access this page"});
+  }
+
+  let announcement = {
+    ancm: req.body.ancm,
+    time: new Date().toLocaleTimeString(),
+    date: new Date().toLocaleDateString()
+  }
+
+  mongo.addAnnouncement(announcement, function(error, result) {
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      res.json({message: "Announcement added!"});
+    }
+  });
+});
+
+router.get('/announcements', function(req, res, next) {
+  mongo.getAnnouncements(function(error, result) {
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      res.json(result);
+    }
+  });
+});
 
 module.exports = router;

@@ -8,7 +8,7 @@
 	</div>
 	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer">
 		<div class="fullwidth uk-container uk-container-supersmall floating-box">
-      <div *ngIf="currentUser.roles && currentUser.roles.indexOf('admin') !== -1 else elseBlock">
+      <div *ngIf="currentUser.roles && (currentUser.roles.indexOf('admin') !== -1 || currentUser.roles.indexOf('exec') !== -1)else elseBlock">
         <h3>Admin Actions:</h3>
         <li class="admin">
           <ul>

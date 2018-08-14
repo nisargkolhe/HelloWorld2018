@@ -21,6 +21,8 @@ import { HomeComponent } from './home/home.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { ApplicationComponent } from './application/application.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { NavbarComponent } from './navbar/navbar.component';
   CheckinComponent,
   HomeComponent,
   ApplicationComponent,
-  NavbarComponent
+  NavbarComponent,
+  AnnouncementComponent,
+  AnnouncementsComponent
   ],
   imports: [
   BrowserModule,
