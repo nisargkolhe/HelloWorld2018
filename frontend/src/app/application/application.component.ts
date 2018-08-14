@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule, FormControl } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation'
+import { CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent } from "ng-auto-complete";
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -18,6 +19,18 @@ import { AlertService, UserService } from '../services/index';
 export class ApplicationComponent implements OnInit {
 
   //for autocomplete
+  @ViewChild(NgAutocompleteComponent) public completer: NgAutocompleteComponent;
+
+  public majorsAutocomplete = [
+      CreateNewAutocompleteGroup(
+          'Eg. Computer Sience',
+          'completer',
+          Application.getMajors(),
+          {titleKey: 'title', childrenKey: null}
+      ),
+  ];
+
+
   majorCtrl: FormControl;
   filteredMajors: any;
   majors = [];
@@ -114,6 +127,10 @@ export class ApplicationComponent implements OnInit {
             //this.alertService.error(error);
           }
       );
+  }
+
+  selectedMajor(item: SelectedAutocompleteItem) {
+    this.model.major = item.item.title;
   }
 
 }

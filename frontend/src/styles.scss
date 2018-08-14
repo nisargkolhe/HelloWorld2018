@@ -391,3 +391,70 @@ p {
 .help-block {
   color: #ff0000;
 }
+
+.ng-autocomplete-dropdown .ng-autocomplete-inputs {
+    position: relative;
+}
+.ng-autocomplete-dropdown .ng-autocomplete-inputs input {
+  height: 40px;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: solid 2px var(--dark-blue);
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: left;
+  transition: border-color ease 0.5s;
+  padding: 0 10px;
+}
+
+.ng-autocomplete-dropdown .ng-autocomplete-placeholder {
+    display: none;
+}
+.ng-autocomplete-dropdown .ng-dropdown {
+    display: none;
+    border: 1px solid #e0e0e0;
+    z-index: 99999;
+    max-height: 280px;
+    overflow-x: hidden;
+    width: 100%;
+}
+.ng-autocomplete-dropdown .ng-dropdown.open {
+    display: block;
+}
+
+.ng-dropdown.open {
+  border: solid 2px var(--dark-blue);
+  border-top: none;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item {
+    height: 40px;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 0 10px;
+    background-color: white;
+    color: var(--dark-blue);
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item.active {
+    background-color: var(--dark-blue);
+    color: #fff !important;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item .dropdown-item-highlight {
+    font-weight: bold;
+}
+
+
+.ng-autocomplete-dropdown-icon.open:after {
+    transform: rotate(180deg);
+}

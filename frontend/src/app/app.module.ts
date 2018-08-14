@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgAutoCompleteModule } from "ng-auto-complete";
 
 import { routing } from './app.routing';
 
@@ -45,7 +46,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
   FormsModule,
   ReactiveFormsModule,
   HttpModule,
-  routing
+  routing,
+  NgAutoCompleteModule
   ],
   providers: [
   AuthGuard,

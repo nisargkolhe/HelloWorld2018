@@ -35,7 +35,7 @@
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Major</label>
             <div class="uk-form-controls">
-                <input class="uk-input" name="major" type="major"  [(ngModel)]="model.major" #major="ngModel" required>
+								<ng-autocomplete (selected)="selectedMajor($event)" [classes]="['']" [group]="majorsAutocomplete" name="major" type="major" id="major" required></ng-autocomplete>
             </div>
         </div>
 
@@ -104,7 +104,7 @@
               </div>
               <ng-template #elseBlock>
                 <span uk-icon="icon: cloud-upload"></span>
-                <span class="uk-text-middle">Attach binaries by dropping them here or</span>
+                <span class="uk-text-middle">Attach a resume by dropping it here or</span>
                   <div class="js-upload" uk-form-custom>
                     <input id="resume" type="file" name="resume" (change)="setFile($event)" accept=".pdf"/>
                     <span class="uk-link">selecting one</span>
