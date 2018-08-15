@@ -32,8 +32,6 @@ export class ApplicationComponent implements OnInit {
 
 
   majorCtrl: FormControl;
-  filteredMajors: any;
-  majors = [];
 
   currentUser: User;
 
@@ -74,10 +72,6 @@ export class ApplicationComponent implements OnInit {
     private alertService: AlertService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.majorCtrl = new FormControl();
-      this.filteredMajors = this.majorCtrl.valueChanges
-          .startWith(null)
-          .map(name => this.filterMajors(name));
-      this.majors = Application.getMajors();
       this.model.firstName = this.currentUser.firstname;
       this.model.lastName = this.currentUser.lastname;
       this.model.email = this.currentUser.email;
@@ -85,11 +79,6 @@ export class ApplicationComponent implements OnInit {
 
   ngOnInit() {
     this.loadApplication();
-  }
-
-  filterMajors(val: string) {
-    return val ? this.majors.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
-               : this.majors;
   }
 
   setFile(event){

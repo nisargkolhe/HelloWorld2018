@@ -27,7 +27,7 @@ export class Application {
 	}
 }
 
-const MAJORS: {} = [
+const MAJORS: { [value: string]: any; id?: string | number; }[] = [
 { title: "Accounting", id: "Accounting"},
 { title: "Acting", id: "Acting"},
 { title: "Actuarial Science", id: "Actuarial Science"},
