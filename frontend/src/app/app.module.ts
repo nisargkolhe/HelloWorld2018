@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgAutoCompleteModule } from "ng-auto-complete";
 
 import { routing } from './app.routing';
 
@@ -21,6 +22,8 @@ import { HomeComponent } from './home/home.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { ApplicationComponent } from './application/application.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +37,17 @@ import { NavbarComponent } from './navbar/navbar.component';
   CheckinComponent,
   HomeComponent,
   ApplicationComponent,
-  NavbarComponent
+  NavbarComponent,
+  AnnouncementComponent,
+  AnnouncementsComponent
   ],
   imports: [
   BrowserModule,
   FormsModule,
   ReactiveFormsModule,
   HttpModule,
-  routing
+  routing,
+  NgAutoCompleteModule
   ],
   providers: [
   AuthGuard,

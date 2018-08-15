@@ -9,12 +9,17 @@
   --bluey-purple-50: rgba(114, 51, 173, 0.5);
 }
 
+html {
+  width: 100%;
+}
+
 body {
   font-family: 'Lato', sans-serif !important;
   margin: 0;
   color: white;
   background-size: 100% auto;
   background-repeat: repeat-y;
+  overflow-x: hidden;
 }
 
 h1{
@@ -316,8 +321,39 @@ p {
 
 }
 
+.uk-container-small {
+  padding: 1em;
+}
+
 .section-primary {
   background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
+}
+
+.hero {
+  flex-direction: column;
+  padding-bottom: 0;
+  padding-top: 4em;
+}
+
+.hero-img {
+  width: 100%;
+  margin-top: -25%;
+  margin-bottom: -15%;
+  margin-left: -15px;
+  height: auto;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  background: url("assets/images/hero-rocket.svg") no-repeat;
+  background-size: cover;
+  width: 100%;
+  left: 0;
+  bottom: -15%;
+  height: 100%;
+  z-index: 99999;
 }
 
 .uk-section-primary {
@@ -332,8 +368,24 @@ p {
   max-width: 70%;
 }
 
+.sponsor-card {
+  height: 150px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .uk-card-default h3 {
   color: var(--dark-blue) !important;
+}
+
+.uk-card-media-top {
+  padding: 1em;
+}
+
+.uk-card-media-top img {
+  max-height: 150px;
 }
 
 .leftBox {
@@ -343,7 +395,6 @@ p {
 
 .rightContainer {
   overflow: scroll;
-  padding-top: 4em;
 }
 
 .floating-box {
@@ -368,7 +419,7 @@ p {
 }
 
 .fade-bg-left {
-  width: 120px;
+  width: 180px;
   height: 100%;
   background-image: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
   z-index: 0;
@@ -376,7 +427,7 @@ p {
 }
 
 .fade-bg-right {
-  width: 120px;
+  width: 180px;
   height: 100%;
   background-image: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
   z-index: 0;
@@ -390,4 +441,79 @@ p {
 
 .help-block {
   color: #ff0000;
+}
+
+.uk-position-center-right-out {
+  left: calc(100% - 2em);
+}
+
+.uk-position-center-left-out {
+  right: calc(100% - 2em);
+}
+
+.ng-autocomplete-dropdown .ng-autocomplete-inputs {
+    position: relative;
+}
+.ng-autocomplete-dropdown .ng-autocomplete-inputs input {
+  height: 40px;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: solid 2px var(--dark-blue);
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: left;
+  transition: border-color ease 0.5s;
+  padding: 0 10px;
+}
+
+.ng-autocomplete-dropdown .ng-autocomplete-placeholder {
+    display: none;
+}
+.ng-autocomplete-dropdown .ng-dropdown {
+    display: none;
+    border: 1px solid #e0e0e0;
+    z-index: 99999;
+    max-height: 280px;
+    overflow-x: hidden;
+    width: 100%;
+}
+.ng-autocomplete-dropdown .ng-dropdown.open {
+    display: block;
+}
+
+.ng-dropdown.open {
+  border: solid 2px var(--dark-blue);
+  border-top: none;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item {
+    height: 40px;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 0 10px;
+    background-color: white;
+    color: var(--dark-blue);
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item.active {
+    background-color: var(--dark-blue);
+    color: #fff !important;
+}
+
+.ng-autocomplete-dropdown .ng-dropdown .dropdown-item .dropdown-item-highlight {
+    font-weight: bold;
+}
+
+
+.ng-autocomplete-dropdown-icon.open:after {
+    transform: rotate(180deg);
 }

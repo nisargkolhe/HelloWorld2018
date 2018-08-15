@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.currentUser.roles && this.currentUser.roles.indexOf('admin') !== -1){
+    if(this.currentUser.roles && (this.currentUser.roles.indexOf('admin') !== -1 || this.currentUser.roles.indexOf('exec') !== -1)){
       this.appService.getAllApplications()
         .subscribe(
           result => {
