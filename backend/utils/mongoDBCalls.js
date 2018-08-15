@@ -465,7 +465,7 @@ MongoClient.connect(mongodbUrl, function(err, db){
   else
   {
     var dbo = db.db(config.mongoDBDatabase);
-    dbo.collection("Applications").find({"status" : "open"}).toArray(function(err,applications){
+    dbo.collection("Applications").find({"status" : "Pending"}).toArray(function(err,applications){
       if (err)
       {
         console.log('An error occurred getting the applications', err);

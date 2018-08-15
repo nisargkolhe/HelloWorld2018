@@ -182,7 +182,7 @@ console.log(req.files);
     website: req.body.website,
     longanswer_1: req.body.longanswer_1,
     longanswer_2: req.body.longanswer_2,
-    status: "open"
+    status: "Pending"
   }
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
