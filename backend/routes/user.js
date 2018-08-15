@@ -10,6 +10,8 @@ var User = require('../models/user')
 var router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+var multer = require('multer');
+var upload = multer({ storage: multer.memoryStorage()  });
 
 mongoose.connect(config.mongoDBHost);
 
@@ -158,15 +160,28 @@ router.get('/application', passport.authenticate(['jwt'], { session: false }), c
 });
 
 
-router.post("/apply", passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
+router.post("/apply", upload.single('file'), passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
 console.log(req.body.firstName)
 console.log("xd")
+console.log(req.files);
 
   const applicationData = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     address: req.body.address,
+    file: req.file,
     email: req.user.email,
+    uid: req.body.uid,
+    class_year: req.body.classyear,
+    grad_year: req.body.gradyear,
+    major: req.body.major,
+    referral: req.body.referral,
+    hackathon_count: req.body.hackathon_count,
+    dietary_restrictions: req.body.dietary_restrictions,
+    shirt_size: req.body.shirt_size,
+    website: req.body.website,
+    longanswer_1: req.body.longanswer_1,
+    longanswer_2: req.body.longanswer_2,
     status: "open"
   }
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
