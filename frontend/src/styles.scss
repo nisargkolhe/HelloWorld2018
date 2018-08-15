@@ -19,6 +19,7 @@ body {
   color: white;
   background-size: 100% auto;
   background-repeat: repeat-y;
+  overflow-x: hidden;
 }
 
 h1{
@@ -328,6 +329,33 @@ p {
   background-image: linear-gradient(to top, rgba(114, 51, 173, 0.5), rgba(29, 31, 122, 0.75));
 }
 
+.hero {
+  flex-direction: column;
+  padding-bottom: 0;
+  padding-top: 4em;
+}
+
+.hero-img {
+  width: 100%;
+  margin-top: -25%;
+  margin-bottom: -15%;
+  margin-left: -15px;
+  height: auto;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  background: url("assets/images/hero-rocket.svg") no-repeat;
+  background-size: cover;
+  width: 100%;
+  left: 0;
+  bottom: -15%;
+  height: 100%;
+  z-index: 99999;
+}
+
 .uk-section-primary {
   background-color: var(--dark-blue);
 }
@@ -340,8 +368,24 @@ p {
   max-width: 70%;
 }
 
+.sponsor-card {
+  height: 150px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .uk-card-default h3 {
   color: var(--dark-blue) !important;
+}
+
+.uk-card-media-top {
+  padding: 1em;
+}
+
+.uk-card-media-top img {
+  max-height: 150px;
 }
 
 .leftBox {
