@@ -380,7 +380,17 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           console.log('an error occurred while looking up application', err);
           callback(err);
         } else if (application) {
-          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address}}, (err, result) => {
+          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address, "resume": applicationData.file,  "uid": applicationData.uid,
+          "class_year": applicationData.classyear,
+          "grad_year": applicationData.gradyear,
+          "major": applicationData.major,
+          "referral": applicationData.referral,
+          "hackathon_count": applicationData.hackathon_count,
+          "dietary_restrictions": applicationData.dietary_restrictions,
+          "shirt_size": applicationData.shirt_size,
+          "website": applicationData.website,
+          "longanswer_1": applicationData.longanswer_1,
+          "longanswer_2": applicationData.longanswer_2,}},(err, result) => {
 
             callback(null, {update: true, result});
           })
@@ -455,7 +465,7 @@ MongoClient.connect(mongodbUrl, function(err, db){
   else
   {
     var dbo = db.db(config.mongoDBDatabase);
-    dbo.collection("Applications").find({"status" : "open"}).toArray(function(err,applications){
+    dbo.collection("Applications").find({"status" : "Pending"}).toArray(function(err,applications){
       if (err)
       {
         console.log('An error occurred getting the applications', err);
