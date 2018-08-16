@@ -10,8 +10,11 @@ var User = require('../models/user')
 var router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 var multer = require('multer');
-var upload = multer({ storage: multer.memoryStorage()  });
+var upload = multer({ dest: `uploads/`, limits: {
+        fileSize: 1024 * 1024 * 5
+    }});
 
 mongoose.connect(config.mongoDBHost);
 
@@ -160,10 +163,16 @@ router.get('/application', passport.authenticate(['jwt'], { session: false }), c
 });
 
 
-router.post("/apply", upload.single('file'), passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
-console.log(req.body.firstName)
-console.log("xd")
-console.log(req.files);
+router.post("/apply", upload.single('resume'), passport.authenticate(['jwt'], { session: false }), cors(), function(req, res){
+  if (req.file) {
+    if(!req.file.originalname.match(/\.(pdf)$/)) {
+      res.status(401).json({message: 'Only PDF files are allowed.'});
+      return;
+    } else if(req.file.size > 1024 * 1024 * 5) { //files bigger than 5MBs
+      res.status(401).json({message: 'Files cannot be bigger than 5MBs.'});
+      return;
+    }
+  }
 
   const applicationData = {
     firstName: req.body.firstName,
@@ -172,8 +181,8 @@ console.log(req.files);
     file: req.file,
     email: req.user.email,
     uid: req.body.uid,
-    class_year: req.body.classyear,
-    grad_year: req.body.gradyear,
+    class_year: req.body.class_year,
+    grad_year: req.body.grad_year,
     major: req.body.major,
     referral: req.body.referral,
     hackathon_count: req.body.hackathon_count,
@@ -182,8 +191,9 @@ console.log(req.files);
     website: req.body.website,
     longanswer_1: req.body.longanswer_1,
     longanswer_2: req.body.longanswer_2,
-    status: "Pending"
+    status: "pending"
   }
+  console.log('applicationData',applicationData);
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
       res.status(401).json({message: 'An error occurred', error: err});

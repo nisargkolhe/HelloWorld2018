@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
       this.userService.getApplication()
         .subscribe(
           result => {
-            this.application = result.application;
+            this.application = result;
             this.appSubmitted = true;
             this.appLoaded = true;
             console.log(result);

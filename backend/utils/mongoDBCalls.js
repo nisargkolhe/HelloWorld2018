@@ -381,8 +381,8 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           callback(err);
         } else if (application) {
           dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address, "resume": applicationData.file,  "uid": applicationData.uid,
-          "class_year": applicationData.classyear,
-          "grad_year": applicationData.gradyear,
+          "class_year": applicationData.class_year,
+          "grad_year": applicationData.grad_year,
           "major": applicationData.major,
           "referral": applicationData.referral,
           "hackathon_count": applicationData.hackathon_count,

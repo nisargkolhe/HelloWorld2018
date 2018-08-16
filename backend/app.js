@@ -33,6 +33,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use('/resumes', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
+  var isExecOrAdmin = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "exec" || req.user.roles[i] == "admin")
+    {
+      isExecOrAdmin = true;
+    }
+  }
+  if (isExecOrAdmin == false){
+    res.status(401).json({message: "Only execs and admins can access this page"});
+  }
+  next();
+});
+app.use('/resumes', express.static(path.join(__dirname, 'uploads')));
 
 app.options('*', cors());
 

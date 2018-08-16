@@ -96,6 +96,7 @@ export class ApplicationComponent implements OnInit {
               this.router.navigate(['/home']);
           },
           error => {
+              console.log(error);
               error = error.json();
               this.alertService.error(error.message);
               this.loading = false;
@@ -106,7 +107,10 @@ export class ApplicationComponent implements OnInit {
       this.userService.getApplication()
         .subscribe(
           result => {
-            this.model = result.application;
+            this.model = result;
+            console.log(result);
+            if(result.major)
+              this.completer.SelectItem('completer', result.major);
             if(result.message === "success")
               this.appSubmitted = true;
             console.log(result);
