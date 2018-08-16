@@ -471,6 +471,25 @@ MongoClient.connect(mongodbUrl, function(err, db){
 });
 }
 
+function retrieveGlobals(callback){
+  MongoClient.connect(mongodbUrl, function(err, db){
+    if (err) {
+      callback("Error connecting to MongoDB", null)
+    } else {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Globals").findOne({}, function(err, Globals){
+        if (err) {
+          console.log('An error occurred getting the globals', err);
+          callback(err);
+        } else if (Globals) {
+            console.log(Globals)
+            callback(null, Globals);
+        }
+      });
+    }
+  });
+}
+
 function setApplicationStatus(user_email, status, callback){
   MongoClient.connect(mongodbUrl, function(err, db){
     if (err)
@@ -518,7 +537,7 @@ function setApplicationStatus(user_email, status, callback){
                   console.log("Error inserting the announcement: " + announcement);
                   callback("Error inserting the announcement", null);
                 } else {
-                  callback("Announcement added!", null);                  
+                  callback("Announcement added!", null);
                 }
                 db.close();
               });
@@ -559,6 +578,7 @@ module.exports = {
   retrieveUserApplication : retrieveUserApplication,
   retrieveAllApplications: retrieveAllApplications,
   retrieveOpenApplications: retrieveOpenApplications,
+  retrieveGlobals: retrieveGlobals,
   setApplicationStatus: setApplicationStatus,
   checkCheckInStatus: checkCheckInStatus,
   getCheckedInUsers: getCheckedInUsers,

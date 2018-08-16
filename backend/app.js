@@ -9,6 +9,7 @@ var cors = require('cors');
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var exec = require('./routes/exec');
+var applications = require('./routes/applications');
 
 const config = require('./config/config');
 const passport = require('passport');
@@ -44,6 +45,7 @@ app.use(function(req, res, next) {
 //app.use('/', routes);
 app.use('/user', user);
 app.use('/exec', exec);
+app.use('/applications', applications);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
