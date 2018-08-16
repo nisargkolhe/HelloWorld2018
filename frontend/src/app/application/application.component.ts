@@ -10,6 +10,8 @@ import 'rxjs/add/operator/map';
 import { User } from '../user';
 import { Application } from '../application';
 
+declare var UIkit: any;
+
 import { AlertService, UserService } from '../services/index';
 @Component({
   selector: 'app-application',
@@ -87,6 +89,20 @@ export class ApplicationComponent implements OnInit {
     this.filename = event.target.files[0].name;
   }
 
+  onDrop(event, data: any) {
+    //let dataTransfer = event.dataTransfer.getData('file');
+    console.log('dataTransfer', event);
+    //this.model.resume = dataTransfer;
+    event.preventDefault();
+  }
+
+  onDragOver(event) {
+    //console.log
+    //event.dataTransfer.setData('file', event);
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
   apply() {
     this.loading = true;
     this.userService.apply(this.model)
@@ -104,9 +120,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   private loadApplication() {
+      this.loading = true;
       this.userService.getApplication()
         .subscribe(
           result => {
+            this.loading = false;
             this.model = result;
             console.log(result);
             if(result.major)

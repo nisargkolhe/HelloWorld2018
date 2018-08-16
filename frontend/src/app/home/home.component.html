@@ -44,7 +44,8 @@
             </div>
             <!-- Show if the app is still loading -->
             <ng-template #elseBlock>
-              <h2>Loading...</h2>
+            	<h1>LOADING</h1>
+							<p>Looking for your application!<p>
             </ng-template>
           </div>
           <div class="buttons topSpacing">
@@ -57,15 +58,17 @@
             <p>Please verify your email to access the application.</p>
             <button class="uk-button  p-large-dark" (click)="resendVerificationEmail()">Resend Verification Email </button>
           </div>
-          <div
-            *ngIf="loading"
-            color="primary"
-            mode="indeterminate"
-            class="spinner">
-            Loading...
-          </div>
         </ng-template>
       </ng-template>
+			<div
+				*ngIf="loading"
+				color="primary"
+				mode="indeterminate"
+				class="spinner">
+				<div class="uk-position-bottom-center uk-margin-bottom">
+					<div uk-spinner></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

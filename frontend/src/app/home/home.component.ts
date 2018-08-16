@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   private loadApplication() {
+    this.loading = true;
       this.userService.getApplication()
         .subscribe(
           result => {

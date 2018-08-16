@@ -7,8 +7,12 @@
 		</div>
 	</div>
 	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer" style="padding-top: 4em;">
-		<div class="fullwidth uk-container uk-container-supersmall floating-box">
-      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" novalidate>
+		<div class="fullwidth uk-container uk-container-supersmall floating-box" >
+			<div class="application-status topSpacing" *ngIf="loading">
+				<h1>LOADING</h1>
+				<p>Processing your application.<p>
+			</div>
+      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
 
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Class Year</label>
@@ -98,28 +102,20 @@
 
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Upload Your Resume (Optional but highly recommended)</label>
-            <div class="js-upload uk-placeholder uk-text-center p-small">
-              <div *ngIf='filename; else elseBlock'>
-                <span uk-icon="icon: copy"></span> {{filename}}
-              </div>
-              <ng-template #elseBlock>
-                <span uk-icon="icon: cloud-upload"></span>
-                <span class="uk-text-middle">Attach a resume by dropping it here or</span>
-                  <div class="js-upload" uk-form-custom>
-                    <input id="resume" type="file" name="file" (change)="setFile($event)" accept=".pdf"/>
-                    <span class="uk-link">selecting one</span>
-                  </div>
-              </ng-template>
-          </div>
-            <!-- <div class="uk-form-controls">
-              <a class="ui-button upload-btn">
-                <div *ngIf='filename; else elseBlock'>
-                  {{filename}}
-                </div>
-                <ng-template #elseBlock><i class="fa fa-upload" aria-hidden="true"></i> {{(model.resume && model.resume.filename_original) ? model.resume.filename_original : "Upload"}} </ng-template>
-                <input id="resume" type="file" name="resume" (change)="setFile($event)" accept=".pdf"/>
-              </a>
-            </div> -->
+						<div class="uk-form-controls">
+							<div class="js-upload uk-placeholder uk-text-center p-small uk-form-custom">
+								<input id="resume" type="file" name="file" (change)="setFile($event)" accept=".pdf"/>
+	              <div *ngIf='filename; else elseBlock'>
+	                <span uk-icon="icon: copy"></span> {{filename}}
+	              </div>
+	              <ng-template #elseBlock>
+									<div uk-form-custom>
+										<span uk-icon="icon: cloud-upload"></span>
+										<span class="uk-text-middle">Attach a resume by dropping it here or selecting one.</span>
+									</div>
+	              </ng-template>
+	          	</div>
+						</div>
         </div>
 
       <div class="uk-align-right">
@@ -131,15 +127,16 @@
         </button>
       </div>
       <div *ngIf="f.submitted && f.form.invalid" class="help-block">Some fields are missing and/or invalid.</div>
-      <div
-        *ngIf="loading"
-        color="primary"
-        mode="indeterminate"
-        class="spinner">
-        Loading...
-      </div>
-
       </form>
+			<div
+				*ngIf="loading"
+				color="primary"
+				mode="indeterminate"
+				class="spinner">
+				<div class="uk-position-bottom-center uk-margin-bottom">
+					<div uk-spinner></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
