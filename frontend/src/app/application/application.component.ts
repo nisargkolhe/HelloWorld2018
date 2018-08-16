@@ -57,7 +57,8 @@ export class ApplicationComponent implements OnInit {
     {value: 'website', viewValue: 'Purdue Hackers Website'},
     {value: 'flyers', viewValue: 'Flyers'},
     {value: 'class', viewValue: 'Class Callout'},
-    {value: 'friend', viewValue: 'Friend'}
+    {value: 'friend', viewValue: 'Friend'},
+    {value: 'other', viewValue: 'Other'}
   ];
 
   shirt_sizes = [
@@ -85,6 +86,11 @@ export class ApplicationComponent implements OnInit {
 
   setFile(event){
     console.log('upload', event.target.files);
+    if(event.target.files[0].size > 1024*1024*5) {
+      this.alertService.error('Files cannot be bigger than 5MBs.', true);
+      return;
+    }
+
     this.model.resume = event.target.files[0];
     this.filename = event.target.files[0].name;
   }

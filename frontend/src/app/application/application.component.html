@@ -15,68 +15,74 @@
       <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Class Year</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Class Year*</label>
             <div class="uk-form-controls">
-              <select class="uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.class_year)}" [(ngModel)]="model.class_year" #class_year="ngModel" name="class_year"  required>
+              <select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.class_year)}" [(ngModel)]="model.class_year" #class_year="ngModel" name="class_year" required>
                 <option *ngFor="let year of class_years" [value]="year.value">
                   {{year.viewValue}}
                 </option>
               </select>
             </div>
+						<div *ngIf="f.submitted && !class_year.valid" class="uk-text-danger">Class Year is required.</div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Graduation Year</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Graduation Year*</label>
             <div class="uk-form-controls">
-              <select class="uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.grad_year)}" [(ngModel)]="model.grad_year" #grad_year="ngModel" name="grad_year"  required>
+              <select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.grad_year)}" [(ngModel)]="model.grad_year" #grad_year="ngModel" name="grad_year"  required>
                 <option *ngFor="let year of grad_years" [value]="year">
                   {{year}}
                 </option>
               </select>
             </div>
+						<div *ngIf="f.submitted && !grad_year.valid" class="uk-text-danger">Graduation Year is required.</div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Major</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Major*</label>
             <div class="uk-form-controls">
 								<ng-autocomplete (selected)="selectedMajor($event)" [classes]="['']" [group]="majorsAutocomplete" name="major" type="major" id="major" required></ng-autocomplete>
             </div>
+						<div *ngIf="f.submitted && !model.major" class="uk-text-danger">Major is required.</div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">How did you hear about us?</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">How did you hear about us?*</label>
             <div class="uk-form-controls">
-              <select class="uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.referral)}" [(ngModel)]="model.referral" #referral="ngModel" name="referral"  required>
+              <select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.referral)}" [(ngModel)]="model.referral" #referral="ngModel" name="referral"  required>
                 <option *ngFor="let referral of referrals" [value]="referral.value">
                   {{referral.viewValue}}
                 </option>
               </select>
             </div>
+						<div *ngIf="f.submitted && !referral.valid" class="uk-text-danger">Referral is required.</div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Hackathon Count</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Hackathon Count*</label>
             <div class="uk-form-controls">
-                <input class="uk-input" name="hackathon_count" type="number" min="0" [(ngModel)]="model.hackathon_count" #hackathon_count="ngModel" required>
+                <input class="uk-input" name="hackathon_count" type="number" min="0" [(ngModel)]="model.hackathon_count" #hackathon_count="ngModel" placeholder="0" required>
             </div>
+						<div *ngIf="f.submitted && !hackathon_count.valid" class="uk-text-danger">Hackathon Count is required.</div>
         </div>
 
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Dietary Restrictions</label>
             <div class="uk-form-controls">
-                <input class="uk-input" name="dietary_restrictions" type="text"  [(ngModel)]="model.dietary_restrictions" #dietary_restrictions="ngModel" required>
+                <input class="uk-input" name="dietary_restrictions" type="text"  [(ngModel)]="model.dietary_restrictions" #dietary_restrictions="ngModel">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Shirt Size</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Shirt Size*</label>
             <div class="uk-form-controls">
-              <select class="uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.shirt_size)}" [(ngModel)]="model.shirt_size" #shirt_size="ngModel" name="shirt_size"  required>
+              <select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.shirt_size)}" [(ngModel)]="model.shirt_size" #shirt_size="ngModel" name="shirt_size"  required>
                 <option *ngFor="let size of shirt_sizes" [value]="size.value">
                   {{size.viewValue}}
                 </option>
               </select>
             </div>
+						<div *ngIf="f.submitted && !shirt_size.valid" class="uk-text-danger">Shirt Size is required.</div>
         </div>
 
         <div class="uk-margin">
@@ -87,17 +93,20 @@
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Long Answer 1</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Long Answer 1*</label>
             <div class="uk-form-controls">
                 <textarea class="uk-textarea" name="longanswer_1" type="text" minlength="140" maxlength="1000" rows="5" [(ngModel)]="model.longanswer_1" #longanswer_1="ngModel" required></textarea>
             </div>
+						<div *ngIf="f.submitted && !longanswer_1.valid" class="uk-text-danger">Response has to be between 140 and 1000 characters.</div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label p-small" for="form-stacked-text">Long Answer 2</label>
+            <label class="uk-form-label p-small" for="form-stacked-text">Long Answer 2*</label>
             <div class="uk-form-controls">
                 <textarea class="uk-textarea" name="longanswer_2" type="text" minlength="140" maxlength="1000" rows="5" [(ngModel)]="model.longanswer_2" #longanswer_2="ngModel" required></textarea>
             </div>
+						<div *ngIf="f.submitted && !longanswer_2.valid" class="uk-text-danger">Response has to be between 140 and 1000 characters.</div>
+
         </div>
 
         <div class="uk-margin">
@@ -126,7 +135,7 @@
           <div *ngIf='!appSubmitted'>Submit</div>
         </button>
       </div>
-      <div *ngIf="f.submitted && f.form.invalid" class="help-block">Some fields are missing and/or invalid.</div>
+      <div *ngIf="f.submitted && f.form.invalid" class="uk-text-warning">Some fields are missing and/or invalid.</div>
       </form>
 			<div
 				*ngIf="loading"
