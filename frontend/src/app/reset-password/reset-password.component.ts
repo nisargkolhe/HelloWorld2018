@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
                 this.alertService.success('Please check your email for password reset link.', true);
                 this.router.navigate(['/login']);
             } else {
-                this.alertService.error(data.message);
+                this.alertService.success(data.message);
                 this.loading = false;
             }
         },
