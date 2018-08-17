@@ -18,6 +18,10 @@ export class ApplicationService {
       return this.http.get(environment.apiUrl+'/applications',  this.utilService.jwt()).map((response: Response) => response.json());
   }
 
+  getApplicationsStatus() {
+      return this.http.get(environment.apiUrl+'/applications/status',  this.utilService.jwt()).map((response: Response) => response.json());
+  }
+
   getApplication(id) {
       return this.http.get(environment.apiUrl+'/applications/'+id,  this.utilService.jwt()).map((response: Response) => response.json());
   }

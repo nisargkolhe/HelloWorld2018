@@ -115,7 +115,7 @@ export class ApplicationComponent implements OnInit {
       .subscribe(
           data => {
               this.alertService.success('Application successfully submitted.', true);
-              this.router.navigate(['/home']);
+              this.loading = false;
           },
           error => {
               console.log(error);
@@ -131,12 +131,11 @@ export class ApplicationComponent implements OnInit {
         .subscribe(
           result => {
             this.loading = false;
+            this.appSubmitted = true;
             this.model = result;
             console.log(result);
             if(result.major)
               this.completer.SelectItem('completer', result.major);
-            if(result.message === "success")
-              this.appSubmitted = true;
             console.log(result);
           }, error => {
             console.log(error);

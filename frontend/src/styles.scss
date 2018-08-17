@@ -298,6 +298,10 @@ p {
   color: var(--dark-blue);
 }
 
+.uk-link-heading:hover {
+  color: #f3f3f3 !important;
+}
+
 .invalidInput {
   outline: none !important;
   border-color: red !important;

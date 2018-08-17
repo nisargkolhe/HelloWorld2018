@@ -3,63 +3,70 @@
 	<div class="section-primary uk-flex uk-flex-middle uk-width-1-3@m">
 		<div class="uk-container uk-container-supersmall leftBox uk-flex uk-flex-column ">
 				<div><h1 class="h1-light">Hi {{currentUser.firstname}}!</h1></div>
-        <div><button class="uk-button negative  p-large-dark" [routerLink]="['/login']">Logout</button></div>
 		</div>
 	</div>
 	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer">
 		<div class="fullwidth uk-container uk-container-supersmall floating-box" style="padding-top: -4em;">
-      <div *ngIf="currentUser.roles && (currentUser.roles.indexOf('admin') !== -1 || currentUser.roles.indexOf('exec') !== -1)else elseBlock">
-        <h3>Admin Actions:</h3>
-        <li class="admin">
-          <ul>
-            <a [routerLink]="['/applications']">Applications</a>
-          </ul>
-          <ul>
-            <a [routerLink]="['/announcement']">Post Announcement</a>
-          </ul>
-          <ul>
-            <a [routerLink]="['/checkin']">Check In</a>
-          </ul>
-        </li>
-        <div class="buttons">
-          <button class="uk-button" [routerLink]="['/application']">Application</button>
-          <button class="uk-button negative" [routerLink]="['/login']">Logout</button>
-        </div>
-      </div>
-      <ng-template #elseBlock>
-        <!--TODO: Replace email verification hardcoded condition-->
-        <div *ngIf="currentUser.verified else elseBlock">
-          <!-- Application Status Page -->
-          <div class="application-status topSpacing">
-            <!-- Show once the app has loaded-->
-            <div *ngIf="!loading else elseBlock">
-              <div *ngIf="appSubmitted else elseBlock">
-                <h1>{{getStatusString().title | uppercase}}</h1>
-                <p>{{getStatusString().description}}</p>
-              </div>
-              <ng-template #elseBlock>
-                <h1>INCOMPLETE</h1>
-                <p>You have not submitted an application</p>
-              </ng-template>
-            </div>
-            <!-- Show if the app is still loading -->
-            <ng-template #elseBlock>
-            	<h1>LOADING</h1>
-							<p>Looking for your application!<p>
-            </ng-template>
-          </div>
-          <div class="buttons topSpacing">
-            <button class="uk-button  p-large-dark" [routerLink]="['/apply']">Application</button>
-          </div>
-        </div>
-        <ng-template #elseBlock>
-          <div class="buttons">
-						<h1>UNVERIFIED</h1>
-            <p>Please verify your email to access the application.</p>
-            <button class="uk-button  p-large-dark" (click)="resendVerificationEmail()">Resend Verification Email </button>
-          </div>
-        </ng-template>
-      </ng-template>
+			<div *ngIf="!loading else elseBlock">
+				<div *ngIf="currentUser.roles && (currentUser.roles.indexOf('admin') !== -1 || currentUser.roles.indexOf('exec') !== -1)else elseBlock">
+	        <h3>Admin Actions:</h3>
+	        <li class="admin">
+	          <ul>
+	            <a [routerLink]="['/applications']">Applications</a>
+	          </ul>
+	          <ul>
+	            <a [routerLink]="['/announcement']">Post Announcement</a>
+	          </ul>
+	          <ul>
+	            <a [routerLink]="['/checkin']">Check In</a>
+	          </ul>
+	        </li>
+	        <div class="buttons">
+	          <button class="uk-button" [routerLink]="['/application']">Application</button>
+	          <button class="uk-button negative" [routerLink]="['/login']">Logout</button>
+	        </div>
+	      </div>
+	      <ng-template #elseBlock>
+					<div *ngIf="applicationsStatus == 'interest' else showAppStatus">
+						<div class="buttons">
+							<h1>APPLICATIONS AREN'T OPEN YET</h1>
+							<p>Thanks for signing up early! Applications open on August 25, 2018.</p>
+						</div>
+					</div>
+					<ng-template #showAppStatus>
+		        <div *ngIf="currentUser.verified else elseBlock">
+		          <!-- Application Status Page -->
+		          <div class="application-status topSpacing">
+		            <!-- Show once the app has loaded-->
+	              <div *ngIf="appSubmitted else elseBlock">
+	                <h1>{{getStatusString().title | uppercase}}</h1>
+	                <p>{{getStatusString().description}}</p>
+	              </div>
+	              <ng-template #elseBlock>
+	                <h1>INCOMPLETE</h1>
+	                <p>You have not submitted an application</p>
+	              </ng-template>
+		          </div>
+		          <div class="buttons topSpacing">
+		            <button *ngIf="applicationsStatus == 'open'" class="uk-button  p-large-dark" [routerLink]="['/apply']">Application</button>
+								<button *ngIf="applicationsStatus == 'closed'" class="uk-button  p-large-dark" disabled>Application are closed</button>
+		          </div>
+		        </div>
+		        <ng-template #elseBlock>
+		          <div class="buttons">
+								<h1>UNVERIFIED</h1>
+		            <p>Please verify your email to access the application.</p>
+		            <button class="uk-button  p-large-dark" (click)="resendVerificationEmail()">Resend Verification Email </button>
+		          </div>
+		        </ng-template>
+					</ng-template>
+	      </ng-template>
+			</div>
+			<!-- Show if the app is still loading -->
+			<ng-template #elseBlock>
+				<h1>LOADING</h1>
+				<p>[insert clever loading pun]<p>
+			</ng-template>
 			<div
 				*ngIf="loading"
 				color="primary"

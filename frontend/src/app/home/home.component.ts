@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   users: User[] = [];
   applications: Application[] = [];
   application: Application;
+  applicationsStatus = "interest";
   appSubmitted = false;
   appLoaded = false;
   loading = false;
@@ -44,8 +45,25 @@ export class HomeComponent implements OnInit {
           }
       );
     } else {
-      if(this.currentUser.verified)
-        this.loadApplication();
+      if(this.currentUser.verified){
+        this.loading = true;
+        this.appService.getApplicationsStatus()
+          .subscribe(
+            result => {
+              this.applicationsStatus = result.status;
+              if(this.applicationsStatus == "open") {
+                this.loadApplication();
+              }
+              console.log(result);
+              this.loading = false;
+            }, error => {
+              error = error.json()
+              this.alertService.error(error.message);
+              console.log(error);
+              this.loading = false;
+            }
+        );
+      }
     }
   }
 
