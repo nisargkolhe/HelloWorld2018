@@ -44,7 +44,8 @@ export class HomeComponent implements OnInit {
           }
       );
     } else {
-      this.loadApplication();
+      if(this.currentUser.verified)
+        this.loadApplication();
     }
   }
 

@@ -1,19 +1,23 @@
-<div class="con">
-  <h1>Email Verification</h1>
-  <div style="text-align:center" class="topSpacing">
-    <div *ngIf="loading else elseBlock">
-      <h3>Verifying your email...</h3>
-      <div
-        *ngIf="loading"
-        color="primary"
-        mode="indeterminate"
-        class="spinner">
-        Loading...
+<app-navbar></app-navbar>
+<div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
+	<div class="section-primary uk-flex uk-flex-middle">
+		<div class="uk-container uk-container-supersmall leftBox uk-text-center">
+      <div *ngIf="loading else elseBlock">
+        <h1 class="h1-light">Verifying your email...</h1>
+        <div
+          *ngIf="loading"
+          color="primary"
+          mode="indeterminate"
+          class="spinner">
+          <div class="uk-position-bottom-center uk-margin-bottom">
+            <div uk-spinner></div>
+          </div>
+        </div>
       </div>
-    </div>
-    <ng-template #elseBlock>
-      <h3>Email verification unsuccessful :(</h3>
-      If you're having problems verifying your email, please contact us at helloworld@purduehackers.com
-    </ng-template>
-  </div>
+      <ng-template #elseBlock>
+        <h1 class="h1-light">Email verification unsuccessful :(</h1>
+        <p class="p-lead-light">If you're having problems verifying your email, please contact us at helloworld@purduehackers.com<p>
+      </ng-template>
+		</div>
+	</div>
 </div>
