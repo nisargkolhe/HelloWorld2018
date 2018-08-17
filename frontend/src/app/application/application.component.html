@@ -6,13 +6,13 @@
 				<div><a class="uk-link-heading p-lead-light" [routerLink]="['/home']" href="#"><span uk-icon="arrow-left"></span> Back to Home</a></div>
 		</div>
 	</div>
-	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer" style="padding-top: 4em;">
+	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer" >
 		<div class="fullwidth uk-container uk-container-supersmall floating-box" >
 			<div class="application-status topSpacing" *ngIf="loading">
 				<h1>LOADING</h1>
 				<p>Processing your application.<p>
 			</div>
-      <form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
+      <form class="uk-form-stacked" style="padding-top: 4em;" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
 
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Class Year*</label>
