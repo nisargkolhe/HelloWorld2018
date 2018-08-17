@@ -6,7 +6,7 @@
       </div>
       <div class="uk-navbar-right" *ngIf="showButton">
         <div class="uk-navbar-item">
-            <button *ngIf="!loggedIn" class="uk-button p-large-light">Apply</button>
+            <button *ngIf="!loggedIn" class="uk-button p-large-light" [routerLink]="['/login']">Apply</button>
             <button *ngIf="loggedIn" class="uk-button uk-button-secondary p-large-light" [routerLink]="['/login']">Logout</button>
         </div>
       </div>
