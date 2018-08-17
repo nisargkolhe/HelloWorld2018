@@ -1,4 +1,3 @@
-
 var MongoClient = require('mongodb').MongoClient
 , assert = require('assert')
 , ObjectID = require('mongodb').ObjectID
@@ -11,6 +10,12 @@ var Token = require('../models/token')
 const config = require('../config/config');
 const mongodbUrl = config.mongoDBHost;
 const bcrypt = require('bcrypt');
+
+//For sending confirmation emails
+var mailgun = require("mailgun-js");
+var api_key = config.MAILGUN_KEY;
+var DOMAIN = 'helloworld.purduehackers.com';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
 
 function connectToMongo(callback) {
   MongoClient.connect(mongodbUrl, function(err, db) {
@@ -90,7 +95,17 @@ function addUser(user, callback) {
                       callback(err.message, null);
                     } else {
                       console.log("TOKEN URL: /confirmEmail?token="+token.token);
-                      // TODO: Send the email
+
+                      var data = {
+                        from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                        to: user.email,
+                        subject: 'Hi '+user.firstname+', please verify your Hello World account',
+                        text: 'Email confirmation link: http://helloworld.purduehackers.com/#/confirmEmail?token='+token.token
+                      };
+
+                      mailgun.messages().send(data, function (error, body) {
+                        console.log(body);
+                      });
 
                       callback(null, user);
                     }
@@ -107,7 +122,8 @@ function addUser(user, callback) {
   }
 }
 
-function resendVerificationEmail(user_id, callback) {
+function resendVerificationEmail(user, callback) {
+  let user_id = user._id;
   if (!user_id) {
     callback("No user id provided!", null);
   } else {
@@ -122,7 +138,17 @@ function resendVerificationEmail(user_id, callback) {
           } else {
             if (result) {
               console.log("TOKEN URL: /confirmEmail?token="+result.token);
-              // TODO: Send the email
+
+              var data = {
+                from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                to: user.email,
+                subject: 'Hi '+user.firstname+', please verify your Hello World account',
+                text: 'Email confirmation link: http://helloworld.purduehackers.com/#/confirmEmail?token='+result.token
+              };
+
+              mailgun.messages().send(data, function (error, body) {
+                console.log(body);
+              });
 
               callback(null, result);
             } else  {
@@ -247,8 +273,18 @@ function resetPassword(email, callback) {
               if (err) {
                 callback(err.message, null);
               } else {
-                console.log("TOKEN URL: /resetPassword?token="+token.token);
-                // TODO: Send the email
+                console.log("TOKEN URL: /confirmPassword?token="+token.token);
+
+                var data = {
+                  from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                  to: user.email,
+                  subject: 'Hi '+user.firstname+', here\'s a link to reset your password',
+                  text: 'Password reset link: http://helloworld.purduehackers.com/#/confirmPassword?token='+token.token
+                };
+
+                mailgun.messages().send(data, function (error, body) {
+                  console.log(body);
+                });
 
                 callback(null, user);
               }
@@ -530,50 +566,50 @@ function setApplicationStatus(user_email, status, callback){
   }
 
 
-  function addAnnouncement(announcement, callback) {
-    if (!announcement || !announcement.ancm) {
-      callback("Error adding the announcement!", null);
-    } else {
-      MongoClient.connect(mongodbUrl, function (err, db) {
-        if (err) {
-          callback("We are currently facing some technically difficulties, please try again later!", null);
-        } else {
-          var dbo = db.db(config.mongoDBDatabase);
-          if (err) {
-            callback("Error adding the announcement! " + err.message, null);
-          } else {
-              dbo.collection("Announcements").insertOne(announcement, function(err, res) {
-                if (err) {
-                  console.log("Error inserting the announcement: " + announcement);
-                  callback("Error inserting the announcement", null);
-                } else {
-                  callback("Announcement added!", null);
-                }
-                db.close();
-              });
-          }
-        }
-      });
-    }
-  }
-
-  function getAnnouncements(callback) {
+function addAnnouncement(announcement, callback) {
+  if (!announcement || !announcement.ancm) {
+    callback("Error adding the announcement!", null);
+  } else {
     MongoClient.connect(mongodbUrl, function (err, db) {
-      //Connection error
       if (err) {
         callback("We are currently facing some technically difficulties, please try again later!", null);
       } else {
         var dbo = db.db(config.mongoDBDatabase);
-        dbo.collection("Announcements").find().toArray(function(err, results) {
-          if (err){
-            callback("Error finding announcements!", null);
-          } else {
-            callback(null, results);
-          }
-        });
+        if (err) {
+          callback("Error adding the announcement! " + err.message, null);
+        } else {
+            dbo.collection("Announcements").insertOne(announcement, function(err, res) {
+              if (err) {
+                console.log("Error inserting the announcement: " + announcement);
+                callback("Error inserting the announcement", null);
+              } else {
+                callback("Announcement added!", null);
+              }
+              db.close();
+            });
+        }
       }
     });
   }
+}
+
+function getAnnouncements(callback) {
+  MongoClient.connect(mongodbUrl, function (err, db) {
+    //Connection error
+    if (err) {
+      callback("We are currently facing some technically difficulties, please try again later!", null);
+    } else {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Announcements").find().toArray(function(err, results) {
+        if (err){
+          callback("Error finding announcements!", null);
+        } else {
+          callback(null, results);
+        }
+      });
+    }
+  });
+}
 
 module.exports = {
   connectToMongo : connectToMongo,
