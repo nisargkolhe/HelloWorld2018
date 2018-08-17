@@ -3,6 +3,10 @@
 	<div class="section-primary uk-flex uk-flex-middle uk-width-1-3@m">
 		<div class="uk-container uk-container-supersmall leftBox uk-flex uk-flex-column ">
 				<div><h1 class="h1-light">Application</h1></div>
+				<div *ngIf="appSubmitted && model.updated_at">
+					<p class="p-lead-light" style="margin-bottom: 0">Last Updated</p>
+					<h4 class="h4-light" style="margin-top: 0">{{model.updated_at | date:'MMM d, y h:mm aa'}}</h4>
+				</div>
 				<div><a class="uk-link-heading p-lead-light" [routerLink]="['/home']" href="#"><span uk-icon="arrow-left"></span> Back to Home</a></div>
 		</div>
 	</div>

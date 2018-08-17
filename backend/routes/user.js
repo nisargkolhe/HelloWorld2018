@@ -191,6 +191,8 @@ router.post("/apply", upload.single('resume'), passport.authenticate(['jwt'], { 
     website: req.body.website,
     longanswer_1: req.body.longanswer_1,
     longanswer_2: req.body.longanswer_2,
+    created_at: new Date(req.body.created_at) < Date.now() ? req.body.created_at : Date.now(),
+    updated_at: Date.now(),
     status: "pending"
   }
   console.log('applicationData',applicationData);
