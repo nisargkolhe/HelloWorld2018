@@ -426,7 +426,10 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           "shirt_size": applicationData.shirt_size,
           "website": applicationData.website,
           "longanswer_1": applicationData.longanswer_1,
-          "longanswer_2": applicationData.longanswer_2,}},(err, result) => {
+          "longanswer_2": applicationData.longanswer_2,
+          "created_at": applicationData.created_at,
+          "updated_at": applicationData.updated_at
+        }},(err, result) => {
 
             callback(null, {update: true, result});
           })
