@@ -22,10 +22,10 @@
             </div>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
-        <div class="uk-align-right">
-          <a class="link uk-margin-right" [routerLink]="['/resetPassword']">Forgot Password?</a>
-          <button class="uk-button uk-button-secondary p-large-dark uk-margin-right" [routerLink]="['/register']" type="button">Register</button>
-          <button class="uk-button p-large-light" [disabled]="loading" type="submit">Login</button>
+        <div class="uk-flex uk-flex-column">
+					<button class="uk-button p-large-light" [disabled]="loading" type="submit">Login</button>
+					<button class="uk-button uk-button-secondary p-large-dark uk-margin-small-top" [routerLink]="['/register']" type="button">Register</button>
+          <a class="link uk-margin-small-top" [routerLink]="['/resetPassword']">Forgot Password?</a>
         </div>
         <div
           *ngIf="loading"

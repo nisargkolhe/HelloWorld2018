@@ -401,6 +401,12 @@ p {
   width: 100%;
 }
 
+@media screen and (max-width: 750px) {
+  .leftBox {
+    margin-top: 4em;
+  }
+}
+
 .rightContainer {
   overflow: scroll;
 }

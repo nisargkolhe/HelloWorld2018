@@ -115,6 +115,7 @@ export class ApplicationComponent implements OnInit {
       .subscribe(
           data => {
               this.alertService.success('Application successfully submitted.', true);
+              this.loadApplication();
               this.loading = false;
           },
           error => {
