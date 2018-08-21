@@ -29,13 +29,9 @@ export class AnnouncementsComponent implements OnInit {
 
 	ngOnInit() {
 	    if (!this.currentUser){
-		          this.router.navigate(["/home"]);
+		    this.userLoadAnnouncements();
 		}
-	    else if (!this.currentUser.verified) {
-	        	this.router.navigate(["/home"]);
-	    }
-
-	    if (this.currentUser["exec"] != -1 || this.currentUser["admin"] != -1){
+	    else if (this.currentUser["exec"] != -1 || this.currentUser["admin"] != -1){
 	    	this.execLoadAnnouncements();
 	    }
 	    else {
