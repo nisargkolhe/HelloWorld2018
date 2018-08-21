@@ -1,4 +1,4 @@
-<app-navbar showButton="true"></app-navbar>
+<app-navbar></app-navbar>
 <div class="uk-section section-primary uk-section-default uk-flex hero">
   <div class="uk-container uk-container-small fullwidth uk-margin-large-top" style="z-index: 1;">
     <div class="">
@@ -60,19 +60,21 @@
           <div class="uk-width-1-2@m">
               <div uk-grid class="uk-grid-small">
                   <div class="uk-width-1-1"><h3 class="h3-light">Day 1</h3></div>
-                  <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
+                  <div class="uk-width-1-2">TBD.</div>
+                  <!-- <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
                   <div class="uk-width-1-2">Lift-Off</div>
                   <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
-                  <div class="uk-width-1-2">Lift-Off</div>
+                  <div class="uk-width-1-2">Lift-Off</div> -->
               </div>
           </div>
           <div class="uk-width-1-2@m">
             <div uk-grid class="uk-grid-small">
                 <div class="uk-width-1-1"><h3 class="h3-light">Day 2</h3></div>
-                <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
+                <div class="uk-width-1-2">TBD.</div>
+                <!-- <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
                 <div class="uk-width-1-2">Lift-Off</div>
                 <div class="uk-width-1-2">6:00&nbsp;PM&nbsp;</div>
-                <div class="uk-width-1-2">Lift-Off</div>
+                <div class="uk-width-1-2">Lift-Off</div> -->
             </div>
           </div>
         </div>
@@ -146,7 +148,7 @@
     <h2>Sponsors</h2>
     <div>
       <p>
-        If you are interested in sponsoring Hello World 2018, email us at <a href="mailto:purduehackers@gmail.com">purduehackers@gmail.com</a> for more details!
+        If you are interested in sponsoring Hello World 2018, email us at <a href="mailto:helloworld@purduehackers.com">helloworld@purduehackers.com</a> for more details!
       </p>
       <p>Here are some of our past sponsors:</p>
     </div>
@@ -199,7 +201,7 @@ keyboard_arrow_right
 <div class="uk-section uk-section-secondary uk-flex uk-flex-around uk-flex-wrap">
   <div class="uk-container-small fullwidth">
     <h2 class="h2-light">Reach new heights.</h2>
-    <button class="uk-button p-large-light uk-margin-top">Apply</button>
+    <button class="uk-button p-large-light uk-margin-top" [routerLink]="['/apply']">Apply</button>
   </div>
 </div>
 <div class="uk-section uk-flex uk-flex-around uk-flex-wrap">
