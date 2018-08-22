@@ -98,7 +98,7 @@ function addUser(user, callback) {
                       let confirmEmailTemplate = require('../views/confirm_email').TEMPLATE;
                       confirmEmailTemplate = confirmEmailTemplate.replace("dummy", "#/confirmEmail?token="+token.token).replace("dummy", "#/confirmEmail?token="+token.token);
                       var data = {
-                        from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                        from: 'Hello World 2018 <noreply@helloworld.purduehackers.com>',
                         to: user.email,
                         subject: 'Hi '+user.firstname+', please verify your Hello World account',
                         html: confirmEmailTemplate,
@@ -144,7 +144,7 @@ function resendVerificationEmail(user, callback) {
               confirmEmailTemplate = confirmEmailTemplate.replace("dummy", "#/confirmEmail?token="+result.token).replace("dummy", "#/confirmEmail?token="+result.token);
               console.log(confirmEmailTemplate);
               var data = {
-                from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                from: 'Hello World 2018 <noreply@helloworld.purduehackers.com>',
                 to: user.email,
                 subject: 'Hi '+user.firstname+', please verify your Hello World account',
                 html: confirmEmailTemplate,
@@ -280,11 +280,14 @@ function resetPassword(email, callback) {
               } else {
                 console.log("TOKEN URL: /confirmPassword?token="+token.token);
 
+                let confirmPwdTemplate = require('../views/confirm_password').TEMPLATE;
+                confirmPwdTemplate = confirmPwdTemplate.replace("dummy", "#/confirmPassword?token="+token.token).replace("dummy", "#/confirmPassword?token="+token.token);
                 var data = {
-                  from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
+                  from: 'Hello World 2018 <noreply@helloworld.purduehackers.com>',
                   to: user.email,
                   subject: 'Hi '+user.firstname+', here\'s a link to reset your password',
-                  text: 'Password reset link: http://helloworld.purduehackers.com/#/confirmPassword?token='+token.token
+                  html: confirmPwdTemplate,
+                  text: 'Email confirmation link: http://helloworld.purduehackers.com/#/confirmPassword?token='+token.token
                 };
 
                 mailgun.messages().send(data, function (error, body) {
