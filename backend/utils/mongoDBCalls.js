@@ -95,8 +95,8 @@ function addUser(user, callback) {
                       callback(err.message, null);
                     } else {
                       console.log("TOKEN URL: /confirmEmail?token="+token.token);
-                      let confirmEmailTemplate = require('../views/confirm_email');
-                      confirmEmailTemplate.replace("http:\/\/helloworld.purduehackers.com\/dummy", "http:\/\/helloworld.purduehackers.com\/#\/confirmEmail?token="+token.token);
+                      let confirmEmailTemplate = require('../views/confirm_email').TEMPLATE;
+                      confirmEmailTemplate = confirmEmailTemplate.replace("dummy", "#/confirmEmail?token="+result.token).replace("dummy", "#/confirmEmail?token="+token.token);
                       var data = {
                         from: 'Hello World 2018 <me@helloworld.purduehackers.com>',
                         to: user.email,
