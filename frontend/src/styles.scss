@@ -183,6 +183,14 @@ p {
   color: #ffffff;
 }
 
+a {
+  color: var(--purple) !important;
+}
+
+a:hover {
+  color: var(--dark-blue) !important;
+}
+
 .uk-button {
   border: none;
 	cursor: pointer !important;
