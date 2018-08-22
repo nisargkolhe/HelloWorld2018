@@ -16,6 +16,12 @@ var upload = multer({ dest: `uploads/`, limits: {
         fileSize: 1024 * 1024 * 5
     }});
 
+//For sending confirmation emails
+var mailgun = require("mailgun-js");
+var api_key = config.MAILGUN_KEY;
+var DOMAIN = 'helloworld.purduehackers.com';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+
 mongoose.connect(config.mongoDBHost);
 
 router.post("/login", cors(), function(req, res) {
@@ -173,6 +179,21 @@ router.post("/apply", upload.single('resume'), passport.authenticate(['jwt'], { 
       return;
     }
   }
+  console.log(req.body);
+  if(req.body.created_at === undefined) {
+    let appliedEmailTemplate = require('../views/applied_email').TEMPLATE;
+    var data = {
+      from: 'Hello World 2018 <noreply@helloworld.purduehackers.com>',
+      to: req.user.email,
+      subject: 'Thanks for Applying to Hello World!',
+      text: 'Thanks for Applying to Hello World!',
+      html: appliedEmailTemplate
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(body);
+    });
+  }
 
   const applicationData = {
     firstName: req.body.firstName,
@@ -195,7 +216,7 @@ router.post("/apply", upload.single('resume'), passport.authenticate(['jwt'], { 
     updated_at: Date.now(),
     status: "pending"
   }
-  console.log('applicationData',applicationData);
+  //console.log('applicationData',applicationData);
   mongo.createOrUpdateApplication(req.user.email, applicationData, (err, response) => {
     if (err) {
       res.status(401).json({message: 'An error occurred', error: err});
