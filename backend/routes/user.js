@@ -198,6 +198,8 @@ router.post("/apply", upload.single('resume'), passport.authenticate(['jwt'], { 
   const applicationData = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    gender: req.body.gender,
+    race: req.body.race,
     address: req.body.address,
     file: req.file,
     email: req.user.email,

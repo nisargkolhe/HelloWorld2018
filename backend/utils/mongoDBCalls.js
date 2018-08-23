@@ -424,7 +424,14 @@ function createOrUpdateApplication(user_email, applicationData, callback){
           console.log('an error occurred while looking up application', err);
           callback(err);
         } else if (application) {
-          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {"firstName": applicationData.firstName, "lastName": applicationData.lastName, "address": applicationData.address, "resume": applicationData.file,  "uid": applicationData.uid,
+          dbo.collection('Applications').updateOne({"email": user_email}, {$set: {
+          "firstName": applicationData.firstName,
+          "lastName": applicationData.lastName,
+          "address": applicationData.address,
+          "gender": applicationData.gender,
+          "race": applicationData.race,
+          "resume": applicationData.file,
+          "uid": applicationData.uid,
           "class_year": applicationData.class_year,
           "grad_year": applicationData.grad_year,
           "major": applicationData.major,

@@ -18,6 +18,33 @@
 			</div>
       <form class="uk-form-stacked" style="padding-top: 4em;" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
 
+				<div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">I identify as... *</label>
+						<div class="uk-form-controls">
+							<select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.gender_select)}" [(ngModel)]="model.gender_select" #gender_select="ngModel" name="gender_select" required>
+								<option *ngFor="let gender of genders" [value]="gender.value">
+									{{gender.viewValue}}
+								</option>
+							</select>
+						</div>
+						<div class="uk-form-controls uk-margin-small-top" *ngIf="model.gender_select == 'other'">
+								<input class="uk-input" name="gender_other" type="text"  [(ngModel)]="model.gender_other" #gender_other="ngModel" placeholder="Other">
+						</div>
+						<div *ngIf="f.submitted && !gender_select.valid" class="uk-text-danger">Gender is required.</div>
+				</div>
+
+				<div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">Race/Ethnicity*</label>
+						<div class="uk-form-controls">
+							<select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.race)}" [(ngModel)]="model.race" #race="ngModel" name="race" required>
+								<option *ngFor="let race of races" [value]="race.value">
+									{{race.viewValue}}
+								</option>
+							</select>
+						</div>
+						<div *ngIf="f.submitted && !race.valid" class="uk-text-danger">Race/Ethnicity is required.</div>
+				</div>
+
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Class Year*</label>
             <div class="uk-form-controls">

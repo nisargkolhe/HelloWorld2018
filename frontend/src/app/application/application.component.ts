@@ -37,11 +37,32 @@ export class ApplicationComponent implements OnInit {
 
   currentUser: User;
 
+  gender_select: string = '';
   model: any = {};
   loading = false;
   appSubmitted = false;
 
   filename = null;
+
+  genders = [
+    {value: 'male', viewValue: 'Male'},
+    {value: 'female', viewValue: 'Female'},
+    {value: 'nonbinary', viewValue: 'Non-binary/third gender'},
+    {value: 'other', viewValue: 'Other (Please specify)'}
+  ];
+
+  races = [
+    {value: 'Non-Hispanic White', viewValue: 'Non-Hispanic White'},
+    {value: 'Black or African American', viewValue: 'Black or African American'},
+    {value: 'Latino, Latina, or Hispanic American', viewValue: 'Latino, Latina, or Hispanic American'},
+    {value: 'South Asian or Indian American', viewValue: 'South Asian or Indian American'},
+    {value: 'East Asian or Asian American', viewValue: 'East Asian or Asian American'},
+    {value: 'Middle Eastern or Arab American', viewValue: 'Middle Eastern or Arab American'},
+    {value: 'Native American or Alaskan Native', viewValue: 'Native American or Alaskan Native'},
+    {value: 'Hawaiian or Pacific Islander', viewValue: 'Hawaiian or Pacific Islander'},
+    {value: 'Multiple ethnicity / Other', viewValue: 'Multiple ethnicity / Other'},
+    {value: 'Prefer not to answer', viewValue: 'Prefer not to answer'}
+  ];
 
   class_years = [
     {value: 'freshman', viewValue: 'Freshman'},
@@ -111,6 +132,12 @@ export class ApplicationComponent implements OnInit {
 
   apply() {
     this.loading = true;
+    if(this.model.gender_select == 'other') {
+      this.model.gender = this.model.gender_other;
+    } else {
+      this.model.gender = this.model.gender_select;
+    }
+
     this.userService.apply(this.model)
       .subscribe(
           data => {
@@ -131,12 +158,20 @@ export class ApplicationComponent implements OnInit {
       this.userService.getApplication()
         .subscribe(
           result => {
-            this.loading = false;
             this.appSubmitted = true;
             this.model = result;
             console.log(result);
             if(result.major)
               this.completer.SelectItem('completer', result.major);
+
+            if(this.model.gender != 'male' && this.model.gender != 'female' && this.model.gender != 'nonbinary') {
+              this.model.gender_select = 'other';
+              this.model.gender_other = this.model.gender;
+            } else {
+              this.model.gender_select = this.model.gender;
+            }
+
+            this.loading = false;
             console.log(result);
           }, error => {
             console.log(error);
