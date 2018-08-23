@@ -331,6 +331,7 @@ a:hover {
 
 .body-container {
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .uk-section {
@@ -358,6 +359,8 @@ a:hover {
   margin-left: -15px;
   height: auto;
   position: relative;
+  transform:scale(1.1);
+  -webkit-transform:scale(1.1);
 }
 
 .hero::after {
