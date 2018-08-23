@@ -331,7 +331,6 @@ a:hover {
 
 .body-container {
   height: 100vh;
-  overflow-x: hidden;
 }
 
 .uk-section {
@@ -352,6 +351,10 @@ a:hover {
   padding-top: 4em;
 }
 
+.hero-img-container {
+  width: calc(100% + 30px);
+}
+
 .hero-img {
   width: 100%;
   margin-top: -25%;
@@ -359,8 +362,7 @@ a:hover {
   margin-left: -15px;
   height: auto;
   position: relative;
-  transform:scale(1.1);
-  -webkit-transform:scale(1.1);
+  // transform: scale(1.1);
 }
 
 .hero::after {
@@ -415,6 +417,14 @@ a:hover {
 @media screen and (max-width: 750px) {
   .leftBox {
     margin-top: 4em;
+  }
+
+  .hero-img-container {
+    width: 100%;
+  }
+
+  .hero-img {
+    margin-left: 0;
   }
 }
 
