@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from "../user";
 import { Application } from '../application';
 import { UserService } from "../services/index";
-import { AuthService, AlertService, ApplicationService } from "../services/index";
+import { AuthService, AlertService, ApplicationService, ExecService } from "../services/index";
 
 @Component({
   selector: 'app-home',
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private appService: ApplicationService,
+    private execService: ExecService,
     private route: ActivatedRoute,
     private router: Router) {
     this.currentUser = userService.loadFromLocalStorage();
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if(this.currentUser.roles && (this.currentUser.roles.indexOf('admin') !== -1 || this.currentUser.roles.indexOf('exec') !== -1)){
-      this.appService.getAllApplications()
+      this.execService.getAllApplications()
         .subscribe(
           result => {
             this.applications = result;
@@ -125,6 +126,12 @@ export class HomeComponent implements OnInit {
       default:
       return {title: "Pending", description: ""};
     }
+  }
+
+  private getFilteredApplications() {
+    return this.applications.filter( app => {
+      return app.status == "pending";
+    });
   }
 
 }

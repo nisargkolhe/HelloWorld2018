@@ -10,7 +10,16 @@
 			<div *ngIf="!loading else elseBlock">
 				<div *ngIf="currentUser.verified else elseBlock">
 					<div *ngIf="currentUser.roles && (currentUser.roles.indexOf('admin') !== -1 || currentUser.roles.indexOf('exec') !== -1)else elseBlock">
-		        <h3>Admin Actions:</h3>
+						<h3>Mini Stats</h3>
+						<li class="admin">
+						 <ul>
+							 <p>Total Applications: <b>{{applications.length}}</b><p>
+						 </ul>
+						 <ul>
+							 <p>Pending Applications: <b>{{getFilteredApplications().length}}</b><p>
+						 </ul>
+					 </li>
+						<h3>Admin Actions:</h3>
 		        <li class="admin">
 		          <ul>
 		            <a [routerLink]="['/applications']">Applications</a>
@@ -22,10 +31,6 @@
 		            <a [routerLink]="['/checkin']">Check In</a>
 		          </ul>
 		        </li>
-		        <div class="buttons">
-		          <button class="uk-button" [routerLink]="['/application']">Application</button>
-		          <button class="uk-button negative" [routerLink]="['/login']">Logout</button>
-		        </div>
 		      </div>
 		      <ng-template #elseBlock>
 						<div *ngIf="applicationsStatus == 'interest' else showAppStatus">
