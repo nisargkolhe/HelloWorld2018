@@ -19,6 +19,7 @@ export class ApplicationsComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'race', 'class_year', 'major', 'hackathon_count'];
   dataSource: any;
   hasResumeFilterApplied: boolean = false;
+  loading = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
