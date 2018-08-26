@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgAutoCompleteModule } from "ng-auto-complete";
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { routing } from './app.routing';
 
@@ -24,6 +28,8 @@ import { ApplicationComponent } from './application/application.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { ApplicationsComponent } from './applications/applications.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
   ApplicationComponent,
   NavbarComponent,
   AnnouncementComponent,
-  AnnouncementsComponent
+  AnnouncementsComponent,
+  ApplicationsComponent
   ],
   imports: [
   BrowserModule,
@@ -47,7 +54,12 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
   ReactiveFormsModule,
   HttpModule,
   routing,
-  NgAutoCompleteModule
+  NgAutoCompleteModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatCheckboxModule,
+  BrowserAnimationsModule
   ],
   providers: [
   AuthGuard,

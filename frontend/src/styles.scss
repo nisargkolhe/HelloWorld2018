@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
-/*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* Color palette */
 :root {
@@ -191,6 +191,14 @@ a:hover {
   color: var(--dark-blue) !important;
 }
 
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
 .uk-button {
   border: none;
 	cursor: pointer !important;
@@ -339,6 +347,11 @@ a:hover {
 
 .uk-container-small {
   padding: 1em;
+}
+
+.uk-placeholder {
+  display: block;
+  padding: 30px 0;
 }
 
 .section-primary {
@@ -553,3 +566,9 @@ a:hover {
 .ng-autocomplete-dropdown-icon.open:after {
     transform: rotate(180deg);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
