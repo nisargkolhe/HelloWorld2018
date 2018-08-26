@@ -20,6 +20,7 @@ export class Application {
 	resume: File;
 	status_internal: string;
 	status_public: string;
+	file: any;
 	user: User;
 
 	public static getMajors(){

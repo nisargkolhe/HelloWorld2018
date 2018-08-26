@@ -126,7 +126,7 @@
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Why do you want to attend Hello World?*</label>
             <div class="uk-form-controls">
-                <textarea class="uk-textarea" name="longanswer_1" type="text" minlength="140" maxlength="1000" rows="5" [(ngModel)]="model.longanswer_1" #longanswer_1="ngModel" required></textarea>
+                <textarea class="uk-textarea" name="longanswer_1" type="text" rows="5" [(ngModel)]="model.longanswer_1" #longanswer_1="ngModel" required></textarea>
             </div>
 						<div *ngIf="f.submitted && !longanswer_1.valid" class="uk-text-danger">Response has to be between 140 and 1000 characters.</div>
         </div>
@@ -134,7 +134,7 @@
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">What do you hope to learn from your experience at Hello World?*</label>
             <div class="uk-form-controls">
-                <textarea class="uk-textarea" name="longanswer_2" type="text" minlength="140" maxlength="1000" rows="5" [(ngModel)]="model.longanswer_2" #longanswer_2="ngModel" required></textarea>
+                <textarea class="uk-textarea" name="longanswer_2" type="text" rows="5" [(ngModel)]="model.longanswer_2" #longanswer_2="ngModel" required></textarea>
             </div>
 						<div *ngIf="f.submitted && !longanswer_2.valid" class="uk-text-danger">Response has to be between 140 and 1000 characters.</div>
 
@@ -142,6 +142,7 @@
 
         <div class="uk-margin">
             <label class="uk-form-label p-small" for="form-stacked-text">Upload Your Resume (Optional but highly recommended)</label>
+						<p *ngIf="model.file">Last Uploaded: <b>{{model.file.originalname}}</b></p>
 						<div class="uk-form-controls">
 							<div class="js-upload uk-placeholder uk-text-center p-small uk-form-custom">
 								<input id="resume" type="file" name="file" (change)="setFile($event)" accept=".pdf"/>
@@ -151,7 +152,7 @@
 	              <ng-template #elseBlock>
 									<div uk-form-custom>
 										<span uk-icon="icon: cloud-upload"></span>
-										<span class="uk-text-middle">Attach a resume by dropping it here or selecting one.</span>
+										<span class="uk-text-middle uk-margin-small-left">Attach a resume by dropping it here or selecting one.</span>
 									</div>
 	              </ng-template>
 	          	</div>

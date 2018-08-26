@@ -1,0 +1,73 @@
+<app-navbar showButton="true"></app-navbar>
+<div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
+	<div class="section-primary uk-flex uk-flex-middle uk-width-1-1 rightContainer">
+		<div class="fullwidth uk-container uk-container-supersmall floating-box" style="padding-top: -4em;">
+			<div *ngIf="!loading else elseBlock">
+				<div>
+					<mat-checkbox id="1" [ngModel]="hasResumeFilterApplied" (ngModelChange)="onFilterChange($event)">Has Resume</mat-checkbox>
+				</div>
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+            <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="race">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Race </th>
+            <td mat-cell *matCellDef="let element"> {{element.race}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="class_year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+            <td mat-cell *matCellDef="let element"> {{element.class_year}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="major">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Major </th>
+            <td mat-cell *matCellDef="let element"> {{element.major}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="hackathon_count">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Hackathons </th>
+            <td mat-cell *matCellDef="let element"> {{element.hackathon_count}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+
+			</div>
+			<!-- Show if the app is still loading -->
+			<ng-template #elseBlock>
+				<h1>LOADING</h1>
+				<p>[insert clever loading pun]<p>
+			</ng-template>
+			<div
+				*ngIf="loading"
+				color="primary"
+				mode="indeterminate"
+				class="spinner">
+				<div class="uk-position-bottom-center uk-margin-bottom">
+					<div uk-spinner></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
