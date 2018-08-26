@@ -30,6 +30,7 @@ import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckedInUsersComponent } from './checked-in-users/checked-in-users.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   NavbarComponent,
   AnnouncementComponent,
   AnnouncementsComponent,
-  ApplicationsComponent
+  ApplicationsComponent,
+  CheckedInUsersComponent
   ],
   imports: [
   BrowserModule,
