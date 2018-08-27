@@ -70,6 +70,7 @@ export class ApplicationsComponent implements OnInit {
 
   ngAfterViewInit() {
     //this.dataSource.sort = this.sort;
+    this.dataSource = new MatTableDataSource([]);
   }
 
 }
