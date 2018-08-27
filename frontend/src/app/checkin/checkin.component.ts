@@ -51,13 +51,14 @@ export class CheckinComponent implements OnInit {
   	this.loading = true;
   	this.execService.checkin(this.model.email).subscribe(
       data => {
+        data = data.json();
         this.alertService.success(data.message);
         this.loadCheckIns();
         this.loading = false;
       },
       error => {
-        this.alertService.error(error);
-        console.log(error);
+        error = error.json()
+        this.alertService.error(error.message);
         this.loading = false;
       });
     window.location.reload();

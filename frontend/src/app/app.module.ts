@@ -31,6 +31,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { ApplicationsComponent } from './applications/applications.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckedInUsersComponent } from './checked-in-users/checked-in-users.component';
+import { DayofComponent } from './dayof/dayof.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CheckedInUsersComponent } from './checked-in-users/checked-in-users.com
   AnnouncementComponent,
   AnnouncementsComponent,
   ApplicationsComponent,
-  CheckedInUsersComponent
+  CheckedInUsersComponent,
+  DayofComponent
   ],
   imports: [
   BrowserModule,
