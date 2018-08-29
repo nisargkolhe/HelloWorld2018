@@ -95,6 +95,37 @@ router.get('/applications', passport.authenticate(['jwt'], { session: false }), 
 });
 });
 
+router.post('/applications/:id', passport.authenticate(['jwt'], { session: false }), function(req,res){
+  var isAdmin = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "admin")
+    {
+      isAdmin = true;
+    }
+  }
+  if (isAdmin == false){
+    res.status(401).json({message: "Only admins can access this information"});
+  }
+  mongo.getUserByOID(req.params.id, function(error, user) {
+    if(error) {
+      res.status(401).json({message:error});
+    } else {
+      userObj = user;
+      mongo.changeUserStatus(userObj.email, req.params.status, (err, response) => {
+        if (err){
+          res.send({Error: err})
+        }
+        else if (response){
+          res.send(response);
+        }
+        else{
+          res.send("An error has occurred");
+        }
+    });
+    }
+  });
+});
+
 router.get('/applications/status', passport.authenticate(['jwt'], { session: false }), function(req,res){
   var isAdmin = false;
   for (i in req.user.roles) {
