@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UtilService } from './util.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { environment } from '../../environments';
+import { Observable } from 'rxjs/Rx';
 
 import { User } from '../user';
 import { Application } from '../application';
@@ -33,5 +34,9 @@ export class ExecService {
 
 	getAnnouncements() {
 		return this.http.get(environment.apiUrl+'/exec/announcements', this.authService.jwt()).map((response: Response) => response.json());
+	}
+
+	downloadResume(fileName): Observable<Blob> {
+		return this.http.get(environment.apiUrl+'/resumes/'+fileName, this.authService.jwtFile()).map(res => res.blob());
 	}
 }

@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { JudgeApplicationComponent } from './judge-application/judge-application.component';
 import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
 { path: '', component: LandingComponent },
 { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
 { path: 'apply', component: ApplicationComponent, canActivate: [AuthGuard] },
-{ path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
+{ path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard, AdminGuard] },
+{ path: 'application/:id', component: JudgeApplicationComponent, canActivate: [AuthGuard, AdminGuard] },
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
 { path: 'resetPassword', component: ResetPasswordComponent },

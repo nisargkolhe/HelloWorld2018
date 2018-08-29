@@ -32,6 +32,7 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckedInUsersComponent } from './checked-in-users/checked-in-users.component';
 import { DayofComponent } from './dayof/dayof.component';
+import { JudgeApplicationComponent } from './judge-application/judge-application.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { DayofComponent } from './dayof/dayof.component';
   AnnouncementsComponent,
   ApplicationsComponent,
   CheckedInUsersComponent,
-  DayofComponent
+  DayofComponent,
+  JudgeApplicationComponent
   ],
   imports: [
   BrowserModule,
@@ -68,6 +70,7 @@ import { DayofComponent } from './dayof/dayof.component';
   providers: [
   AuthGuard,
   AuthService,
+  AdminGuard,
   UserService,
   ExecService,
   AlertService,

@@ -1,0 +1,153 @@
+<app-navbar></app-navbar>
+<div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
+	<div class="section-primary uk-flex uk-flex-middle uk-width-1-3@m">
+		<div class="uk-container uk-container-supersmall leftBox uk-padding">
+				<div><h1 class="h1-light">Application</h1></div>
+				<div *ngIf="appSubmitted && model.updated_at">
+					<p class="p-lead-light" style="margin-bottom: 0">Last Updated</p>
+					<h4 class="h4-light" style="margin-top: 0">{{model.updated_at | date:'MMM d, y h:mm aa'}}</h4>
+				</div>
+				<div><a class="uk-link-heading p-lead-light" [routerLink]="['/applications']" href="#"><span uk-icon="arrow-left"></span> Back to Applications</a></div>
+		</div>
+	</div>
+	<div class="uk-flex uk-flex-middle uk-width-2-3@m rightContainer" >
+		<div class="fullwidth uk-container uk-container-supersmall floating-box" >
+			<div class="application-status topSpacing" *ngIf="loading">
+				<h1>LOADING</h1>
+				<p>Loading application...<p>
+			</div>
+      <form class="uk-form-stacked" style="padding-top: 4em;" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
+
+        <div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">First Name</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="firstName" type="text" min="0" [(ngModel)]="model.firstName" #firstName="ngModel" placeholder="0" disabled>
+            </div>
+				</div>
+
+        <div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">Last Name</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="lastName" type="text" min="0" [(ngModel)]="model.lastName" #lastName="ngModel" placeholder="0" disabled>
+            </div>
+				</div>
+
+        <div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">Email</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="email" type="text" min="0" [(ngModel)]="model.email" #email="ngModel" placeholder="0" disabled>
+            </div>
+				</div>
+
+				<div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">I identify as...</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="gender" type="text" min="0" [(ngModel)]="model.gender" #gender="ngModel" placeholder="0" disabled>
+            </div>
+				</div>
+
+				<div class="uk-margin">
+						<label class="uk-form-label p-small" for="form-stacked-text">Race/Ethnicity</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="race" type="text" min="0" [(ngModel)]="model.race" #race="ngModel" placeholder="0" disabled>
+            </div>
+				</div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Class Year</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="class_year" type="text" min="0" [(ngModel)]="model.class_year" #class_year="ngModel" placeholder="0" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Graduation Year</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="grad_year" type="text" min="0" [(ngModel)]="model.grad_year" #grad_year="ngModel" placeholder="0" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Major</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="major" type="text" min="0" [(ngModel)]="model.major" #major="ngModel" placeholder="0" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">How did you hear about us?</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="referral" type="text" min="0" [(ngModel)]="model.referral" #referral="ngModel" placeholder="0" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Hackathon Count</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="hackathon_count" type="text" min="0" [(ngModel)]="model.hackathon_count" #hackathon_count="ngModel" placeholder="0" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Dietary Restrictions</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="dietary_restrictions" type="text"  [(ngModel)]="model.dietary_restrictions" #dietary_restrictions="ngModel" disabled>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Shirt Size</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="shirt_size" type="text"  [(ngModel)]="model.shirt_size" #shirt_size="ngModel" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Personal Website or GitHub Link</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" name="website" type="text"  [(ngModel)]="model.website" #website="ngModel" disabled>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Why do you want to attend Hello World?</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-textarea" name="longanswer_1" type="text" rows="5" [(ngModel)]="model.longanswer_1" #longanswer_1="ngModel" disabled></textarea>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">What do you hope to learn from your experience at Hello World?</label>
+            <div class="uk-form-controls">
+                <textarea class="uk-textarea" name="longanswer_2" type="text" rows="5" [(ngModel)]="model.longanswer_2" #longanswer_2="ngModel" disabled></textarea>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label p-small" for="form-stacked-text">Download resume</label>
+            <button class="uk-button p-large-dark" [disabled]="loading" mdRippleColor="#F00" type="submit" (click)="downloadResume()">
+              Download
+            </button>
+        </div>
+
+      <div class="uk-align-right">
+        <button class="uk-button p-large-dark" [disabled]="loading" mdRippleColor="#F00" type="submit">
+          <div *ngIf='appSubmitted'>
+            Update Application
+          </div>
+          <div *ngIf='!appSubmitted'>Submit</div>
+        </button>
+      </div>
+
+      </form>
+			<div
+				*ngIf="loading"
+				color="primary"
+				mode="indeterminate"
+				class="spinner">
+				<div class="uk-position-bottom-center uk-margin-bottom">
+					<div uk-spinner></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -33,15 +33,18 @@ export class ApplicationsComponent implements OnInit {
     private router: Router
   ) {
     this.currentUser = userService.loadFromLocalStorage();
+    //this.loading = true;
     this.execService.getAllApplications()
       .subscribe(
         result => {
+          this.loading = false;
           this.applications = result;
           this.dataSource = new MatTableDataSource(result);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           console.log(result);
         }, error => {
+          this.loading = false;
           error = error.json()
           this.alertService.error(error.message);
           console.log(error);
@@ -71,6 +74,11 @@ export class ApplicationsComponent implements OnInit {
   ngAfterViewInit() {
     //this.dataSource.sort = this.sort;
     this.dataSource = new MatTableDataSource([]);
+  }
+
+  applicationClicked(app: any) {
+    //console.log(eve);
+    this.router.navigate(['/application/'+app._id]);
   }
 
 }

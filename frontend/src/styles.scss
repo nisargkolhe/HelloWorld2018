@@ -538,6 +538,15 @@ th.mat-sort-header-sorted {
   border-top: none;
 }
 
+.mat-row {
+  transition: all ease 0.25s;
+}
+
+.mat-row:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
 .ng-autocomplete-dropdown .ng-dropdown .dropdown-item {
     height: 40px;
     font-size: 18px;

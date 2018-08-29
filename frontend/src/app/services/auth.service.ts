@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import 'rxjs/add/operator/map';
@@ -64,6 +66,25 @@ export class AuthService {
     	let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     	return new RequestOptions({ headers: headers });
     } else {
+			console.log("wut");
+    	return null;
+    }
+  }
+
+	jwtFile() {
+    // create authorization header with jwt token
+    //let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let token = localStorage.getItem('token');
+    if (token) {
+			let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+
+			let options = {
+	        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+	        responseType: 'blob' as 'json'
+	    };
+    	return new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+    } else {
+			console.log("wut");
     	return null;
     }
   }
