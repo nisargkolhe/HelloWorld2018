@@ -34,15 +34,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if(this.currentUser.roles && (this.currentUser.roles.indexOf('admin') !== -1 || this.currentUser.roles.indexOf('exec') !== -1)){
+      this.loading = true;
       this.execService.getAllApplications()
         .subscribe(
           result => {
             this.applications = result;
             console.log(result);
+            this.loading = false;
           }, error => {
             error = error.json()
             this.alertService.error(error.message);
             console.log(error);
+            this.loading = false;
           }
       );
     } else {

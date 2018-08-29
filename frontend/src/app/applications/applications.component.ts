@@ -81,4 +81,7 @@ export class ApplicationsComponent implements OnInit {
     this.router.navigate(['/application/'+app._id]);
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

@@ -122,21 +122,21 @@
             </div>
         </div>
 
-        <div class="uk-margin">
+        <div class="uk-margin" *ngIf="model.file">
             <label class="uk-form-label p-small" for="form-stacked-text">Download resume</label>
             <button class="uk-button p-large-dark" [disabled]="loading" mdRippleColor="#F00" type="submit" (click)="downloadResume()">
               Download
             </button>
         </div>
 
-      <div class="uk-align-right">
+      <!-- <div class="uk-align-right">
         <button class="uk-button p-large-dark" [disabled]="loading" mdRippleColor="#F00" type="submit">
           <div *ngIf='appSubmitted'>
             Update Application
           </div>
           <div *ngIf='!appSubmitted'>Submit</div>
         </button>
-      </div>
+      </div> -->
 
       </form>
 			<div
