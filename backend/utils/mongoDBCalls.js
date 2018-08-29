@@ -459,6 +459,7 @@ function createOrUpdateApplication(user_email, applicationData, callback){
   }
 }
 
+
 function retrieveUserApplication(user_email, callback){
   if (!user_email){
     callback("Invalid user!", null);
@@ -477,6 +478,18 @@ function retrieveUserApplication(user_email, callback){
             callback(err);
           }
           else if (application){
+
+            dbo.collection("Status").findOne({"public": "yes"}, function(err, status){
+              if (err){
+                console.log('An error occurred while retrieving the public status', err);
+                callback(err);
+              }
+              else if (status){
+                if (status.status == "open"){
+                  application.status = "Pending";
+                }
+              }
+            });
             callback(null, application);
           } else {
             callback("No application submitted yet.", null)
@@ -486,6 +499,7 @@ function retrieveUserApplication(user_email, callback){
     });
   }
 }
+
 function changeUserStatus(user_email, status, callback){
   if (!user_email){
     callback("Invalid user!", null);
