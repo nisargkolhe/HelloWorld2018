@@ -2,11 +2,7 @@
 <div class="fullscreen uk-grid-collapse uk-child-width-expand@s" uk-grid>
 	<div class="section-primary uk-flex uk-flex-middle uk-width-1-3@m">
 		<div class="uk-container uk-container-supersmall leftBox uk-padding">
-				<div><h1 class="h1-light">Application</h1></div>
-				<div *ngIf="appSubmitted && model.updated_at">
-					<p class="p-lead-light" style="margin-bottom: 0">Last Updated</p>
-					<h4 class="h4-light" style="margin-top: 0">{{model.updated_at | date:'MMM d, y h:mm aa'}}</h4>
-				</div>
+				<div><h1 class="h1-light">{{model.firstName}} {{model.lastName}}'s Application</h1></div>
 				<div><a class="uk-link-heading p-lead-light" [routerLink]="['/applications']" href="#"><span uk-icon="arrow-left"></span> Back to Applications</a></div>
 		</div>
 	</div>
@@ -16,7 +12,7 @@
 				<h1>LOADING</h1>
 				<p>Loading application...<p>
 			</div>
-      <form class="uk-form-stacked" style="padding-top: 4em;" name="form" (ngSubmit)="f.form.valid && apply()" #f="ngForm" [hidden]="loading" novalidate>
+      <form class="uk-form-stacked" style="padding-top: 4em;" name="form" #f="ngForm" [hidden]="loading" novalidate>
 
         <div class="uk-margin">
 						<label class="uk-form-label p-small" for="form-stacked-text">First Name</label>
