@@ -510,6 +510,30 @@ function retrieveAllApplications(callback){
   });
 }
 
+function retrieveApplicationByID(app_id, callback){
+  console.log("inside retrieveApplicationByID");
+  MongoClient.connect(mongodbUrl, function(err,db){
+    if (err){
+      console.log("error connecting");
+      callback("Error connecting to MongoDB", null)
+    }
+    else{
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Applications").findOne({'_id': ObjectID(app_id)}, function(err, application){
+        if (err) {
+          console.log('An error occurred getting the application', err);
+          callback(err, null);
+        } else if (application) {
+          console.log(application)
+          callback(null, application);
+        } else {
+          console.log("wtf");
+        }
+      });
+    }
+  });
+}
+
 function retrieveOpenApplications(callback){
 MongoClient.connect(mongodbUrl, function(err, db){
   if (err)
@@ -641,6 +665,7 @@ module.exports = {
   createOrUpdateApplication: createOrUpdateApplication,
   retrieveUserApplication : retrieveUserApplication,
   retrieveAllApplications: retrieveAllApplications,
+  retrieveApplicationByID: retrieveApplicationByID,
   retrieveOpenApplications: retrieveOpenApplications,
   retrieveGlobals: retrieveGlobals,
   setApplicationStatus: setApplicationStatus,

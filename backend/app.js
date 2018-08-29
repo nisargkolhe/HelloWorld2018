@@ -33,6 +33,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.options('*', cors());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use('/resumes',(function(req, res, next) {
+  if ('OPTIONS' === req.method) {
+    //respond with 200
+    res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.send(200);
+    return;
+  } else {
+    next();
+  }
+}));
+
 app.use('/resumes', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {
   var isExecOrAdmin = false;
   for (i in req.user.roles) {
@@ -47,14 +69,6 @@ app.use('/resumes', passport.authenticate(['jwt'], { session: false }), function
   next();
 });
 app.use('/resumes', express.static(path.join(__dirname, 'uploads')));
-
-app.options('*', cors());
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 //app.use('/', routes);
 app.use('/user', user);

@@ -21,7 +21,7 @@ var myHasher = function(password, tempUserData, insertTempUser, callback) {
 nev.configure({
     verificationURL: 'http://helloworld.purduehackers.com/${URL}',
     persistentUserModel: User,
-    passwordFieldName: 'password', 
+    passwordFieldName: 'password',
     hashingFunction: myHasher
 }, function(error, options){
   if(error)
@@ -81,7 +81,7 @@ router.get('/applications', passport.authenticate(['jwt'], { session: false }), 
   if (isExecOrAdmin == false){
     res.status(401).json({message: "Only execs and admins can access this information"});
   }
-  
+
   mongo.retrieveAllApplications((err, response) => {
     if (err){
       res.send({Error: err})
@@ -117,37 +117,6 @@ router.get('/applications/status', passport.authenticate(['jwt'], { session: fal
       res.send("An error has occurred");
     }
 });
-});
-
-router.get('/applications/:id', passport.authenticate(['jwt'], { session: false }), function(req,res){
-  var isAdmin = false;
-  for (i in req.user.roles) {
-    if (req.user.roles[i] == "admin")
-    {
-      isAdmin = true;
-    }
-  }
-  if (isAdmin == false){
-    res.status(401).json({message: "Only admins can access this information"});
-  }
-  mongo.getUserByOID(req.params.id, function(error, user) {
-    if(error) {
-      res.status(401).json({message:error});
-    } else {
-      userObj = user;
-      mongo.retrieveUserApplication(userObj.email, (err, response) => {
-        if (err){
-          res.send({Error: err})
-        }
-        else if (response){
-          res.send(response);
-        }
-        else{
-          res.send("An error has occurred");
-        }
-    });
-    }
-  });
 });
 
 router.post('/announcement', passport.authenticate(['jwt'], { session: false }), function(req, res, next) {

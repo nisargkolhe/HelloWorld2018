@@ -15,4 +15,30 @@ router.get('/status', passport.authenticate(['jwt'], { session: false }), functi
 	});
 });
 
+router.get('/:id', passport.authenticate(['jwt'], { session: false }), function(req,res){
+  var isAdmin = false;
+  for (i in req.user.roles) {
+    if (req.user.roles[i] == "admin")
+    {
+      isAdmin = true;
+    }
+  }
+  if (isAdmin == false){
+    res.status(401).json({message: "Only admins can access this information"});
+  }
+  console.log(req.params.id);
+
+  mongo.retrieveApplicationByID(req.params.id, (err, response) => {
+      if (err){
+        res.status(401).json({message:err});
+      }
+      else if (response){
+        res.send(response);
+      }
+      else{
+        res.status(401).json({message:'An error has occurred'});
+      }
+  });
+});
+
 module.exports = router;
