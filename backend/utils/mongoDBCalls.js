@@ -478,19 +478,20 @@ function retrieveUserApplication(user_email, callback){
             callback(err);
           }
           else if (application){
-
-            dbo.collection("Status").findOne({"public": "yes"}, function(err, status){
+            dbo.collection("Globals").findOne({}, function(err, Globals){
               if (err){
                 console.log('An error occurred while retrieving the public status', err);
-                callback(err);
+                callback(err, null);
               }
-              else if (status){
-                if (status.status == "open"){
-                  application.status = "Pending";
+              else if (Globals){
+                if (!Globals.applicationsPublic){
+                  application.status = "pending";
                 }
+
+                console.log(application)
+                callback(null, application);
               }
             });
-            callback(null, application);
           } else {
             callback("No application submitted yet.", null)
           }
@@ -576,7 +577,8 @@ function retrieveApplicationByID(app_id, callback){
           console.log(application)
           callback(null, application);
         } else {
-          console.log("wtf");
+          console.log('An error occurred getting the application', err);
+          callback(err, null);
         }
       });
     }

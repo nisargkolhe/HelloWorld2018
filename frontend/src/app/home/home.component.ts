@@ -55,11 +55,12 @@ export class HomeComponent implements OnInit {
           .subscribe(
             result => {
               this.applicationsStatus = result.status;
-              if(this.applicationsStatus == "open") {
+              if(this.applicationsStatus != "interest") {
                 this.loadApplication();
+              } else {
+                this.loading = false;
               }
               console.log(result);
-              this.loading = false;
             }, error => {
               error = error.json()
               this.alertService.error(error.message);
