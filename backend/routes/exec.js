@@ -106,12 +106,13 @@ router.post('/applications/:id', passport.authenticate(['jwt'], { session: false
   if (isAdmin == false){
     res.status(401).json({message: "Only admins can access this information"});
   }
-  mongo.getUserByOID(req.params.id, function(error, user) {
+  console.log(req.params.id);
+
+  mongo.retrieveApplicationByID(req.params.id, function(error, application) {
     if(error) {
       res.status(401).json({message:error});
     } else {
-      userObj = user;
-      mongo.changeUserStatus(userObj.email, req.params.status, (err, response) => {
+      mongo.changeUserStatus(application.email, req.body.status, (err, response) => {
         if (err){
           res.send({Error: err})
         }

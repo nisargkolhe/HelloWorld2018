@@ -66,30 +66,31 @@ export class JudgeApplicationComponent implements OnInit {
 
   public setStatus(status){
     this.loading = true;
-    // this.appService.setStatus(this.application.id, status)
-    //   .subscribe(
-    //       data => {
-    //           this.alertService.success('Application successfully updated.', true);
-    //           //this.loading = false;
-    //           //this.loadApplication();
-    //           this.execService.getNextApplication()
-    //             .subscribe(
-    //               result => {
-    //                 console.log(result);
-    //                 if(result){
-    //                   this.router.navigate(['/application/'+result.id]);
-    //                 }
-    //               }, error => {
-    //                 console.log(error);
-    //                 this.router.navigate(['/applications']);
-    //                 this.loading = false;
-    //               }
-    //           );
-    //       },
-    //       error => {
-    //           this.alertService.error(error);
-    //           this.loading = false;
-    //       });
+    this.appService.setStatus(this.model._id, status)
+      .subscribe(
+          data => {
+              this.alertService.success('Application successfully updated.', true);
+              this.loadApplication();
+              //this.loading = false;
+              //this.loadApplication();
+              // this.execService.getNextApplication()
+              //   .subscribe(
+              //     result => {
+              //       console.log(result);
+              //       if(result){
+              //         this.router.navigate(['/application/'+result.id]);
+              //       }
+              //     }, error => {
+              //       console.log(error);
+              //       this.router.navigate(['/applications']);
+              //       this.loading = false;
+              //     }
+              // );
+          },
+          error => {
+              this.alertService.error(error);
+              this.loading = false;
+          });
     }
 
 

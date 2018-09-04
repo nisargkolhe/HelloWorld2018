@@ -27,7 +27,7 @@ export class ApplicationService {
   }
 
   setStatus(id, status) {
-      return this.http.post(environment.apiUrl+'/applications/'+id+'/setStatus', {"status":status}, this.utilService.jwt()).map((response: Response) => response.json());
+      return this.http.post(environment.apiUrl+'/exec/applications/'+id, {"status":status}, this.utilService.jwt()).map((response: Response) => response.json());
   }
 
 

@@ -4,7 +4,7 @@ import { User } from "../user";
 import { Application } from '../application';
 
 import { MatSort, MatTableDataSource, PageEvent, MatPaginator } from '@angular/material';
-import { AuthService, AlertService, ExecService, UserService } from "../services/index";
+import { AuthService, AlertService, ExecService, UserService, ApplicationService } from "../services/index";
 
 @Component({
   selector: 'app-applications',
@@ -15,10 +15,11 @@ import { AuthService, AlertService, ExecService, UserService } from "../services
 export class ApplicationsComponent implements OnInit {
   currentUser: User;
   applications: Application[] = [];
-
-  displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'race', 'class_year', 'major', 'hackathon_count'];
+  statuses: ["accepted", "waitlisted", "rejected"];
+  displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'class_year', 'major', 'hackathon_count', 'status'];
   dataSource: any;
   hasResumeFilterApplied: boolean = false;
+  hasPendingFilterApplied: boolean = false;
   loading = false;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -29,11 +30,16 @@ export class ApplicationsComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private execService: ExecService,
+    private appService: ApplicationService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.currentUser = userService.loadFromLocalStorage();
     //this.loading = true;
+    this.loadApplications();
+  }
+
+  loadApplications() {
     this.execService.getAllApplications()
       .subscribe(
         result => {
@@ -52,20 +58,41 @@ export class ApplicationsComponent implements OnInit {
     );
   }
 
-  onFilterChange(eve: any) {
+  onFilterChange() {
     console.log("caught eve");
-    this.hasResumeFilterApplied = !this.hasResumeFilterApplied;
+    //this.hasResumeFilterApplied = !this.hasResumeFilterApplied;
+    let filteredApplications = this.applications;
     if(this.hasResumeFilterApplied) {
-      let filteredApplications = this.applications.filter(app => app.file != undefined && app.file != null);
+      filteredApplications = filteredApplications.filter(app => app.file != undefined && app.file != null);
       console.log('filteredApplications', filteredApplications);
-      this.dataSource = new MatTableDataSource(filteredApplications);
-    } else {
-      this.dataSource = new MatTableDataSource(this.applications);
     }
+
+    if (this.hasPendingFilterApplied) {
+      filteredApplications = filteredApplications.filter(app => app.status == 'pending');
+      console.log('filteredApplications', filteredApplications);
+    }
+
+    this.dataSource = new MatTableDataSource(filteredApplications);
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
+  public setStatus(event, id, status){
+    event.stopPropagation();
+    event.preventDefault();
+    this.appService.setStatus(id, status)
+      .subscribe(
+          data => {
+              this.alertService.success('Application successfully updated.', true);
+              this.loadApplications();
+              //this.loading = false;
+          },
+          error => {
+              this.alertService.error(error);
+              this.loading = false;
+          });
+    }
 
   ngOnInit() {
     //this.dataSource.sort = this.sort;

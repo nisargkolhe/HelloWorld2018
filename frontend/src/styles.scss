@@ -318,6 +318,11 @@ th.mat-sort-header-sorted {
   color: #f3f3f3 !important;
 }
 
+.uk-subnav-pill>.uk-active>a {
+  background-color: var(--dark-blue);
+  color: white !important;
+}
+
 .invalidInput {
   outline: none !important;
   border-color: red !important;
