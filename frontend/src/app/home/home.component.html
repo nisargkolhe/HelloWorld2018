@@ -50,15 +50,17 @@
 		              <div *ngIf="appSubmitted else elseBlock">
 		                <h1>{{getStatusString().title | uppercase}}</h1>
 		                <p>{{getStatusString().description}}</p>
+										<p *ngIf="applicationsStatus == 'open'">Applications close on 11:59PM September 8, 2018.</p>
 		              </div>
 		              <ng-template #elseBlock>
 		                <h1>INCOMPLETE</h1>
 		                <p>You have not submitted an application</p>
+										<p *ngIf="applicationsStatus == 'open'">Applications close on 11:59PM September 8, 2018.</p>
 		              </ng-template>
 			          </div>
 			          <div class="buttons topSpacing">
 			            <button *ngIf="applicationsStatus == 'open'" class="uk-button  p-large-dark" [routerLink]="['/apply']">Application</button>
-									<button *ngIf="applicationsStatus == 'closed'" class="uk-button  p-large-dark" disabled>Application are closed</button>
+									<button *ngIf="applicationsStatus == 'closed'" class="uk-button  p-large-dark" disabled>Applications are closed</button>
 			          </div>
 						</ng-template>
 		      </ng-template>
