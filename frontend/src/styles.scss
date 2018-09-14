@@ -183,6 +183,26 @@ p {
   color: #ffffff;
 }
 
+.uk-card-body {
+    padding: 30px 30px !important;
+}
+
+.uk-label {
+  border-radius: 15px;
+  background-color: #8b95a6;
+  border: solid 1px #8b95a6;
+}
+
+.uk-label.food {
+  background-color: var(--dark-blue);
+  border: solid 1px var(--dark-blue);
+}
+
+.uk-label.important {
+  background-color: #ee3e23;
+  border: solid 1px #ee3e23;
+}
+
 a {
   color: var(--purple) !important;
 }

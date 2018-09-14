@@ -28,27 +28,22 @@ export class DayofComponent implements OnInit {
   }
 
 	ngOnInit() {
-	    if (!this.currentUser){
-		    this.userLoadAnnouncements();
-		}
-	    else if (this.currentUser["exec"] != -1 || this.currentUser["admin"] != -1){
-	    	this.execLoadAnnouncements();
-	    }
-	    else {
-	    	this.userLoadAnnouncements();
-	    }
+    this.userLoadAnnouncements();
 	}
 
 	userLoadAnnouncements(){
 	    this.userService.getAnnouncements().subscribe(
 	      	result => {
-	        	for (var i = 0; i < result.length; i++){
-	        		var ancm = result[i]["ancm"];
-	        		var date = result[i]["date"];
-	        		var time = result[i]["time"];
-	          		this.announcements.unshift(ancm + "<br>" + "Posted at " + time + " on " + date);
-	        	}
-	        	this.addToTable();
+            this.announcements = result.sort((a,b) => {
+              return new Date(a.time) < new Date(b.time);
+            });
+	        	// for (var i = 0; i < result.length; i++){
+	        	// 	var ancm = result[i]["ancm"];
+	        	// 	var date = result[i]["date"];
+	        	// 	var time = result[i]["time"];
+	          // 		this.announcements.unshift(ancm + "<br>" + "Posted at " + time + " on " + date);
+	        	// }
+	        	// this.addToTable();
 	      	}, error => {
 	        	this.alertService.error(error);
 	      	}
@@ -84,4 +79,3 @@ export class DayofComponent implements OnInit {
     	}
   	}
 }
-

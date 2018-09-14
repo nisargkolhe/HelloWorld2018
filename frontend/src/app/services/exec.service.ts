@@ -28,8 +28,8 @@ export class ExecService {
 		return this.http.get(environment.apiUrl+'/exec/applications', this.authService.jwt()).map((response: Response) => response.json());
 	}
 
-	postAnnouncement(ancm: String) {
-		return this.http.post(environment.apiUrl+'/exec/announcement', {ancm: ancm}, this.authService.jwt()).map((response: Response) => response.json());
+	postAnnouncement(ancm: String, title: String, badge: String) {
+		return this.http.post(environment.apiUrl+'/exec/announcement', {ancm: ancm, title:title, badge:badge}, this.authService.jwt()).map((response: Response) => response.json());
 	}
 
 	getAnnouncements() {

@@ -9,12 +9,28 @@
 		<div class="fullwidth uk-container uk-container-supersmall flexbox-center">
 			<form class="uk-form-stacked" name="form" (ngSubmit)="f.form.valid && postAnnouncement()" #f="ngForm" autocomplete="off" novalidate>
       		<div class="uk-margin">
-            	<label class="uk-form-label p-small" for="form-stacked-text">Announcement</label>
+            	<label class="uk-form-label p-small" for="form-stacked-text">Title</label>
             	<div class="uk-form-controls">
-                	<input class="uk-input" name="ancm" type="text" rows="5" [(ngModel)]="model.ancm" #ancm="ngModel">
+                	<input class="uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.title)}" name="title" type="text" rows="5" [(ngModel)]="model.title" #title="ngModel">
+            	</div>
+						</div>
+					<div class="uk-margin">
+							<label class="uk-form-label p-small" for="form-stacked-text">Announcement Body</label>
+							<div class="uk-form-controls">
+                	<textarea class="uk-textarea" [ngClass]="{'invalidInput':(f.submitted && !model.ancm)}" name="ancm" type="text" rows="5" [(ngModel)]="model.ancm" #ancm="ngModel"></textarea>
             	</div>
         	</div>
-	        
+					<div class="uk-margin">
+							<label class="uk-form-label p-small" for="form-stacked-text">Category</label>
+							<div class="uk-form-controls">
+								<select class="uk-select uk-input" [ngClass]="{'invalidInput':(f.submitted && !model.badge)}" [(ngModel)]="model.badge" #badge="ngModel" name="badge" required>
+									<option value="general">General</option>
+									<option value="food">Food</option>
+									<option value="important">Important</option>
+								</select>
+							</div>
+					</div>
+
 	        <div *ngIf="f.submitted && f.form.invalid" class="help-block">The input is invalid.</div>
 	        <button class="uk-button p-large-light" [disabled]="loading" type="submit">Post Announcement</button>
 	        <div *ngIf="loading" color="primary" mode="indeterminate" class="spinner"> Loading...</div>
@@ -22,4 +38,3 @@
 		</div>
 	</div>
 </div>
-

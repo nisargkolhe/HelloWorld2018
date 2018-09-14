@@ -48,7 +48,7 @@ export class AnnouncementComponent implements OnInit {
 
   	postAnnouncement() {
 	  	this.loading = true;
-	  	this.execService.postAnnouncement(this.model.ancm).subscribe(
+	  	this.execService.postAnnouncement(this.model.ancm, this.model.title, this.model.badge).subscribe(
 	      data => {
 	        this.alertService.success(data.message);
 	        this.loading = false;

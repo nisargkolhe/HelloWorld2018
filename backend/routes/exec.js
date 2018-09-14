@@ -165,8 +165,9 @@ router.post('/announcement', passport.authenticate(['jwt'], { session: false }),
 
   let announcement = {
     ancm: req.body.ancm,
-    time: new Date().toLocaleTimeString(),
-    date: new Date().toLocaleDateString()
+    title: req.body.title,
+    badge: req.body.badge ? req.body.badge : "general",
+    time: Date.now()
   }
 
   mongo.addAnnouncement(announcement, function(error, result) {
