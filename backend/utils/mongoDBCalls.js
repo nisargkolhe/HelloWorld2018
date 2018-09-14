@@ -11,6 +11,16 @@ const config = require('../config/config');
 const mongodbUrl = config.mongoDBHost;
 const bcrypt = require('bcrypt');
 
+const webpush = require('web-push');
+
+const vapidKeys = {"publicKey":"BE8kp7w24mEcUUtRlQwo9K-FvVrpX9sNQ9NUG-QliKf0wmA2cmM1Gl5szfGV30xt47MhQbUgQJL95wlntxaYwD0","privateKey":"Vrb_QpFCrcfhkPZyzY6wVgZNu3f6wBfHnoVMLCkfDUU"}
+
+webpush.setVapidDetails(
+    'mailto:noreply@helloworld.purduehackers.org',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+);
+
 //For sending confirmation emails
 var mailgun = require("mailgun-js");
 var api_key = config.MAILGUN_KEY;
@@ -44,7 +54,7 @@ function checkUserExists(jwt_payload, logging_in, callback) {
             callback("Incorrect Password or the user doesn’t exists.", null);
           } else {
             if(logging_in) {
-              if(bcrypt.compareSync(jwt_payload.password, result.password)) {
+              if(result && bcrypt.compareSync(jwt_payload.password, result.password)) {
                 // if(!result.verified){
                 //   callback("Your account has not been verified.", result);
                 // }
@@ -676,7 +686,44 @@ function addAnnouncement(announcement, callback) {
                 console.log("Error inserting the announcement: " + announcement);
                 callback("Error inserting the announcement", null);
               } else {
-                callback("Announcement added!", null);
+
+                dbo.collection("Subscriptions").find().toArray(function(err, results) {
+                  if (err){
+                    callback("Error finding subscriptions!", null);
+                  } else {
+                    const allSubscriptions = results;
+                    console.log('Total subscriptions', allSubscriptions.length);
+
+                    const notificationPayload = {
+                        "notification": {
+                            "title": announcement.title,
+                            "body": announcement.ancm,
+                            "icon": "https://helloworld.purduehackers.com/assets/images/logo.png",
+                            "vibrate": [100, 50, 100],
+                            "data": {
+                                "dateOfArrival": Date.now(),
+                                "primaryKey": 1
+                            },
+                            "actions": [{
+                                "action": "explore",
+                                "title": "Go to the site"
+                            }]
+                        }
+                    };
+
+                    Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
+                        sub, JSON.stringify(notificationPayload) )))
+                        .then(() => console.log("successfully sent notification"))
+                        .catch(err => {
+                            console.error("Error sending notification, reason: ", err);
+                            //res.sendStatus(500);
+                        });
+
+                    callback(null, "Announcement added.");
+                  }
+                });
+
+                // callback("Announcement added!", null);
               }
               db.close();
             });
@@ -703,7 +750,7 @@ function addSubscription(sub, callback) {
                 console.log("Error adding the subscription! " + sub);
                 callback("Error adding the subscription!", null);
               } else {
-                callback("Subscription added!", null);
+                callback(null, "Subscription added!");
               }
               db.close();
             });
@@ -731,6 +778,23 @@ function getAnnouncements(callback) {
   });
 }
 
+function getSubscriptions(callback) {
+  MongoClient.connect(mongodbUrl, function (err, db) {
+    //Connection error
+    if (err) {
+      callback("We are currently facing some technically difficulties, please try again later!", null);
+    } else {
+      var dbo = db.db(config.mongoDBDatabase);
+      dbo.collection("Subscriptions").find().toArray(function(err, results) {
+        if (err){
+          callback("Error finding subscriptions!", null);
+        } else {
+          callback(null, results);
+        }
+      });
+    }
+  });
+}
 module.exports = {
   connectToMongo : connectToMongo,
   checkUserExists : checkUserExists,
@@ -753,5 +817,6 @@ module.exports = {
   resendVerificationEmail: resendVerificationEmail,
   addAnnouncement: addAnnouncement,
   getAnnouncements: getAnnouncements,
-  addSubscription:addSubscription
+  addSubscription:addSubscription,
+  getSubscriptions: getSubscriptions,
 }

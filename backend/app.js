@@ -16,15 +16,6 @@ const config = require('./config/config');
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 const token = require('./utils/token');
-const webpush = require('web-push');
-
-const vapidKeys = {"publicKey":"BE8kp7w24mEcUUtRlQwo9K-FvVrpX9sNQ9NUG-QliKf0wmA2cmM1Gl5szfGV30xt47MhQbUgQJL95wlntxaYwD0","privateKey":"Vrb_QpFCrcfhkPZyzY6wVgZNu3f6wBfHnoVMLCkfDUU"}
-
-webpush.setVapidDetails(
-    'mailto:noreply@helloworld.purduehackers.org',
-    vapidKeys.publicKey,
-    vapidKeys.privateKey
-);
 
 require('./config/passport');
 
