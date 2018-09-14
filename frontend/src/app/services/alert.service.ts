@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { UtilService } from './util.service';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { environment } from '../../environments';
 
 declare var UIkit: any;
 
@@ -11,7 +14,10 @@ export class AlertService {
   private subject = new Subject<any>();
   private keepAfterNavigationChange = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private http: Http,
+    private utilService: UtilService) {
     // clear alert message on route change
     router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
@@ -24,6 +30,10 @@ export class AlertService {
               }
             }
           });
+  }
+
+  addPushSubscriber(sub: any) {
+      return this.http.post(environment.apiUrl+'/subscribe/', sub, this.utilService.jwt());
   }
 
   success(message: string, keepAfterNavigationChange = false) {

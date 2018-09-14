@@ -28,6 +28,7 @@
     "rand-token": "^0.4.0",
     "request": "^2.87.0",
     "serve-favicon": "^2.5.0",
-    "uglify-js": "^3.3.28"
+    "uglify-js": "^3.3.28",
+    "web-push": "^3.3.2"
   }
 }

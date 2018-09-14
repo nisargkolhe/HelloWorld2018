@@ -686,6 +686,33 @@ function addAnnouncement(announcement, callback) {
   }
 }
 
+function addSubscription(sub, callback) {
+  if (!sub) {
+    callback("Error adding the subscription!", null);
+  } else {
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      if (err) {
+        callback("We are currently facing some technically difficulties, please try again later!", null);
+      } else {
+        var dbo = db.db(config.mongoDBDatabase);
+        if (err) {
+          callback("Error adding the subscription! " + err.message, null);
+        } else {
+            dbo.collection("Subscriptions").insertOne(sub, function(err, res) {
+              if (err) {
+                console.log("Error adding the subscription! " + sub);
+                callback("Error adding the subscription!", null);
+              } else {
+                callback("Subscription added!", null);
+              }
+              db.close();
+            });
+        }
+      }
+    });
+  }
+}
+
 function getAnnouncements(callback) {
   MongoClient.connect(mongodbUrl, function (err, db) {
     //Connection error
@@ -725,5 +752,6 @@ module.exports = {
   getCheckedInUsers: getCheckedInUsers,
   resendVerificationEmail: resendVerificationEmail,
   addAnnouncement: addAnnouncement,
-  getAnnouncements: getAnnouncements
+  getAnnouncements: getAnnouncements,
+  addSubscription:addSubscription
 }

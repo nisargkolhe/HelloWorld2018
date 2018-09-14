@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 import { routing } from './app.routing';
 
@@ -33,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckedInUsersComponent } from './checked-in-users/checked-in-users.component';
 import { DayofComponent } from './dayof/dayof.component';
 import { JudgeApplicationComponent } from './judge-application/judge-application.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { JudgeApplicationComponent } from './judge-application/judge-application
   MatSortModule,
   MatPaginatorModule,
   MatCheckboxModule,
-  BrowserAnimationsModule
+  BrowserAnimationsModule,
+  ServiceWorkerModule.register('/ngsw-worker.js', { enabled: true }),
+  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+
   ],
   providers: [
   AuthGuard,
