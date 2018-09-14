@@ -32,7 +32,7 @@ const appRoutes: Routes = [
 { path: 'checkin', component: CheckinComponent },
 { path: 'checkedInUsers', component: CheckedInUsersComponent },
 { path: 'announcement', component: AnnouncementComponent },
-{ path: 'announcements', component: AnnouncementsComponent },
+// { path: 'announcements', component: AnnouncementsComponent },
 { path: 'dayof', component: DayofComponent },
 { path: '**', redirectTo: '' }
 ];

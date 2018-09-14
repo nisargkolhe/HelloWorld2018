@@ -4,8 +4,22 @@
           <a class="uk-navbar-item uk-logo" href="#"><img src="assets/images/logo-white.svg" alt="logo" class="logo"></a>
           <h3 class="h3-light no-margin uk-visible@m">Hello World</h3>
       </div>
-      <div class="uk-navbar-right" *ngIf="showButton">
-        <div class="uk-navbar-item">
+      <div class="uk-navbar-right uk-flex uk-flex-middle uk-visible@m" *ngIf="dayof">
+        <ul class="uk-navbar-nav">
+          <li>
+              <a href="#announcements">Announcements</a>
+          </li>
+          <li>
+              <a href="#schedule">Schedule</a>
+          </li>
+          <li>
+              <a href="#faq">FAQ</a>
+          </li>
+          <li>
+              <a href="#sponsors">Sponsors</a>
+          </li>
+        </ul>
+        <div class="uk-navbar-item" *ngIf="showButton">
             <button *ngIf="!loggedIn" class="uk-button p-large-light" [routerLink]="['/login']">Apply</button>
             <button *ngIf="loggedIn" class="uk-button uk-button-secondary p-large-light" [routerLink]="['/login']">Logout</button>
         </div>

@@ -9,6 +9,7 @@ import { UserService } from '../services/index';
 })
 export class LandingComponent implements OnInit {
   public isLoggedIn: boolean;
+  announcements: any = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +24,19 @@ export class LandingComponent implements OnInit {
       //User is not logged in
       this.isLoggedIn = false;
     }
+    this.userLoadAnnouncements();
+  }
+
+  userLoadAnnouncements(){
+      this.userService.getAnnouncements().subscribe(
+          result => {
+            this.announcements = result.sort((a,b) => {
+              return new Date(a.time) < new Date(b.time);
+            });
+          }, error => {
+            this.alertService.error(error);
+          }
+      );
   }
 
 }

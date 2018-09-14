@@ -203,12 +203,24 @@ p {
   border: solid 1px #ee3e23;
 }
 
-a {
+p>a {
   color: var(--purple) !important;
 }
 
-a:hover {
+p>a:hover {
   color: var(--dark-blue) !important;
+}
+
+.uk-navbar-nav>li>a {
+    font-size: 1em;
+    color: #fff;
+    text-transform: none;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color;
+}
+
+.uk-navbar-nav>li>a:hover {
+    color: #999;
 }
 
 table {

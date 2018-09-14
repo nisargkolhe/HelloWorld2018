@@ -1,9 +1,11 @@
-<app-navbar></app-navbar>
+<app-navbar [dayof]="true"></app-navbar>
 <div class="uk-section section-primary uk-section-default uk-flex hero">
   <div class="uk-container uk-container-small fullwidth uk-margin-large-top" style="z-index: 1; padding: 0;">
     <div style="padding: 0 1em;">
       <h1 class="h1-light">Purdue's<br>freshman-only<br>hackathon.</h1>
-      <button class="uk-button p-large-light uk-margin-top" [routerLink]="['/login']">Apply</button>
+      <!-- <button class="uk-button p-large-light uk-margin-top" [routerLink]="['/login']">Apply</button> -->
+      <a class="uk-button p-large-light uk-margin-top" href="http://bit.ly/hw2018slack" target="_blank" style="color:white !important">Slack</a>
+      <a class="uk-button p-large-light uk-margin-top uk-margin-left" href="https://helpq-helloworld.herokuapp.com/" target="_blank" style="color:white !important">HELPq</a>
     </div>
   </div>
   <div class="hero-img-container">
@@ -11,7 +13,7 @@
   </div>
 </div>
 <div class="uk-section uk-section-default uk-section-overlap uk-flex uk-flex-center" style="padding-top: 15%;">
-  <div class="uk-container-small fullwidth">
+  <!-- <div class="uk-container-small fullwidth">
     <h2>About</h2>
     <div>
         <p>
@@ -24,9 +26,20 @@
           Applications open on August 24. Hello World will be on September 15 - 16.
         </p>
     </div>
+  </div> -->
+  <div class="uk-container-small fullwidth" id="announcements">
+    <h2>Announcements</h2>
+    <!-- <div class="uk-width-1-2" id="ancmList"></div> -->
+    <p *ngIf="announcements.length < 1">No announcements have been posted yet!</p>
+    <div class="uk-card uk-card-default uk-card-body uk-margin-bottom" *ngFor="let ancm of announcements">
+        <div class="uk-label" [class.food]="ancm.badge == 'food'" [class.important]="ancm.badge == 'important'">{{ancm.badge}}</div>
+        <div class="uk-card-badge">{{ancm.time | date:'h:mma'}}</div>
+        <h3 style="margin-top:1em">{{ancm.title}}</h3>
+        <p class="p-small">{{ancm.ancm}}</p>
+    </div>
   </div>
 </div>
-<div class="uk-section uk-section-primary uk-flex uk-flex-center"  style="padding-bottom: 0;">
+<div class="uk-section uk-section-primary uk-flex uk-flex-center"  style="padding-bottom: 0;" id="schedule">
   <div class="uk-container-small fullwidth">
     <h2 class="h2-light">Schedule</h2>
     <div uk-grid>
@@ -106,7 +119,7 @@
     </div>
   </div>
 </div>
-<div class="uk-section uk-section-secondary uk-flex uk-flex-around uk-flex-wrap">
+<div class="uk-section uk-section-secondary uk-flex uk-flex-around uk-flex-wrap" id="faq">
   <div class="uk-container-small fullwidth">
     <h2 class="h2-light">FAQ</h2>
   </div>
